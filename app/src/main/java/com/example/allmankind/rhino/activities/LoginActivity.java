@@ -35,11 +35,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        findViewById(R.id.btnLogin).setOnClickListener(this);
+        findViewById(tvForgetPass).setOnClickListener(this);
         etEmailId = (EditText) findViewById(R.id.etEmailId);
         etPassword = (EditText) findViewById(R.id.etPassword);
         textView1 = (TextView) findViewById(R.id.textView1);
-        findViewById(R.id.btnLogin).setOnClickListener(this);
-        findViewById(tvForgetPass).setOnClickListener(this);
         unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
@@ -57,15 +57,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (!usercred.isEmpty() && !password.isEmpty()) {
 
                     textView1.setVisibility(View.VISIBLE);
-                    //  getData(usercred, password);
                     loginRetrofit(usercred, password, device_type, device_id, fcm_id);
-
                 } else {
                     Toast.makeText(this, "Fields are empty !", Toast.LENGTH_LONG).show();
 
                 }
-                /*Intent i = new Intent(LoginActivity.this, ServiceProviderActivity.class);
-                startActivity(i);*/
 
                 break;
             case tvForgetPass:
@@ -89,10 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         response.enqueue(new Callback<ApiList>() {
             @Override
             public void onResponse(Call<ApiList> call, Response<ApiList> response) {
-
                 progressDialog.dismiss();
-
-                // Response Success or Fail
                 if (response.isSuccessful()) {
                     //Toast.makeText(LoginActivity.this, response.body().getUsercred(), Toast.LENGTH_LONG).show();
                     Intent i = new Intent(LoginActivity.this, ServiceProviderActivity.class);
@@ -103,7 +96,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
                 textView1.setVisibility(View.VISIBLE);
-                // ivProfileLogin.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -128,7 +120,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 dialog.dismiss();
             }
         });
-        /*ImageView image = (ImageView) dialog.findViewById(R.id.close);*/
         Button submitButton = (Button) dialog.findViewById(R.id.btnSubmit);
         final EditText editText = (EditText) dialog.findViewById(R.id.editText);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +128,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String email = editText.getText().toString();
                 if (!email.isEmpty()) {
                     forgotPasswordResponse(email);
-                    // Toast.makeText(LoginActivity.this, "email send", Toast.LENGTH_SHORT).show();
                     /*dialog.dismiss();*/
                 } else {
                     Toast.makeText(LoginActivity.this, "Please enter email id", Toast.LENGTH_SHORT)
@@ -165,8 +155,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onResponse(Call<ApiList> call, Response<ApiList> response) {
 
                 progressDialog.dismiss();
-
-                // Response Success or Fail
                 if (response.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "email send", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
@@ -176,7 +164,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
                 textView1.setVisibility(View.VISIBLE);
-                // ivProfileLogin.setVisibility(View.INVISIBLE);
             }
 
             @Override
