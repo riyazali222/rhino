@@ -5,25 +5,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.allmankind.rhino.R;
-import com.example.allmankind.rhino.utills.ItemsList;
+import com.example.allmankind.rhino.webServices.pojo.ItemsList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class VehicleMakeAdapter extends RecyclerView.Adapter<VehicleMakeAdapter.VehicleMakeViewHolder> implements Filterable {
+public class VehicleMakeAdapter extends RecyclerView.Adapter<VehicleMakeAdapter.VehicleMakeViewHolder> {
 
 
     private Context mContext;
-    private List<ItemsList> itemList;
+    private List<ItemsList> itemList = new ArrayList<>();
     private List<ItemsList> listToDisplay;
 
     public VehicleMakeAdapter(Context mContext, List<ItemsList> itemList) {
-        this.mContext=mContext;
+        this.mContext = mContext;
         this.itemList = itemList;
         this.listToDisplay = itemList;
     }
@@ -38,7 +37,7 @@ public class VehicleMakeAdapter extends RecyclerView.Adapter<VehicleMakeAdapter.
     @Override
     public void onBindViewHolder(VehicleMakeAdapter.VehicleMakeViewHolder holder, final int position) {
         final ItemsList item = itemList.get(position);
-        holder.tvAudi.setText(item.getname());
+        holder.tvAudi.setText(item.getVehicle_name());
     }
 
     @Override
@@ -49,11 +48,6 @@ public class VehicleMakeAdapter extends RecyclerView.Adapter<VehicleMakeAdapter.
     @Override
     public int getItemCount() {
         return itemList.size();
-    }
-
-    @Override
-    public Filter getFilter() {
-        return null;
     }
 
 

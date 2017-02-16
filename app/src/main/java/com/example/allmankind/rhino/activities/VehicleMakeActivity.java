@@ -9,21 +9,25 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.allmankind.rhino.R;
 import com.example.allmankind.rhino.adapters.VehicleMakeAdapter;
-import com.example.allmankind.rhino.utills.ItemsList;
+import com.example.allmankind.rhino.utills.CommonMethods;
+import com.example.allmankind.rhino.webServices.apis.RestClient;
+import com.example.allmankind.rhino.webServices.pojo.ItemsList;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class VehicleMakeActivity extends AppCompatActivity {
     Toolbar toolbarVehMake;
     RecyclerView recyclerView;
     public VehicleMakeAdapter vehicleMakeAdapter;
-    TextView toolbarTitle;
     public EditText etSearch;
     private List<ItemsList> itemsListArrayList = new ArrayList<>();
     private List<ItemsList> listToDisplay = new ArrayList<>();
@@ -36,13 +40,11 @@ public class VehicleMakeActivity extends AppCompatActivity {
         etSearch = (EditText) findViewById(R.id.etSearch);
         init();
         addTextListener();
-        prepareItemListData();
-        listToDisplay.addAll(itemsListArrayList);
+        loadVehicleList();
     }
 
     private void init() {
         //initialise toolbar
-        toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
         toolbarVehMake = (Toolbar) findViewById(R.id.toolbarVehMake);
         toolbarVehMake.setNavigationIcon(R.drawable.ic_toolbar_arrow);
         toolbarVehMake.setNavigationOnClickListener(new View.OnClickListener() {
@@ -56,6 +58,37 @@ public class VehicleMakeActivity extends AppCompatActivity {
         vehicleMakeAdapter = new VehicleMakeAdapter(this, listToDisplay);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(vehicleMakeAdapter);
+
+
+    }
+
+    private void loadVehicleList() {
+
+
+        RestClient.get().VehicleListResponse().enqueue(new Callback<List<ItemsList>>() {
+            @Override
+            public void onResponse(Call<List<ItemsList>> call, Response<List<ItemsList>> response) {
+                try {
+                    if (response.code() == 200 && response.body() != null) {
+                        itemsListArrayList.clear();
+                        itemsListArrayList.addAll(response.body());
+                        listToDisplay.clear();
+                        listToDisplay.addAll(itemsListArrayList);
+                        vehicleMakeAdapter.notifyDataSetChanged();
+                    } else
+                        CommonMethods.showErrorMessage(VehicleMakeActivity.this,
+                                response.errorBody());
+                } catch (Exception e) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ItemsList>> call, Throwable t) {
+
+            }
+        });
+        //  request.VehicleListResponse( ApplicationGlobal.prefsManager.getSessionId()).enqueue(new Callback<List<ItemsList>>() {
 
 
     }
@@ -78,7 +111,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 listToDisplay.clear();
                 for (ItemsList items : itemsListArrayList) {
-                    if (items.getname().toLowerCase().contains(etSearch.getText().toString().toLowerCase())) {
+                    if (items.getVehicle_name().toLowerCase().contains(etSearch.getText().toString().toLowerCase())) {
                         // Adding Matched items
                         listToDisplay.add(items);
                     }
@@ -89,38 +122,6 @@ public class VehicleMakeActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-
-    private void prepareItemListData() {
-        ItemsList il = new ItemsList("Audi");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Mercedes");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Ford");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Swaraj mazda");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Traveller");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Aston Martin");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Royal Royce");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Lamborghini");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Mahindra");
-        itemsListArrayList.add(il);
-
-        vehicleMakeAdapter.notifyDataSetChanged();
     }
 
 
