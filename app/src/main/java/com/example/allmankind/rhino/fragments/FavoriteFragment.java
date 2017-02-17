@@ -1,9 +1,11 @@
 package com.example.allmankind.rhino.fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,10 @@ import android.widget.Toast;
 import com.example.allmankind.rhino.R;
 import com.example.allmankind.rhino.activities.VehicleMakeActivity;
 import com.example.allmankind.rhino.utills.ApiList;
+import com.example.allmankind.rhino.utills.ApplicationGlobal;
 import com.example.allmankind.rhino.utills.CommonMethods;
 import com.example.allmankind.rhino.utills.Constants;
+import com.example.allmankind.rhino.utills.PrefsManager;
 import com.example.allmankind.rhino.webServices.apis.APIs;
 import com.example.allmankind.rhino.webServices.apis.RestClient;
 
@@ -26,10 +30,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.app.Activity.RESULT_OK;
+import static com.example.allmankind.rhino.R.id.tvVehicleMake;
+
 public class FavoriteFragment extends Fragment implements View.OnClickListener {
     EditText etLicence, etMileage, etVehicleType, etRequestType, etVehicleId, etVehicleModel,
-            etVehicleYear;
-    TextView etVehicleMake;
+            etVehicleYear,etPhoneNo;
+    TextView tvVehicleMake;
     Button btnSearch;
 
     @Override
@@ -43,8 +50,10 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         etVehicleId = (EditText) view.findViewById(R.id.etVehicleId);
         etVehicleModel = (EditText) view.findViewById(R.id.etVehicleModel);
         etVehicleYear = (EditText) view.findViewById(R.id.etVehicleYear);
+        etPhoneNo = (EditText) view.findViewById(R.id.etPhoneNo);
+        tvVehicleMake = (TextView) view.findViewById(R.id.tvVehicleMake);
         view.findViewById(R.id.btnSearch).setOnClickListener(this);
-        view.findViewById(R.id.etVehicleMake).setOnClickListener(this);
+        view.findViewById(R.id.tvVehicleMake).setOnClickListener(this);
 
         return view;
     }
@@ -53,9 +62,12 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.etVehicleMake:
-                Intent i = new Intent(getActivity(), VehicleMakeActivity.class);
-                startActivity(i);
+            case R.id.tvVehicleMake:
+                /*Intent i = new Intent(getActivity(), VehicleMakeActivity.class);
+                startActivity(i);*/
+                Intent intent=new Intent(getActivity(),VehicleMakeActivity.class);
+                startActivityForResult(intent,2);
+
 
                 break;
             case R.id.btnSearch:
@@ -71,14 +83,14 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
                 String vehicle_make_id = etVehicleId.getText().toString();
                 String vehicle_model = etVehicleModel.getText().toString();
                 String vehicle_year = etVehicleYear.getText().toString();
-                String phone_no = "234242343";
+                String phone_no = etPhoneNo.getText().toString();
                 String location = "Chandigarh";
 
 
                 if (!license_plate_no.isEmpty() && !vehicle_mileage.isEmpty()
                         && !type_of_vehicle.isEmpty() && !request_type.isEmpty()
                         && !vehicle_make_id.isEmpty() && !vehicle_model.isEmpty()
-                        && !vehicle_year.isEmpty()) {
+                        && !vehicle_year.isEmpty() && !phone_no.isEmpty()) {
 
                     requestServicesResponse(vendor_id, product_id, service_id, vehicle_id, name,
                             license_plate_no, vehicle_mileage, type_of_vehicle, request_type,
@@ -92,6 +104,17 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            tvVehicleMake.setText(ApplicationGlobal.prefsManager.getVehicleName());
+        }
+    }
+
+
 
     private void requestServicesResponse(String vendor_id, String product_id, String service_id,
                                          String vehicle_id, String name, String license_plate_no,
@@ -134,4 +157,7 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         });
 
     }
+
+
+
 }

@@ -20,7 +20,7 @@ public class ServiceProviderActivity extends AppCompatActivity implements TabLay
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setSelectedTabIndicatorHeight(0);
+        //tabLayout.setSelectedTabIndicatorHeight(0);
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         //Initializing viewPager

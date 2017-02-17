@@ -9,7 +9,14 @@ import java.util.Map;
 
 public class ItemsList {
 
+    private boolean selected=false;
+    public boolean getSelected() {
+        return selected;
+    }
 
+    public boolean setSelected(Boolean selected) {
+        return this.selected = selected;
+    }
     public ItemsList(String vehicle_name) {
         this.vehicle_name = vehicle_name;
     }

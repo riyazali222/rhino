@@ -26,6 +26,15 @@ public class PrefsManager {
         mEditor.apply();
     }
 
+    public String getVehicleName() {
+        return mSharedPreferences.getString("vehicleName", "");
+    }
+
+    public void setVehicleName(String vehicleName) {
+        mEditor.putString("vehicleName", vehicleName);
+        mEditor.apply();
+    }
+
     public String getProfile() {
         return mSharedPreferences.getString("profile", "");
     }
@@ -39,6 +48,7 @@ public class PrefsManager {
     public void logout() {
         ApplicationGlobal.sessionId = "";
         setProfile("");
+        ApplicationGlobal.vehicleName = "";
     }
 
 

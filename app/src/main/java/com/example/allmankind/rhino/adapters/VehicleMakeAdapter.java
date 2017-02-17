@@ -1,6 +1,8 @@
 package com.example.allmankind.rhino.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.allmankind.rhino.R;
+import com.example.allmankind.rhino.fragments.FavoriteFragment;
+import com.example.allmankind.rhino.utills.ApplicationGlobal;
 import com.example.allmankind.rhino.webServices.pojo.ItemsList;
 
 import java.util.ArrayList;
@@ -38,6 +42,7 @@ public class VehicleMakeAdapter extends RecyclerView.Adapter<VehicleMakeAdapter.
     public void onBindViewHolder(VehicleMakeAdapter.VehicleMakeViewHolder holder, final int position) {
         final ItemsList item = itemList.get(position);
         holder.tvAudi.setText(item.getVehicle_name());
+
     }
 
     @Override

@@ -8,6 +8,7 @@
     <string name="vehicle_Make">Vehicle Make</string>
     <string name="vehicle_Model">Vehicle Model</string>
     <string name="vehicle_Year">Vehicle Year</string>
+    <string name="phone_no">Phone Number</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgetPass">Forgot Password ?</string>

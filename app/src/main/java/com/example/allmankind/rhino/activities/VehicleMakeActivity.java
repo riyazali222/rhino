@@ -1,5 +1,7 @@
 package com.example.allmankind.rhino.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import com.example.allmankind.rhino.R;
 import com.example.allmankind.rhino.adapters.VehicleMakeAdapter;
 import com.example.allmankind.rhino.utills.CommonMethods;
+import com.example.allmankind.rhino.utills.RecyclerItemClickListener;
 import com.example.allmankind.rhino.webServices.apis.RestClient;
 import com.example.allmankind.rhino.webServices.pojo.ItemsList;
 
@@ -31,6 +34,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
     public EditText etSearch;
     private List<ItemsList> itemsListArrayList = new ArrayList<>();
     private List<ItemsList> listToDisplay = new ArrayList<>();
+    String name = "";
 
 
     @Override
@@ -40,7 +44,10 @@ public class VehicleMakeActivity extends AppCompatActivity {
         etSearch = (EditText) findViewById(R.id.etSearch);
         init();
         addTextListener();
-        loadVehicleList();
+        prepareItemListData();
+        listToDisplay.addAll(itemsListArrayList);
+        //  loadVehicleList();
+
     }
 
     private void init() {
@@ -58,8 +65,16 @@ public class VehicleMakeActivity extends AppCompatActivity {
         vehicleMakeAdapter = new VehicleMakeAdapter(this, listToDisplay);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(vehicleMakeAdapter);
-
-
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        //itemsListArrayList.get(position).getVehicle_name();
+                        Intent I = new Intent(itemsListArrayList.get(position).getVehicle_name());
+                        setResult(Activity.RESULT_OK, I);
+                        finish();
+                    }
+                }));
     }
 
     private void loadVehicleList() {
@@ -122,6 +137,37 @@ public class VehicleMakeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void prepareItemListData() {
+        ItemsList il = new ItemsList("Audi");
+        itemsListArrayList.add(il);
+
+        il = new ItemsList("Mercedes");
+        itemsListArrayList.add(il);
+
+        il = new ItemsList("Ford");
+        itemsListArrayList.add(il);
+
+        il = new ItemsList("Swaraj mazda");
+        itemsListArrayList.add(il);
+
+        il = new ItemsList("Traveller");
+        itemsListArrayList.add(il);
+
+        il = new ItemsList("Aston Martin");
+        itemsListArrayList.add(il);
+
+        il = new ItemsList("Royal Royce");
+        itemsListArrayList.add(il);
+
+        il = new ItemsList("Lamborghini");
+        itemsListArrayList.add(il);
+
+        il = new ItemsList("Mahindra");
+        itemsListArrayList.add(il);
+
+        vehicleMakeAdapter.notifyDataSetChanged();
     }
 
 

@@ -10,6 +10,7 @@ public class ApplicationGlobal extends Application {
 
     public static int screenWidth = 160;
     public static String sessionId;
+    public static String vehicleName;
     public static ArrayList<String> cities = new ArrayList<String>();
     public static PrefsManager prefsManager;
     //public static Profile profile;
@@ -23,6 +24,7 @@ public class ApplicationGlobal extends Application {
         screenWidth = getScreenWidth();
         prefsManager = new PrefsManager(this);
         sessionId = prefsManager.getSessionId();
+        vehicleName=prefsManager.getVehicleName();
 //        if (!sessionId.isEmpty()) {
 //            profile = new Gson().fromJson(prefsManager.getProfile(), Profile.class);
 //        }
