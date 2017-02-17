@@ -29,8 +29,8 @@ public class ServiceProviderActivity extends AppCompatActivity implements TabLay
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setText("Favorites").setIcon(R.drawable.selector_favorite);
-        tabLayout.getTabAt(1).setText("History").setIcon(R.drawable.selector_history);
+        tabLayout.getTabAt(0).setText("Service Provider");
+        tabLayout.getTabAt(1).setText("Notifications");
 
     }
 

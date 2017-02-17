@@ -71,9 +71,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (!usercred.isEmpty() && !password.isEmpty()) {
 
                     textView1.setVisibility(View.VISIBLE);
-                    //loginRetrofit(usercred, password, device_type, device_id, fcm_id);
-                    Intent i = new Intent(LoginActivity.this, ServiceProviderActivity.class);
-                    startActivity(i);
+                    loginRetrofit(usercred, password, device_type, device_id, fcm_id);
+                    /*Intent i = new Intent(LoginActivity.this, ServiceProviderActivity.class);
+                    startActivity(i);*/
                 } else {
                     Toast.makeText(this, "Fields are empty !", Toast.LENGTH_LONG).show();
 

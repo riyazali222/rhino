@@ -35,7 +35,7 @@ import static com.example.allmankind.rhino.R.id.tvVehicleMake;
 
 public class FavoriteFragment extends Fragment implements View.OnClickListener {
     EditText etLicence, etMileage, etVehicleType, etRequestType, etVehicleId, etVehicleModel,
-            etVehicleYear,etPhoneNo;
+            etVehicleYear, etPhoneNo;
     TextView tvVehicleMake;
     Button btnSearch;
 
@@ -65,8 +65,8 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
             case R.id.tvVehicleMake:
                 /*Intent i = new Intent(getActivity(), VehicleMakeActivity.class);
                 startActivity(i);*/
-                Intent intent=new Intent(getActivity(),VehicleMakeActivity.class);
-                startActivityForResult(intent,2);
+                Intent intent = new Intent(getActivity(), VehicleMakeActivity.class);
+                startActivityForResult(intent, 2);
 
 
                 break;
@@ -115,7 +115,6 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     private void requestServicesResponse(String vendor_id, String product_id, String service_id,
                                          String vehicle_id, String name, String license_plate_no,
                                          String vehicle_mileage, String type_of_vehicle,
@@ -138,7 +137,7 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
                 try {
                     if (response.code() == 200 & response.body() != null) {
 
-                        Toast.makeText(getActivity(),response.body().getmessage(),
+                        Toast.makeText(getActivity(), response.body().getmessage(),
                                 Toast.LENGTH_LONG).show();
 
                     } else
@@ -157,7 +156,5 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         });
 
     }
-
-
 
 }

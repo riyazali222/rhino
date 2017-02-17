@@ -34,8 +34,6 @@ public class VehicleMakeActivity extends AppCompatActivity {
     public EditText etSearch;
     private List<ItemsList> itemsListArrayList = new ArrayList<>();
     private List<ItemsList> listToDisplay = new ArrayList<>();
-    String name = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
