@@ -34,6 +34,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
     public EditText etSearch;
     private List<ItemsList> itemsListArrayList = new ArrayList<>();
     private List<ItemsList> listToDisplay = new ArrayList<>();
+    public static String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
         etSearch = (EditText) findViewById(R.id.etSearch);
         init();
         addTextListener();
-        prepareItemListData();
-        listToDisplay.addAll(itemsListArrayList);
-        //  loadVehicleList();
+        loadVehicleList();
 
     }
 
@@ -67,10 +66,11 @@ public class VehicleMakeActivity extends AppCompatActivity {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        //itemsListArrayList.get(position).getVehicle_name();
-                        Intent I = new Intent(itemsListArrayList.get(position).getVehicle_name());
-                        setResult(Activity.RESULT_OK, I);
-                        finish();
+                        name= itemsListArrayList.get(position).getVehicle_name();
+                        Intent intent=new Intent();
+                        intent.putExtra("NAME",name);
+                        setResult(2,intent);
+                        finish();//finishing activity
                     }
                 }));
     }
@@ -136,38 +136,6 @@ public class VehicleMakeActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void prepareItemListData() {
-        ItemsList il = new ItemsList("Audi");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Mercedes");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Ford");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Swaraj mazda");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Traveller");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Aston Martin");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Royal Royce");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Lamborghini");
-        itemsListArrayList.add(il);
-
-        il = new ItemsList("Mahindra");
-        itemsListArrayList.add(il);
-
-        vehicleMakeAdapter.notifyDataSetChanged();
-    }
-
 
 }
 

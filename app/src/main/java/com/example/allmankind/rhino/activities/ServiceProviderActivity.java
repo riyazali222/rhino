@@ -1,6 +1,7 @@
 package com.example.allmankind.rhino.activities;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,7 @@ public class ServiceProviderActivity extends AppCompatActivity implements TabLay
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setText("Service Provider");
-        tabLayout.getTabAt(1).setText("Notifications");
+        tabLayout.getTabAt(1).setText("History");
 
     }
 

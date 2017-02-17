@@ -63,10 +63,8 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvVehicleMake:
-                /*Intent i = new Intent(getActivity(), VehicleMakeActivity.class);
-                startActivity(i);*/
                 Intent intent = new Intent(getActivity(), VehicleMakeActivity.class);
-                startActivityForResult(intent, 2);
+                startActivityForResult(intent,2);
 
 
                 break;
@@ -109,11 +107,12 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
-            tvVehicleMake.setText(ApplicationGlobal.prefsManager.getVehicleName());
+        if (resultCode == 2) {
+            String name = data.getStringExtra("NAME");
+            tvVehicleMake.setText(name);
+
         }
     }
-
 
     private void requestServicesResponse(String vendor_id, String product_id, String service_id,
                                          String vehicle_id, String name, String license_plate_no,
