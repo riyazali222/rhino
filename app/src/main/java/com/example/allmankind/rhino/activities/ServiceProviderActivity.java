@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.example.allmankind.rhino.R;
 import com.example.allmankind.rhino.adapters.ViewPagerAdapter;
 
-public class ServiceProviderActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
+public class ServiceProviderActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -21,33 +21,16 @@ public class ServiceProviderActivity extends AppCompatActivity implements TabLay
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        //tabLayout.setSelectedTabIndicatorHeight(0);
-
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         //Initializing viewPager
         viewPager = (ViewPager) findViewById(R.id.pager);
         //Creating our pager adapter
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setText("Service Provider");
-        tabLayout.getTabAt(1).setText("History");
+        tabLayout.getTabAt(0).setText("Service Provider").setIcon(R.drawable.selector_favorite);;
+        tabLayout.getTabAt(1).setText("Notifications").setIcon(R.drawable.selector_history);;
 
     }
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        viewPager.setCurrentItem(tab.getPosition());
 
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
 }

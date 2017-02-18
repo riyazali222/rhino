@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PrefsManager {
-    private String mPrefsName = "audmov_prefs";
+    private String mPrefsName = "Rhino_prefs";
     private Context mContext;
     private SharedPreferences mSharedPreferences;
     public static SharedPreferences.Editor mEditor;

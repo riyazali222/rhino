@@ -43,10 +43,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (ApplicationGlobal.prefsManager.getSessionId() != null) {
+        if (!ApplicationGlobal.sessionId.isEmpty()) {
             Intent i = new Intent(LoginActivity.this, ServiceProviderActivity.class);
             startActivity(i);
-        } else {*/
+            finish();
+        } else {
             setContentView(R.layout.activity_login);
             findViewById(R.id.btnLogin).setOnClickListener(this);
             findViewById(tvForgetPass).setOnClickListener(this);
@@ -54,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             etPassword = (EditText) findViewById(R.id.etPassword);
             textView1 = (TextView) findViewById(R.id.textView1);
             unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
 
     }
 
@@ -109,6 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Intent i = new Intent(LoginActivity.this,
                                         ServiceProviderActivity.class);
                                 startActivity(i);
+                                finish();
                             } else
                                 CommonMethods.showErrorMessage(LoginActivity.this,
                                         response.errorBody());
