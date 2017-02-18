@@ -67,7 +67,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        name= itemsListArrayList.get(position).getVehicle_name();
+                        name= listToDisplay.get(position).getVehicle_name();
                         Intent intent=new Intent();
                         intent.putExtra("NAME",name);
                         setResult(2,intent);
