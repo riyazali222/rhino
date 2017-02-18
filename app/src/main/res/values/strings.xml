@@ -24,6 +24,8 @@
     <string name="dialogText">Enter your email to reset your password.You will get a recovery link on your registered email</string>
     <string name="toolbarBack">Back</string>
     <string name="submit">SUBMIT</string>
+    <string name="submitting_request_text">Problem Submitting Request?</string>
+    <string name="dial_no">Dial  1800 243 394</string>
     <!-- Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ok">Okay</string>

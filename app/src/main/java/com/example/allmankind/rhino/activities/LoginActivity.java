@@ -38,7 +38,7 @@ import static com.example.allmankind.rhino.R.id.tvForgetPass;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etEmailId, etPassword;
     TextView textView1;
-    String unique_id;
+   public static String unique_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +47,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Intent i = new Intent(LoginActivity.this, ServiceProviderActivity.class);
             startActivity(i);
         } else {*/
-        setContentView(R.layout.activity_login);
-        findViewById(R.id.btnLogin).setOnClickListener(this);
-        findViewById(tvForgetPass).setOnClickListener(this);
-        etEmailId = (EditText) findViewById(R.id.etEmailId);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        textView1 = (TextView) findViewById(R.id.textView1);
-        unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+            setContentView(R.layout.activity_login);
+            findViewById(R.id.btnLogin).setOnClickListener(this);
+            findViewById(tvForgetPass).setOnClickListener(this);
+            etEmailId = (EditText) findViewById(R.id.etEmailId);
+            etPassword = (EditText) findViewById(R.id.etPassword);
+            textView1 = (TextView) findViewById(R.id.textView1);
+            unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
     }
 

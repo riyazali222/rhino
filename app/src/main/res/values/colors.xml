@@ -10,4 +10,6 @@
     <color name="emphasis">#555555</color>
     <color name="white">#fff</color>
     <color name="BackgroundColor">#555</color>
+    <color name="dialog_background">#F0EFF5</color>
+    <color name="dialog_toolbar_background">#AAAAAA</color>
 </resources>

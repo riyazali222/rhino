@@ -1,11 +1,9 @@
 package com.example.allmankind.rhino.fragments;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,29 +13,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.allmankind.rhino.R;
+import com.example.allmankind.rhino.activities.LoginActivity;
 import com.example.allmankind.rhino.activities.VehicleMakeActivity;
 import com.example.allmankind.rhino.utills.ApiList;
-import com.example.allmankind.rhino.utills.ApplicationGlobal;
 import com.example.allmankind.rhino.utills.CommonMethods;
-import com.example.allmankind.rhino.utills.Constants;
-import com.example.allmankind.rhino.utills.PrefsManager;
-import com.example.allmankind.rhino.webServices.apis.APIs;
 import com.example.allmankind.rhino.webServices.apis.RestClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.app.Activity.RESULT_OK;
-import static com.example.allmankind.rhino.R.id.tvVehicleMake;
 
 public class FavoriteFragment extends Fragment implements View.OnClickListener {
     EditText etLicence, etMileage, etVehicleType, etRequestType, etVehicleId, etVehicleModel,
             etVehicleYear, etPhoneNo;
     TextView tvVehicleMake;
-    Button btnSearch;
+   // Button btnSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +44,7 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         tvVehicleMake = (TextView) view.findViewById(R.id.tvVehicleMake);
         view.findViewById(R.id.btnSearch).setOnClickListener(this);
         view.findViewById(R.id.tvVehicleMake).setOnClickListener(this);
+        Toast.makeText(getActivity(), LoginActivity.unique_id,Toast.LENGTH_LONG).show();
 
         return view;
     }
