@@ -48,7 +48,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        //initialise toolbar
+
         toolbarVehMake = (Toolbar) findViewById(R.id.toolbarVehMake);
         toolbarVehMake.setNavigationIcon(R.drawable.ic_toolbar_arrow);
         toolbarVehMake.setNavigationOnClickListener(new View.OnClickListener() {
@@ -57,7 +57,8 @@ public class VehicleMakeActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        // initialise recyclerView
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         vehicleMakeAdapter = new VehicleMakeAdapter(this, listToDisplay);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
