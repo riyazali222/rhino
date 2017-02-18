@@ -44,7 +44,6 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         tvVehicleMake = (TextView) view.findViewById(R.id.tvVehicleMake);
         view.findViewById(R.id.btnSearch).setOnClickListener(this);
         view.findViewById(R.id.tvVehicleMake).setOnClickListener(this);
-        Toast.makeText(getActivity(), LoginActivity.unique_id,Toast.LENGTH_LONG).show();
 
         return view;
     }

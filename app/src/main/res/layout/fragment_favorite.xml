@@ -4,13 +4,16 @@
     android:layout_height="match_parent"
     android:id="@+id/scrollView"
     android:background="@color/BackgroundColor">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:scrollbarAlwaysDrawVerticalTrack="true">
+        android:orientation="vertical">
 
 
         <android.support.design.widget.TextInputLayout
@@ -265,6 +268,7 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/dial_no"
             android:textColor="@color/white" />
+    </LinearLayout>
     </LinearLayout>
 </ScrollView>
 
