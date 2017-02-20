@@ -127,7 +127,7 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
                     if (response.code() == 200 & response.body() != null) {
 
                         Toast.makeText(getActivity(), response.body().getmessage(),
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
 
                     } else
                         CommonMethods.showErrorMessage(getActivity(), response.errorBody());
