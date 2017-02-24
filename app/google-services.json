@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "324769196456",
+    "firebase_url": "https://rhino-6c39a.firebaseio.com",
+    "project_id": "rhino-6c39a",
+    "storage_bucket": "rhino-6c39a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324769196456:android:a2f0974da1ef38ba",
+        "android_client_info": {
+          "package_name": "com.henceforth.rhino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324769196456-qiet9irf11o8gq0n4gmgf4q6rnjs465h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.henceforth.rhino",
+            "certificate_hash": "1427b8eadca780848d84cbd01d4464ff3769379b"
+          }
+        },
+        {
+          "client_id": "324769196456-sv88pukmciib116j7om2g412p5h69c24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHSt-UDZrjLbmRQYxRm0jSya4TRz_QPXQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324769196456-sv88pukmciib116j7om2g412p5h69c24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

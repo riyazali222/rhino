@@ -1,0 +1,25 @@
+package com.henceforth.rhino.adapters
+// Top-level com.henceforth.rhino.adapters.build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.com.henceforth.rhino.adapters.build:gradle:2.2.3'
+        classpath 'com.google.gms:google-services:3.0.0'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module com.henceforth.rhino.adapters.build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

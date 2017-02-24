@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/etLicence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:singleLine="true"
+            android:hint="@string/licence_plate"
+            android:padding="@dimen/Twelve"
+            android:layout_marginTop="12dp"
+            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/white" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+
+
+        <EditText
+            android:id="@+id/etMileage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/vehicle_milage"
+            android:padding="@dimen/Twelve"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:singleLine="true"
+            android:layout_marginTop="12dp"
+            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+
+
+        <TextView
+            android:id="@+id/etVehicleType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/vehicle_type"
+            android:padding="@dimen/Twelve"
+            android:layout_marginTop="12dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/white" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+
+
+        <EditText
+            android:id="@+id/etRequestType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/vehicle_ReqType"
+            android:padding="@dimen/Twelve"
+            android:singleLine="true"
+            android:layout_marginTop="12dp"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+
+
+      <!--  <EditText
+            android:id="@+id/etVehicleId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/vehicle_ComId"
+            android:padding="@dimen/Twelve"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:layout_marginTop="12dp"
+            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+-->
+        <TextView
+            android:id="@+id/tvVehicleMake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/Twelve"
+            android:singleLine="true"
+            android:layout_marginTop="12dp"
+            android:hint="@string/vehicle_Make"
+            android:textColor="@color/white"
+            android:textColorHint="@color/sixty_of_white"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+
+
+
+        <EditText
+            android:id="@+id/etVehicleModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/vehicle_Model"
+            android:padding="@dimen/Twelve"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:singleLine="true"
+            android:layout_marginTop="12dp"
+            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/white" >
+
+            </EditText>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/tvVehicleYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/vehicle_Year"
+            android:inputType="date"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:padding="@dimen/Twelve"
+            android:textColor="@color/white"
+            android:singleLine="true"
+            android:layout_marginTop="12dp"
+            android:textColorHint="@color/sixty_of_white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+
+
+        <EditText
+            android:id="@+id/etPhoneNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/phone_no"
+            android:inputType="phone"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:padding="@dimen/Twelve"
+            android:singleLine="true"
+            android:layout_marginTop="12dp"
+            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/white" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/white" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/mybutton"
+            android:text="@string/submit"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/submitting_request_text"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvContactInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:text="@string/dial_no"
+            android:textColor="@drawable/textselector"
+            android:textColorHighlight="@color/colorPrimary"/>
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+

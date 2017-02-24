@@ -10,7 +10,7 @@
     android:paddingEnd="@dimen/activity_horizontal_margin"
     android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_horizontal_margin"
-    tools:context="com.example.allmankind.rhino.activities.VehicleMakeActivity">
+    tools:context="com.henceforth.rhino.activities.VehicleMakeActivity">
 
 
     <TextView
