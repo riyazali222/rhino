@@ -51,7 +51,6 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
         etMileage = (EditText) view.findViewById(R.id.etMileage);
         etVehicleType = (TextView) view.findViewById(R.id.etVehicleType);
         etRequestType = (EditText) view.findViewById(R.id.etRequestType);
-        //etVehicleId = (EditText) view.findViewById(R.id.etVehicleId);
         etVehicleModel = (EditText) view.findViewById(R.id.etVehicleModel);
         tvVehicleYear = (TextView) view.findViewById(R.id.tvVehicleYear);
         etPhoneNo = (EditText) view.findViewById(R.id.etPhoneNo);
