@@ -134,8 +134,6 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
     }
 
 
-
-
     private void showPopupWindow(final TextView tv, final int array) {
         final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());
         popupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.vehicle_type_popup,
@@ -163,10 +161,8 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
             Integer id = data.getIntExtra("id", 1);
             ApplicationGlobal.prefsManager.setVehicleId(id);
             tvVehicleMake.setText(name);
-        }
-   else
-        {
-           String name = data.getStringExtra("year");
+        } else {
+            String name = data.getStringExtra("year");
             tvVehicleYear.setText(name);
         }
     }
@@ -213,11 +209,12 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Constants.ENABLE_LOCATION_PERMISSION)
             checkLocation();
     }
+
     private void checkLocation() {
         if (CommonMethods.isLocationEnabled(getActivity())) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
@@ -254,18 +251,17 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
         else {
             /*if (CommonMethods.isNetworkConnected(getActivity()))*/
             requestServicesResponse(etLicence.getText().toString(),
-                    etMileage.getText().toString(),etVehicleType.getText().toString(),
+                    etMileage.getText().toString(), etVehicleType.getText().toString(),
                     etRequestType.getText().toString(),
                     etVehicleModel.getText().toString(),
                     tvVehicleYear.getText().toString() + "-01-01",
-                    etPhoneNo.getText().toString(),ApplicationGlobal.myLat,ApplicationGlobal.myLng);
+                    etPhoneNo.getText().toString(), ApplicationGlobal.myLat, ApplicationGlobal.myLng);
 
             /*requestServicesResponse(license_plate_no, vehicle_mileage, type_of_vehicle, request_type,
                     vehicle_make_id, vehicle_model,
                     vehicle_year, phone_no, lat, lng);*/
         }
     }
-
 
 
 }
