@@ -23,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.henceforth.rhino.R;
-import com.henceforth.rhino.activities.LoginActivity;
 import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.activities.YearPickerActivity;
 import com.henceforth.rhino.utills.ApiList;
