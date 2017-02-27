@@ -1,21 +1,29 @@
 package com.henceforth.rhino.fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.ListPopupWindow;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -40,31 +48,50 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
     EditText etLicence, etMileage, etVehicleModel, etRequestType,
             etPhoneNo;
     TextView tvVehicleMake, tvContactInfo, tvVehicleYear, etVehicleType;
-    Context mContext;
+    private LocationEnableRequest locationEnableRequest = new LocationEnableRequest();
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_service_provider, container, false);
-
-        etLicence = (EditText) view.findViewById(R.id.etLicence);
-        etMileage = (EditText) view.findViewById(R.id.etMileage);
-        etVehicleType = (TextView) view.findViewById(R.id.etVehicleType);
-        etRequestType = (EditText) view.findViewById(R.id.etRequestType);
-        etVehicleModel = (EditText) view.findViewById(R.id.etVehicleModel);
-        tvVehicleYear = (TextView) view.findViewById(R.id.tvVehicleYear);
-        etPhoneNo = (EditText) view.findViewById(R.id.etPhoneNo);
-        tvVehicleMake = (TextView) view.findViewById(R.id.tvVehicleMake);
-        tvContactInfo = (TextView) view.findViewById(R.id.tvContactInfo);
-        view.findViewById(R.id.tvContactInfo).setOnClickListener(this);
-        view.findViewById(R.id.btnSubmit).setOnClickListener(this);
-        view.findViewById(R.id.tvVehicleMake).setOnClickListener(this);
-        view.findViewById(R.id.tvVehicleYear).setOnClickListener(this);
-        view.findViewById(R.id.etVehicleType).setOnClickListener(this);
-
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        etLicence = (EditText) getView().findViewById(R.id.etLicence);
+        etMileage = (EditText) getView().findViewById(R.id.etMileage);
+        etVehicleType = (TextView) getView().findViewById(R.id.etVehicleType);
+        etRequestType = (EditText) getView().findViewById(R.id.etRequestType);
+        etVehicleModel = (EditText) getView().findViewById(R.id.etVehicleModel);
+        tvVehicleYear = (TextView) getView().findViewById(R.id.tvVehicleYear);
+        etPhoneNo = (EditText) getView().findViewById(R.id.etPhoneNo);
+        tvVehicleMake = (TextView) getView().findViewById(R.id.tvVehicleMake);
+        tvContactInfo = (TextView) getView().findViewById(R.id.tvContactInfo);
+        tvContactInfo.setOnClickListener(this);
+        getView().findViewById(R.id.btnSubmit).setOnClickListener(this);
+        tvVehicleMake.setOnClickListener(this);
+        tvVehicleYear.setOnClickListener(this);
+        etVehicleType.setOnClickListener(this);
+        getActivity().registerReceiver(locationEnableRequest,
+                new IntentFilter("LocationEnableRequest"));
+
+        //set different color for phone and dial
+
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        SpannableString str1 = new SpannableString(getString(R.string.dial));
+        str1.setSpan(new ForegroundColorSpan(Color.WHITE), 0, str1.length(), 0);
+        builder.append(str1);
+
+        SpannableString str2 = new SpannableString(getString(R.string.dial_no));
+        str2.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(),
+                R.color.toolbar_background)), 0, str2.length(), 0);
+        builder.append(str2);
+
+        tvContactInfo.setText(builder, TextView.BufferType.SPANNABLE);
+    }
 
     @Override
     public void onClick(View v) {
@@ -72,45 +99,36 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
             case R.id.tvVehicleMake:
                 Intent intent = new Intent(getActivity(), VehicleMakeActivity.class);
                 startActivityForResult(intent, 2);
-
-
                 break;
+
             case R.id.btnSubmit:
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                String license_plate_no = etLicence.getText().toString();
-                String vehicle_mileage = etMileage.getText().toString();
-                String type_of_vehicle = etVehicleType.getText().toString();
-                String request_type = etRequestType.getText().toString();
-                Integer vehicle_make_id = ApplicationGlobal.prefsManager.getVehicleId();
-                String vehicle_model = etVehicleModel.getText().toString();
-                String vehicle_year = tvVehicleYear.getText().toString() + "-01-01";
-                String phone_no = etPhoneNo.getText().toString();
-                if (license_plate_no.isEmpty()) {
-                    Toast.makeText(getActivity(), "Licence Plate of Vehicle is Empty", Toast.LENGTH_SHORT).show();
-                } else if (vehicle_mileage.isEmpty()) {
-                    Toast.makeText(getActivity(), "Vehicle Mileage is Empty", Toast.LENGTH_SHORT).show();
-                } else if (type_of_vehicle.isEmpty()) {
-                    Toast.makeText(getActivity(), "Type of Vehicle is Empty", Toast.LENGTH_SHORT).show();
-                } else if (request_type.isEmpty()) {
-                    Toast.makeText(getActivity(), "Vehicle Request Type is Empty", Toast.LENGTH_SHORT).show();
-                } else if (vehicle_make_id == null) {
-                    Toast.makeText(getActivity(), "Select a Vehicle", Toast.LENGTH_SHORT).show();
-                } else if (vehicle_model.isEmpty()) {
-                    Toast.makeText(getActivity(), "Vehicle Model is Empty", Toast.LENGTH_SHORT).show();
-                } else if (vehicle_year.isEmpty()) {
-                    Toast.makeText(getActivity(), "Vehicle Year is Empty", Toast.LENGTH_SHORT).show();
-                } else if (phone_no.isEmpty()) {
-                    Toast.makeText(getActivity(), "Phone Number is Empty", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (CommonMethods.isNetworkConnected(getActivity())) {
+                CommonMethods.hideKeyboard(getActivity());
+                if (etLicence.getText().toString().trim().isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterRegistrationNumber));
+                else if (etMileage.getText().toString().trim().isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleMilage));
+                else if (etVehicleType.getText().toString().trim().isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleType));
+                else if (etRequestType.getText().toString().trim().isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleRequestType));
+                else if (tvVehicleMake.getText().toString().trim().isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.selectVehicleCompany));
+                else if (etVehicleModel.getText().toString().trim().isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleModel));
+                else if (tvVehicleYear.getText().toString().trim().isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleYear));
+                else if (etPhoneNo.getText().toString().trim().isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterPhoneNumber));
+                else {
+                    if (CommonMethods.isNetworkConnected(getActivity()))
                         checkLocation();
 
-                    } else {
-                        Toast.makeText(getActivity(), "Internet not connected", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                    else
+                        CommonMethods.showInternetNotConnectedToast(getActivity());
 
+                }
                 break;
+
             case R.id.etVehicleType:
                 showPopupWindow(etVehicleType, R.array.array_list);
                 break;
@@ -124,13 +142,9 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
             case R.id.tvVehicleYear:
                 Intent j = new Intent(getActivity(), YearPickerActivity.class);
                 startActivityForResult(j, 3);
-
                 break;
-
         }
-
     }
-
 
     private void showPopupWindow(final TextView tv, final int array) {
         final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());
@@ -154,12 +168,12 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == 2) {
+        if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             String name = data.getStringExtra("name");
             Integer id = data.getIntExtra("id", 1);
             ApplicationGlobal.prefsManager.setVehicleId(id);
             tvVehicleMake.setText(name);
-        } else {
+        } else if (requestCode == 3 && resultCode == Activity.RESULT_OK) {
             String name = data.getStringExtra("year");
             tvVehicleYear.setText(name);
         }
@@ -169,20 +183,14 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
     private void requestServicesResponse(String license_plate_no,
                                          String vehicle_mileage, String type_of_vehicle,
                                          String request_type,
-                                         String vehicle_model, String vehicle_year, String phone_no,
-                                         double lat, double lng) {
-        final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage(getString(R.string.string_title_upload_progressbar_));
-        progressDialog.show();
-
+                                         String vehicle_model, String vehicle_year, String phone_no) {
 
         RestClient.get().requestServicesResponse(license_plate_no, vehicle_mileage,
                 type_of_vehicle, request_type, vehicle_model, vehicle_year,
-                phone_no, lat, lng).enqueue(new Callback<ApiList>() {
+                phone_no, ApplicationGlobal.myLat, ApplicationGlobal.myLng).enqueue(new Callback<ApiList>() {
             @Override
             public void onResponse(Call<ApiList> call, Response<ApiList> response) {
-                progressDialog.dismiss();
+                CommonMethods.dismissProgressDialog();
                 try {
                     if (response.code() == 200 & response.body() != null) {
 
@@ -198,12 +206,10 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
 
             @Override
             public void onFailure(Call<ApiList> call, Throwable t) {
-                progressDialog.dismiss();
+                CommonMethods.dismissProgressDialog();
             }
 
-
         });
-
     }
 
     @Override
@@ -231,14 +237,14 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
                 return;
             }
             ApplicationGlobal.isGettingLocation = true;
+            CommonMethods.showProgressDialog(getActivity());
             new LocationGetter(getActivity());
-
             getLocation();
-        } else CommonMethods.displayLocationSettingsRequest(getActivity());
+        } else
+            CommonMethods.displayLocationSettingsRequest(getActivity());
     }
 
     private void getLocation() {
-
         if (ApplicationGlobal.myLat == 0)
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -247,19 +253,24 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
                 }
             }, 500);
         else {
-            /*if (CommonMethods.isNetworkConnected(getActivity()))*/
             requestServicesResponse(etLicence.getText().toString(),
                     etMileage.getText().toString(), etVehicleType.getText().toString(),
-                    etRequestType.getText().toString(),
-                    etVehicleModel.getText().toString(),
-                    tvVehicleYear.getText().toString() + "-01-01",
-                    etPhoneNo.getText().toString(), ApplicationGlobal.myLat, ApplicationGlobal.myLng);
-
-            /*requestServicesResponse(license_plate_no, vehicle_mileage, type_of_vehicle, request_type,
-                    vehicle_make_id, vehicle_model,
-                    vehicle_year, phone_no, lat, lng);*/
+                    etRequestType.getText().toString(), etVehicleModel.getText().toString(),
+                    tvVehicleYear.getText().toString() + "-01-01", etPhoneNo.getText().toString());
         }
     }
 
+    private class LocationEnableRequest extends BroadcastReceiver {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            checkLocation();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().unregisterReceiver(locationEnableRequest);
+    }
 }

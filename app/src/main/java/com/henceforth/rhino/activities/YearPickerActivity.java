@@ -1,6 +1,7 @@
 
 package com.henceforth.rhino.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,35 +26,29 @@ public class YearPickerActivity extends AppCompatActivity {
     YearAdapter yearListAdapter;
     public static String year;
     public EditText etSearchYear;
-    private List<String> yearList =  new ArrayList<String>();
+    private List<String> yearList = new ArrayList<String>();
     public static int currentYear;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_picker);
-        //etSearchYear = (EditText) findViewById(R.id.etSearchYear);
-        //addTextListener();
         init();
         Calendar calendar = Calendar.getInstance();
         currentYear = calendar.get(Calendar.YEAR);
 
 
+        for (int i = currentYear; i > 1989; i--) {
 
-        for(int i=currentYear; i>1989; i--)
-        {
-
-            Integer item=Integer.valueOf(i);
+            Integer item = Integer.valueOf(i);
             yearList.add(item.toString());
         }
         yearListAdapter.notifyDataSetChanged();
-
-       // loadYearList();
     }
 
 
     private void init() {
         toolbarVehYear = (Toolbar) findViewById(R.id.toolbarVehYear);
-        toolbarVehYear.setNavigationIcon(R.drawable.ic_toolbar_arrow);
+        toolbarVehYear.setNavigationIcon(R.drawable.ic_back);
         toolbarVehYear.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,25 +68,11 @@ public class YearPickerActivity extends AppCompatActivity {
                         year = yearList.get(position);
                         Intent intent = new Intent();
                         intent.putExtra("year", year);
-                        setResult(3, intent);
+                        setResult(Activity.RESULT_OK, intent);
                         finish();//finishing activity
                     }
                 }));
 
     }
-
-
-   /* private void loadYearList() {
-
-
-
-        for (int i = currentYear; i > 1989; i--) {
-            yearList.add(String.valueOf(i));
-        }
-
-
-
-        yearListAdapter.notifyDataSetChanged();
-    }*/
 
 }

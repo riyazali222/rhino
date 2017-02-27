@@ -1,5 +1,6 @@
 package com.henceforth.rhino.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +39,6 @@ public class VehicleMakeActivity extends AppCompatActivity {
     private List<ItemsList> listToDisplay = new ArrayList<>();
     public static String name;
     public static Integer id;
-    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
     private void init() {
 
         toolbarVehMake = (Toolbar) findViewById(R.id.toolbarVehMake);
-        toolbarVehMake.setNavigationIcon(R.drawable.ic_toolbar_arrow);
+        toolbarVehMake.setNavigationIcon(R.drawable.ic_back);
         toolbarVehMake.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +76,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
                         Intent intent = new Intent();
                         intent.putExtra("name", name);
                         intent.putExtra("id",id);
-                        setResult(2, intent);
+                        setResult(Activity.RESULT_OK, intent);
                         finish();//finishing activity
                     }
                 }));

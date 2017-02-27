@@ -17,4 +17,12 @@
 
     </style>
 
+    <style name="slideFromTopDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowAnimationStyle">@style/slideFromTopDialogAnimation</item>
+    </style>
+
+    <style name="slideFromTopDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/enter_from_top</item>
+    </style>
+
 </resources>

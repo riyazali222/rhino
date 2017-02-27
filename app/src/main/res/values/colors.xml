@@ -12,4 +12,5 @@
     <color name="BackgroundColor">#555</color>
     <color name="dialog_background">#F0EFF5</color>
     <color name="dialog_toolbar_background">#AAAAAA</color>
+    <color name="tenOfBlack">#1A000000</color>
 </resources>

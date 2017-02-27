@@ -1,13 +1,19 @@
 package com.henceforth.rhino.utills;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -19,11 +25,11 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.LoginActivity;
 import com.henceforth.rhino.webServices.apis.RestClient;
 
 import java.io.IOException;
-import java.lang.*;
 import java.lang.annotation.Annotation;
 
 import okhttp3.ResponseBody;
@@ -34,6 +40,7 @@ import retrofit2.Converter;
  */
 
 public class CommonMethods {
+    private static Dialog progressBarDialog;
     public static void showToast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
@@ -54,7 +61,8 @@ public class CommonMethods {
         showToast(context, "Session Expired! Please Login Again");
         //Intent intent = new Intent(context, SplashActivity.class);
         Intent intent = new Intent(context, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
 
@@ -122,6 +130,44 @@ public class CommonMethods {
                 }
             }
         });
+    }
+
+    public static void showProgressDialog(Context context) {
+        if (progressBarDialog == null) {
+            progressBarDialog = new Dialog(context);
+            progressBarDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+            progressBarDialog.setContentView(R.layout.dialog_progress_bar);
+            progressBarDialog.getWindow().setBackgroundDrawable
+                    (new ColorDrawable(Color.TRANSPARENT));
+            progressBarDialog.setCancelable(false);
+            progressBarDialog.show();
+        }
+    }
+
+
+    public static void dismissProgressDialog() {
+        if (progressBarDialog != null) {
+            if (progressBarDialog.isShowing())
+                progressBarDialog.dismiss();
+            progressBarDialog = null;
+        }
+    }
+
+    public static void showInternetNotConnectedToast(Context context) {
+        Toast.makeText(context, "Internet Not Connected", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showErrorToast(Context context) {
+        Toast.makeText(context, "Some Error Occured, Please Try Later", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(
+                    Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
 }

@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">Rhino</string>
-    <string name="licence_plate">Licence Plate Of vehicle</string>
+    <string name="licence_plate">Enter Registeration Number</string>
     <string name="vehicle_milage">Vehicle Mileage</string>
     <string name="vehicle_type">Type of Vehicle</string>
-    <string name="vehicle_ReqType">Vehicle Request Type</string>
+    <string name="vehicle_ReqType">Tell Regarding your Request</string>
     <string name="vehicle_ComId">Vehicle Company Id</string>
     <string name="vehicle_Make">Vehicle Make</string>
     <string name="vehicle_Model">Vehicle Model</string>
-    <string name="vehicle_Year">Vehicle Year</string>
+    <string name="vehicle_Year">Vehicle Manufactured Year</string>
     <string name="phone_no">Phone Number</string>
     <string name="email">Email</string>
-    <string name="noNotification"> No Notification</string>
+    <string name="noNotification"> No Notification for you</string>
     <string name="password">Password</string>
     <string name="forgetPass">Forgot Password ?</string>
     <string name="login_button">LOGIN</string>
@@ -26,7 +26,8 @@
     <string name="toolbarBack">Back</string>
     <string name="submit">SUBMIT</string>
     <string name="submitting_request_text">Problem Submitting Request?</string>
-    <string name="dial_no">Dial  1800 243 394</string>
+    <string name="dial">Dial</string>
+    <string name="dial_no">&#160;&#160;1800 243 394</string>
     <!-- Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ok">Okay</string>
@@ -36,4 +37,13 @@
     <string name="string_title_upload_progressbar_">Wait for a while...</string>
     <string name="pause">pause</string>
     <string name="resume">resume</string>
+    <string name="enterRegistrationNumber">Please Enter Registeration Number</string>
+    <string name="enterVehicleMilage">Please Enter Vehicle Mileage</string>
+    <string name="enterVehicleType">Please Enter Type of Vehicle</string>
+    <string name="enterVehicleRequestType">Please Tell Regarding your Request</string>
+    <string name="selectVehicle">Select a Vehicle</string>
+    <string name="enterVehicleModel">Please Enter Vehicle Model</string>
+    <string name="enterVehicleYear">Please Enter Vehicle Manufactured Year</string>
+    <string name="enterPhoneNumber">Please Enter Phone Number</string>
+    <string name="selectVehicleCompany">Please Select Vehicle Company</string>
 </resources>
