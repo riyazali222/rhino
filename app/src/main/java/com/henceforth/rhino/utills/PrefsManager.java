@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 public class PrefsManager {
     private String mPrefsName = "Rhino_prefs";
     private Context mContext;
+    private static final String ISLOGINED = "isLogined";
     private SharedPreferences mSharedPreferences;
     public static SharedPreferences.Editor mEditor;
 
@@ -15,6 +16,11 @@ public class PrefsManager {
         mEditor = mSharedPreferences.edit();
     }
 
+
+    public boolean getIsLogined() {
+        return mSharedPreferences.getBoolean(ISLOGINED, false);
+    }
+
     //SessionId or Access Token are same
 
     public String getSessionId() {
@@ -22,12 +28,13 @@ public class PrefsManager {
     }
 
     public void setSessionId(String sessionId) {
+        mEditor.putBoolean(ISLOGINED, true);
         mEditor.putString("sessionId", sessionId);
         mEditor.apply();
     }
 
     public int getNotificationId() {
-        return mSharedPreferences.getInt("notiId",1);
+        return mSharedPreferences.getInt("notiId", 1);
     }
 
     public void setNotificationId(int notiId) {
@@ -38,6 +45,7 @@ public class PrefsManager {
     public String getVehicleName() {
         return mSharedPreferences.getString("vehicleName", "");
     }
+
     public void setVehicleName(String vehicleName) {
         mEditor.putString("vehicleName", vehicleName);
         mEditor.apply();
@@ -54,9 +62,11 @@ public class PrefsManager {
 
 
     public void logout() {
-        ApplicationGlobal.sessionId = "";
+
         setProfile("");
         ApplicationGlobal.vehicleName = "";
+//        mEditor.clear();
+        ApplicationGlobal.sessionId = "";
     }
 
     public String getDeviceId() {
@@ -76,6 +86,7 @@ public class PrefsManager {
         mEditor.putInt("vehicleId", vehicleId);
         mEditor.apply();
     }
+
     public String getYear() {
         return mSharedPreferences.getString("year", "");
     }

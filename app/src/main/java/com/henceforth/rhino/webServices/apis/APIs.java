@@ -10,6 +10,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface APIs {
@@ -51,6 +52,13 @@ public interface APIs {
                                    @Query("device_id") String device_id,
                                    @Query("fcm_id") String fcm_id);
 
+
+    @POST("api/v1/logout")
+    Call<LogoutApi> LogoutResponse(@Query("device_id") String device_id);
+
+    @PUT("api/v1/change-password")
+    Call<ChangePasswordApi> ChangePasswordResponse(@Query("old_password") String old_password,
+                                                   @Query("new_password") String new_password);
 }
 
 

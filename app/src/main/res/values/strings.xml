@@ -46,4 +46,8 @@
     <string name="enterVehicleYear">Please Enter Vehicle Manufactured Year</string>
     <string name="enterPhoneNumber">Please Enter Phone Number</string>
     <string name="selectVehicleCompany">Please Select Vehicle Company</string>
+    <string name="change_password">Change Password</string>
+    <string name="logout">Logout</string>
+    <string name="setting">Settings</string>
+    <string name="enable_push">Enable Push</string>
 </resources>

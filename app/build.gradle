@@ -19,7 +19,11 @@ android {
         }
     }
 }
-
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -34,7 +38,8 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile 'com.android.support:support-v4:25.1.0'
     compile 'com.google.android.gms:play-services-location:10.0.1'
-    testCompile 'junit:junit:4.12'
     compile 'com.pnikosis:materialish-progress:1.7'
+    compile 'com.github.scottyab:showhidepasswordedittext:0.8'
+    testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

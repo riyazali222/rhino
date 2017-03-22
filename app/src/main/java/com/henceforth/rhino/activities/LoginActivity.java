@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +37,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!ApplicationGlobal.sessionId.isEmpty()) {
-            setContentView(R.layout.activity_splash);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -48,18 +48,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }, 1000);
         } else {
-            setContentView(R.layout.activity_login);
-            findViewById(R.id.btnLogin).setOnClickListener(this);
-            findViewById(R.id.tvForgetPass).setOnClickListener(this);
-            etEmailId = (EditText) findViewById(R.id.etEmailId);
-            etPassword = (EditText) findViewById(R.id.etPassword);
-            textView1 = (TextView) findViewById(R.id.textView1);
-            tvForgetPass = (TextView) findViewById(R.id.tvForgetPass);
-            unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
-                    Settings.Secure.ANDROID_ID);
-            ApplicationGlobal.prefsManager.setDeviceId(unique_id);
+            setContentView(R.layout.activity_splash);
+            CountDownTimer timer = new CountDownTimer(2000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    setContentView(R.layout.activity_login);
+                    findViewById(R.id.btnLogin).setOnClickListener(LoginActivity.this);
+                    findViewById(R.id.tvForgetPass).setOnClickListener(LoginActivity.this);
+                    etEmailId = (EditText) findViewById(R.id.etEmailId);
+                    etPassword = (EditText) findViewById(R.id.etPassword);
+                    textView1 = (TextView) findViewById(R.id.textView1);
+                    tvForgetPass = (TextView) findViewById(R.id.tvForgetPass);
+                    unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                            Settings.Secure.ANDROID_ID);
+
+                    ApplicationGlobal.prefsManager.setDeviceId(CommonMethods.deviceId(getApplicationContext()));
+                }
+            }.start();
+
+
         }
     }
+
 
     @Override
     public void onClick(final View v) {

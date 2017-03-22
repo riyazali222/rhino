@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Rhino.iml" filepath="$PROJECT_DIR$/Rhino.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rhino.iml" filepath="$PROJECT_DIR$/rhino.iml" />
     </modules>
   </component>
 </project>

@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -41,6 +42,7 @@ import retrofit2.Converter;
 
 public class CommonMethods {
     private static Dialog progressBarDialog;
+
     public static void showToast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
@@ -58,7 +60,7 @@ public class CommonMethods {
 
     public static void logout(Context context) {
         ApplicationGlobal.prefsManager.logout();
-        showToast(context, "Session Expired! Please Login Again");
+       // showToast(context, "Session Expired! Please Login Again");
         //Intent intent = new Intent(context, SplashActivity.class);
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -80,6 +82,7 @@ public class CommonMethods {
         } else
             CommonMethods.showToast(context, error.error_description);
     }
+
     public static boolean isLocationEnabled(Context context) {
         LocationManager locationManager = (LocationManager)
                 context.getSystemService(Context.LOCATION_SERVICE);
@@ -168,6 +171,10 @@ public class CommonMethods {
                     Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    public static String deviceId(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
 }
