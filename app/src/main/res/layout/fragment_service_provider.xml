@@ -3,25 +3,23 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BackgroundColor">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
+        <TextView
             android:id="@+id/etLicence"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
-            android:background="@null"
             android:hint="@string/licence_plate"
-            android:inputType="textCapCharacters"
             android:padding="@dimen/Twelve"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/sixty_of_white"
+            android:textSize="16sp"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/toolbar_background"
             android:textCursorDrawable="@drawable/color_cursor" />
 
         <View
@@ -29,20 +27,82 @@
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/Twelve"
             android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/white" />
+            android:background="@color/toolbar_background" />
+        <EditText
+            android:id="@+id/etMemid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editTextHeight"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:hint="@string/memid"
+            android:padding="@dimen/Twelve"
+            android:textColorHint="@color/hintColor"
+            android:singleLine="true"
+            android:inputType="number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/toolbar_background"
+            android:textCursorDrawable="@drawable/color_cursor" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/viewBackground" />
 
+        <EditText
+            android:id="@+id/etIdNo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editTextHeight"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:textColorHint="@color/hintColor"
+            android:hint="@string/vin"
+            android:padding="@dimen/Twelve"
+            android:singleLine="true"
+            android:inputType="number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/toolbar_background"
+            android:textCursorDrawable="@drawable/color_cursor" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/viewBackground" />
+        <TextView
+            android:id="@+id/tvServiceType"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editTextHeight"
+            android:layout_marginTop="12dp"
+            android:textColorHint="@color/hintColor"
+            android:background="@null"
+            android:hint="@string/service_type"
+            android:padding="@dimen/Twelve"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/toolbar_background"
+            android:textCursorDrawable="@drawable/color_cursor" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/viewBackground" />
         <EditText
             android:id="@+id/etMileage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
+            android:textColorHint="@color/hintColor"
             android:background="@null"
             android:hint="@string/vehicle_milage"
             android:padding="@dimen/Twelve"
             android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/sixty_of_white"
+            android:inputType="number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/toolbar_background"
             android:textCursorDrawable="@drawable/color_cursor" />
 
         <View
@@ -50,20 +110,21 @@
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/Twelve"
             android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/white" />
+            android:background="@color/viewBackground" />
 
 
         <TextView
             android:id="@+id/etVehicleType"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:background="@null"
             android:hint="@string/vehicle_type"
+            android:textColorHint="@color/hintColor"
             android:padding="@dimen/Twelve"
+            style="@style/spinner_style"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/white"
-            android:textColorHint="@color/sixty_of_white" />
+            android:textColor="@color/toolbar_background" />
 
 
         <View
@@ -71,19 +132,20 @@
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/Twelve"
             android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/white" />
+            android:background="@color/viewBackground" />
 
 
         <EditText
-            android:id="@+id/etRequestType"
+            android:id="@+id/etBrandName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
+            android:textColorHint="@color/hintColor"
             android:background="@null"
             android:hint="@string/vehicle_ReqType"
             android:padding="@dimen/Twelve"
-            android:textColor="@color/white"
-            android:textColorHint="@color/sixty_of_white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/toolbar_background"
             android:textCursorDrawable="@drawable/color_cursor" />
 
         <View
@@ -91,61 +153,41 @@
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/Twelve"
             android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/white" />
+            android:background="@color/viewBackground" />
 
 
-        <!--  <EditText
-              android:id="@+id/etVehicleId"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@null"
-              android:hint="@string/vehicle_ComId"
-              android:padding="@dimen/Twelve"
-              android:inputType="phone"
-              android:singleLine="true"
-              android:textCursorDrawable="@drawable/color_cursor"
-              android:layout_marginTop="12dp"
-              android:textColorHint="@color/sixty_of_white"
-              android:textColor="@color/white" />
 
-          <View
-              android:layout_width="match_parent"
-              android:layout_height="1dp"
-              android:layout_marginEnd="@dimen/Twelve"
-              android:layout_marginStart="@dimen/Twelve"
-              android:background="@color/white" />
-  -->
         <TextView
             android:id="@+id/tvVehicleMake"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/editTextHeight"
+            android:textColorHint="@color/hintColor"
             android:layout_marginTop="12dp"
-            android:hint="@string/vehicle_Make"
+            android:hint="@string/brand_name"
             android:padding="@dimen/Twelve"
-            android:singleLine="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/white"
-            android:textColorHint="@color/sixty_of_white" />
+            android:textColor="@color/toolbar_background" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/Twelve"
             android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/white" />
+            android:background="@color/viewBackground" />
 
 
         <EditText
             android:id="@+id/etVehicleModel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:background="@null"
+            android:textColorHint="@color/hintColor"
             android:hint="@string/vehicle_Model"
             android:padding="@dimen/Twelve"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/toolbar_background"
             android:textCursorDrawable="@drawable/color_cursor">
 
         </EditText>
@@ -155,42 +197,41 @@
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/Twelve"
             android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/white" />
+            android:background="@color/viewBackground" />
 
         <TextView
             android:id="@+id/tvVehicleYear"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:background="@null"
             android:hint="@string/vehicle_Year"
-            android:inputType="date"
             android:padding="@dimen/Twelve"
-            android:singleLine="true"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/white"
-            android:textColorHint="@color/sixty_of_white" />
+            android:textColor="@color/toolbar_background"
+            android:textColorHint="@color/hintColor"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/Twelve"
             android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/white" />
+            android:background="@color/viewBackground" />
 
 
         <EditText
             android:id="@+id/etPhoneNo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:background="@null"
             android:hint="@string/phone_no"
             android:inputType="phone"
             android:padding="@dimen/Twelve"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/sixty_of_white"
+            android:textColor="@color/toolbar_background"
+            android:textColorHint="@color/hintColor"
             android:textCursorDrawable="@drawable/color_cursor" />
 
 
@@ -199,8 +240,29 @@
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/Twelve"
             android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/white" />
+            android:background="@color/viewBackground" />
+        <EditText
+            android:id="@+id/tvOdometerReading"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editTextHeight"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:hint="@string/odometer_reading"
+            android:inputType="phone"
+            android:padding="@dimen/Twelve"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:singleLine="true"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/toolbar_background"
+            android:textCursorDrawable="@drawable/color_cursor" />
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/Twelve"
+            android:layout_marginStart="@dimen/Twelve"
+            android:background="@color/viewBackground" />
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
@@ -218,7 +280,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/submitting_request_text"
-            android:textColor="@color/white" />
+            android:textColor="@color/toolbar_background" />
 
         <TextView
             android:id="@+id/tvContactInfo"
@@ -228,7 +290,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="@dimen/activity_horizontal_margin"
             android:text="@string/dial_no"
-            android:textColor="@drawable/textselector"
+            android:textColor="@color/toolbar_background"
             android:textColorHighlight="@color/colorPrimary" />
     </LinearLayout>
 

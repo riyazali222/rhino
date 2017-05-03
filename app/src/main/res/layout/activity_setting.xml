@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BackgroundColor"
+    android:background="@color/white"
     tools:context="com.henceforth.rhino.activities.SettingActivity">
 
     <RelativeLayout
@@ -23,61 +23,62 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting"
+                android:layout_gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/white" />
         </android.support.v7.widget.Toolbar>
+
         <TextView
             android:id="@+id/tvNotifications"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/viewLine"
             android:layout_below="@+id/toolbarSetting"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:drawablePadding="@dimen/activity_horizontal_margin"
-            android:drawableStart="@drawable/ic_notification"
-            android:paddingTop="4dp"
+            android:drawableStart="@drawable/notification_tint"
+            android:padding="16dp"
             android:text="@string/enable_push"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/toolbar_background" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:id="@+id/switchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:layout_alignBaseline="@+id/tvNotifications"
             android:layout_alignBottom="@+id/tvNotifications"
+            android:layout_marginBottom="@dimen/Twelve"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin" />
+            app:thumbTint="@color/toolbar_background"
+            android:checked="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:padding="12dp" />
+
         <View
             android:id="@+id/viewLogout"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/switchButton"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:background="#33FFFFFF" />
+            android:layout_below="@+id/tvNotifications"
+            android:background="@color/viewBackground" />
+
         <TextView
             android:id="@+id/tvChangePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewLogout"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:drawablePadding="@dimen/activity_horizontal_margin"
-            android:drawableStart="@drawable/ic_change_password"
-            android:layout_marginBottom="@dimen/Twelve"
-            android:paddingTop="4dp"
+            android:drawableStart="@drawable/password_tint"
+            android:padding="@dimen/activity_horizontal_margin"
             android:text="@string/change_password"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/toolbar_background" />
 
         <View
             android:id="@+id/viewLine"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/tvChangePassword"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:background="#33FFFFFF" />
+            android:background="@color/viewBackground" />
 
         <TextView
             android:id="@+id/tvLogout"
@@ -85,17 +86,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/viewLine"
             android:layout_below="@+id/viewLine"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:drawablePadding="@dimen/activity_horizontal_margin"
-            android:drawableStart="@drawable/ic_logout_white"
-            android:paddingTop="4dp"
+            android:drawableStart="@drawable/logout_tint"
+            android:padding="16dp"
             android:text="@string/logout"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@android:color/white" />
-
-
-
-
+            android:textColor="@color/toolbar_background" />
 
 
     </RelativeLayout>

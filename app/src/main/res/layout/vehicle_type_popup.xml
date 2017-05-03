@@ -1,11 +1,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="#16000000">
+
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tvRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="car"
+        android:textColor="@color/toolbar_background"
+        style="@style/spinner_style"
+        android:gravity="center"
         android:padding="20dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tvRow"
+        android:background="@color/viewBackground" />
 </RelativeLayout>

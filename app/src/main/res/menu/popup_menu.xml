@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.andoidsrc.popupmenu.MainActivity">
+
+    <item
+        android:id="@+id/lang_java"
+        app:showAsAction="ifRoom|withText"
+        android:title="Car"
+        android:visible="true"/>
+    <item
+        android:id="@+id/lang_android"
+        app:showAsAction="ifRoom|withText"
+        android:title="Truck"
+        android:visible="true"/>
+    <item
+        android:id="@+id/lang_ruby"
+        app:showAsAction="ifRoom|withText"
+        android:title="Ven"
+        android:visible="true"/>
+
+</menu>

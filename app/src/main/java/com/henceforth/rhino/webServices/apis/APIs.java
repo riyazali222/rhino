@@ -2,6 +2,7 @@ package com.henceforth.rhino.webServices.apis;
 
 import com.henceforth.rhino.utills.ApiList;
 import com.henceforth.rhino.utills.ForgotPasswordApi;
+import com.henceforth.rhino.webServices.pojo.EditProfile;
 import com.henceforth.rhino.webServices.pojo.ItemsList;
 import com.henceforth.rhino.webServices.pojo.NotificationsLists;
 
@@ -47,10 +48,6 @@ public interface APIs {
     Call<List<NotificationsLists>> NotificationListResponse();
 
 
-    @GET("api/v1/set-fcm-id")
-    Call<ApiList> getFcmIdResponce(@Query("device_type") String device_type,
-                                   @Query("device_id") String device_id,
-                                   @Query("fcm_id") String fcm_id);
 
 
     @POST("api/v1/logout")
@@ -59,6 +56,13 @@ public interface APIs {
     @PUT("api/v1/change-password")
     Call<ChangePasswordApi> ChangePasswordResponse(@Query("old_password") String old_password,
                                                    @Query("new_password") String new_password);
+    @POST("api/v1/notification-enable-disable")
+    Call<EnableDisableApi> EnableDisableNotification(@Query("device_id") String device_id,
+                                   @Query("status") String status);
+
+    @POST("api/v1/edit-profile")
+    Call<EditProfile> EditProfileResponse();
+
 }
 
 

@@ -12,9 +12,9 @@
         android:layout_below="@+id/toolbarLogout"
         android:layout_centerHorizontal="true"
         android:padding="@dimen/twenty"
-        android:text="Are you sure you want to logout ?"
+        android:text="@string/logoutText"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/toolbar_background" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarLogout"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/logout"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@android:color/white" />
     </android.support.v7.widget.Toolbar>
     <LinearLayout
@@ -43,20 +43,23 @@
             android:id="@+id/btnOk"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Yes"
+            android:text="@string/yesButton"
             android:layout_marginEnd="4dp"
-            android:background="@color/toolbar_background"
+
+            android:background="@drawable/button_yes"
             android:textColor="@android:color/white"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_height="wrap_content" />
         <Button
+            style="?attr/buttonBarButtonStyle"
             android:id="@+id/btnCancle"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="No"
+            android:text="@string/noButton"
             android:layout_marginStart="4dp"
             android:background="@drawable/no_button"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/toolbar_background"
             android:layout_height="48dp" />
 
     </LinearLayout>

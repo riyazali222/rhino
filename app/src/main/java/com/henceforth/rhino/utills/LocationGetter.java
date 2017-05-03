@@ -142,5 +142,4 @@ public class LocationGetter extends Service implements
         }
     }
 
-
 }

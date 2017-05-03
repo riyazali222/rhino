@@ -2,6 +2,8 @@ package com.henceforth.rhino.fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +18,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -25,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,9 +49,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ServiceProviderFragment extends Fragment implements View.OnClickListener {
-    EditText etLicence, etMileage, etVehicleModel, etRequestType,
+    EditText etMileage, etVehicleModel, etRequestType,
             etPhoneNo;
-    TextView tvVehicleMake, tvContactInfo, tvVehicleYear, etVehicleType;
+    TextView tvVehicleMake, tvContactInfo, tvVehicleYear, etLicence, etVehicleType,tvServiceType;
     private LocationEnableRequest locationEnableRequest = new LocationEnableRequest();
 
 
@@ -59,20 +64,23 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        etLicence = (EditText) getView().findViewById(R.id.etLicence);
+        etLicence = (TextView) getView().findViewById(R.id.etLicence);
         etMileage = (EditText) getView().findViewById(R.id.etMileage);
         etVehicleType = (TextView) getView().findViewById(R.id.etVehicleType);
-        etRequestType = (EditText) getView().findViewById(R.id.etRequestType);
+        etRequestType = (EditText) getView().findViewById(R.id.etBrandName);
         etVehicleModel = (EditText) getView().findViewById(R.id.etVehicleModel);
         tvVehicleYear = (TextView) getView().findViewById(R.id.tvVehicleYear);
         etPhoneNo = (EditText) getView().findViewById(R.id.etPhoneNo);
         tvVehicleMake = (TextView) getView().findViewById(R.id.tvVehicleMake);
         tvContactInfo = (TextView) getView().findViewById(R.id.tvContactInfo);
+        tvServiceType=(TextView)getView().findViewById(R.id.tvServiceType);
+        tvServiceType.setOnClickListener(this);
         tvContactInfo.setOnClickListener(this);
         getView().findViewById(R.id.btnSubmit).setOnClickListener(this);
         tvVehicleMake.setOnClickListener(this);
         tvVehicleYear.setOnClickListener(this);
         etVehicleType.setOnClickListener(this);
+        etLicence.setOnClickListener(this);
         getActivity().registerReceiver(locationEnableRequest,
                 new IntentFilter("LocationEnableRequest"));
 
@@ -81,7 +89,7 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
         SpannableStringBuilder builder = new SpannableStringBuilder();
 
         SpannableString str1 = new SpannableString(getString(R.string.dial));
-        str1.setSpan(new ForegroundColorSpan(Color.WHITE), 0, str1.length(), 0);
+        str1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.BackgroundColor)), 0, str1.length(), 0);
         builder.append(str1);
 
         SpannableString str2 = new SpannableString(getString(R.string.dial_no));
@@ -95,6 +103,10 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tvServiceType:
+//                DialogFragment d= ServiceTypeFragment.newInstance();
+                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity)getActivity(),new ServiceTypeFragment(),"Tag");
+                break;
             case R.id.tvVehicleMake:
                 Intent intent = new Intent(getActivity(), VehicleMakeActivity.class);
                 startActivityForResult(intent, 2);
@@ -142,8 +154,48 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
                 Intent j = new Intent(getActivity(), YearPickerActivity.class);
                 startActivityForResult(j, 3);
                 break;
+            case R.id.etLicence:
+//                DialogFragment dialog = RegistrationNoDialog.newInstance();
+                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity)getActivity(),new RegistrationNoDialog(),"Tag");
         }
     }
+
+    private void dialogLicence() {
+
+        final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
+
+
+        dialog.setContentView(R.layout.dialog_registration_no);
+        Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.dialogToolbar);
+        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
+        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        Button submitButton = (Button) dialog.findViewById(R.id.btnSubmit);
+        final EditText editText = (EditText) dialog.findViewById(R.id.editText);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = editText.getText().toString().trim();
+                if (!email.isEmpty()) {
+                    if (CommonMethods.isNetworkConnected(getActivity())) {
+                        //forgotPasswordResponse(email);
+                    } else
+                        CommonMethods.showInternetNotConnectedToast(getActivity());
+
+                } else {
+                    Toast.makeText(getActivity(), "Please enter email id", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+        });
+        dialog.show();
+
+    }
+
 
     private void showPopupWindow(final TextView tv, final int array) {
         final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());

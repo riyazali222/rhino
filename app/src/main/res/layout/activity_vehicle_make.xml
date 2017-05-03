@@ -5,7 +5,7 @@
     android:id="@+id/activity_vehicle_make"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BackgroundColor"
+    android:background="#ffe6e6"
     android:orientation="vertical"
     tools:context="com.henceforth.rhino.activities.VehicleMakeActivity">
 
@@ -39,13 +39,13 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:singleLine="true"
-        android:background="@drawable/submitbutton"
+        android:background="@null"
         android:hint="@string/search_button"
         android:paddingEnd="@dimen/Twelve"
-        android:paddingStart="@dimen/Twelve"
-        android:textColor="@color/BackgroundColor"
+        android:textColor="@color/toolbar_background"
         android:textColorHint="@color/BackgroundColor"
         android:textSize="@dimen/activity_horizontal_margin" />
+
 
 
     <android.support.v7.widget.RecyclerView
@@ -53,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </LinearLayout>

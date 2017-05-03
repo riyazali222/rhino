@@ -54,7 +54,7 @@ public class VehicleMakeActivity extends AppCompatActivity {
     private void init() {
 
         toolbarVehMake = (Toolbar) findViewById(R.id.toolbarVehMake);
-        toolbarVehMake.setNavigationIcon(R.drawable.ic_back);
+        toolbarVehMake.setNavigationIcon(R.drawable.ic_close_white);
         toolbarVehMake.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

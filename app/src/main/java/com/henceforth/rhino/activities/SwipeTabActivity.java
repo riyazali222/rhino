@@ -1,5 +1,6 @@
 package com.henceforth.rhino.activities;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.henceforth.rhino.R;
+import com.henceforth.rhino.SettingDialogFragment;
 import com.henceforth.rhino.adapters.ViewPagerAdapter;
+import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.Constants;
 
 public class SwipeTabActivity extends AppCompatActivity implements View.OnClickListener {
@@ -32,9 +35,11 @@ public class SwipeTabActivity extends AppCompatActivity implements View.OnClickL
         //Creating our pager adapter
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setText(R.string.service_provider).setIcon(R.drawable.selector_service);
-        tabLayout.getTabAt(1).setText(R.string.notification).setIcon(R.drawable.selector_notification);
+        tabLayout.getTabAt(0).setText(R.string.raise_request).setIcon(R.drawable.selector_service);
+        tabLayout.getTabAt(1).setText(R.string.profile).setIcon(R.drawable.ic_user);
+        tabLayout.getTabAt(2).setText(R.string.notification).setIcon(R.drawable.selector_notification);
     }
 
     @Override
@@ -46,10 +51,9 @@ public class SwipeTabActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-       /* getFragmentManager().beginTransaction()
-                .add(R.id.fragmentHolder, new SettingActivity()).addToBackStack("")
-                .commit();*/
-        Intent i=new Intent(SwipeTabActivity.this,SettingActivity.class);
-        startActivity(i);
+
+        DialogFragment dialog = SettingDialogFragment.newInstance();
+        CommonMethods.showDialogFragmentFullScreen((AppCompatActivity)SwipeTabActivity.this,dialog,"Tag");
+
     }
 }

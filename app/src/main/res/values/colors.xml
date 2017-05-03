@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#54D9C8</color>
-    <color name="colorPrimaryDark">#29B9A6</color>
+    <color name="colorPrimary">#1966AE</color>
+    <color name="colorPrimaryDark">#1966AE</color>
     <color name="colorAccent">#FFF</color>
+    <color name="hintColor">#990055A4</color>
     <color name="sixty_of_white">#99ffffff</color>
-    <color name="toolbar_background">#54D9C8</color>
+    <color name="toolbar_background">#0055A4</color>
     <color name="fragment_background">#555555</color>
     <color name="blue_grey">#607d8b</color>
     <color name="emphasis">#555555</color>
     <color name="white">#fff</color>
-    <color name="BackgroundColor">#555</color>
+    <color name="BackgroundColor">#555555</color>
     <color name="dialog_background">#F0EFF5</color>
     <color name="dialog_toolbar_background">#AAAAAA</color>
     <color name="tenOfBlack">#1A000000</color>
+    <color name="viewBackground">#0055A4</color>
+    <color name="tintRed">#D90E2B</color>
+    <color name="colorGrayBg">#F2F2F2</color>
 </resources>

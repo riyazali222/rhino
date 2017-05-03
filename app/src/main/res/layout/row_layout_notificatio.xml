@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/BackgroundColor"
+    android:background="@color/white"
     android:orientation="vertical"
     android:paddingEnd="@dimen/activity_horizontal_margin"
     android:paddingStart="@dimen/activity_horizontal_margin"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/notification"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="@color/sixty_of_white" />
+        android:textColor="@color/toolbar_background" />
 
 
     <TextView
@@ -26,13 +26,13 @@
         android:singleLine="true"
         android:text="@string/date"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textColor="@color/sixty_of_white" />
+        android:textColor="@color/toolbar_background" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:background="@color/white" />
+        android:background="@color/viewBackground" />
 
 
 </LinearLayout>

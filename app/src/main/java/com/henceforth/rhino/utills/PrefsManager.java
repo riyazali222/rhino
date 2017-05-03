@@ -62,11 +62,10 @@ public class PrefsManager {
 
 
     public void logout() {
-
-        setProfile("");
+        mEditor.clear();
         ApplicationGlobal.vehicleName = "";
-//        mEditor.clear();
         ApplicationGlobal.sessionId = "";
+
     }
 
     public String getDeviceId() {
@@ -93,6 +92,15 @@ public class PrefsManager {
 
     public void setYear(String year) {
         mEditor.putString("year", year);
+        mEditor.apply();
+    }
+
+    public String getStatus() {
+        return mSharedPreferences.getString("save", "");
+    }
+
+    public void setStatus(String status) {
+        mEditor.putString("save", status);
         mEditor.apply();
     }
 }

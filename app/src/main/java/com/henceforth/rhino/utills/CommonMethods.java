@@ -10,10 +10,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -30,19 +34,19 @@ import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.LoginActivity;
 import com.henceforth.rhino.webServices.apis.RestClient;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-/**
- * Created by All Mankind on 2/16/2017.
- */
+
 
 public class CommonMethods {
     private static Dialog progressBarDialog;
-
+    public static final String JPEG_FILE_PREFIX = "IMG_";
+    public static final String JPEG_FILE_SUFFIX = ".jpg";
     public static void showToast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
@@ -58,9 +62,19 @@ public class CommonMethods {
             return true;
     }
 
+    public static void showDialogFragmentFullScreen(AppCompatActivity context, android.app.DialogFragment dialogFragment, String
+            tag) {
+        android.app.FragmentManager fm = context.getFragmentManager();
+        int style = android.app.DialogFragment.STYLE_NO_TITLE, theme = 0;
+        theme = R.style.slideFromTopDialog;
+        dialogFragment.setStyle(style, theme);
+        dialogFragment.show(fm, tag);
+
+    }
+
     public static void logout(Context context) {
         ApplicationGlobal.prefsManager.logout();
-       // showToast(context, "Session Expired! Please Login Again");
+        // showToast(context, "Session Expired! Please Login Again");
         //Intent intent = new Intent(context, SplashActivity.class);
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -176,5 +190,24 @@ public class CommonMethods {
     public static String deviceId(Context context) {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
+    public static File setUpImageFile(String directory) throws IOException {
+        File imageFile = null;
+        if (Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState())) {
+            File storageDir = new File(directory);
+            if (storageDir != null) {
+                if (!storageDir.mkdirs()) {
+                    if (!storageDir.exists()) {
+                        Log.d("CameraSample", "failed to create directory");
+                        return null;
+                    }
+                }
+            }
 
+            imageFile = File.createTempFile(JPEG_FILE_PREFIX
+                            + System.currentTimeMillis() + "_",
+                    JPEG_FILE_SUFFIX, storageDir);
+        }
+        return imageFile;
+    }
 }

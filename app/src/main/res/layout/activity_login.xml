@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
+    android:id="@+id/lin_lay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_background_image"
+    android:background="@drawable/ic_backgroud"
     android:orientation="vertical">
 
     <View
@@ -11,39 +11,42 @@
         android:layout_height="@dimen/editTextHeight" />
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/editTextHeight"
-        android:src="@drawable/rhino" />
-
+        android:src="@drawable/ic_logo" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/etEmailId"
         android:layout_width="match_parent"
         android:layout_height="@dimen/editTextHeight"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_marginEnd="@dimen/twenty"
         android:layout_marginStart="@dimen/twenty"
         android:layout_marginTop="@dimen/twenty"
         android:background="@android:color/transparent"
-        android:drawablePadding="@dimen/activity_horizontal_margin"
-        android:drawableStart="@drawable/ic_username"
+        android:drawableStart="@drawable/user_tint"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:paddingEnd="12dp"
         android:paddingStart="12dp"
         android:singleLine="true"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/sixty_of_white" />
+        android:textColor="@color/toolbar_background"
+        android:textColorHint="@color/hintColor" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginEnd="@dimen/twenty"
         android:layout_marginStart="@dimen/twenty"
-        android:background="@android:color/white" />
+        android:background="@android:color/holo_red_dark" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -53,34 +56,48 @@
         android:layout_marginStart="@dimen/twenty"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:background="@android:color/transparent"
-        android:drawablePadding="@dimen/activity_horizontal_margin"
-        android:drawableStart="@drawable/ic_password"
-        android:gravity="center_vertical"
+        android:gravity="center"
+        android:drawableStart="@drawable/pass_red_tint"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:paddingEnd="12dp"
         android:paddingStart="12dp"
         android:singleLine="true"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/sixty_of_white" />
+        android:textColor="@color/toolbar_background"
+        android:textColorHint="@color/hintColor" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginEnd="@dimen/twenty"
         android:layout_marginStart="@dimen/twenty"
-        android:background="@android:color/white" />
+        android:background="@android:color/holo_red_dark" />
 
     <TextView
         android:id="@+id/tvForgetPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:padding="12dp"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="6dp"
         android:text="@string/forgetPass"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/toolbar_background" />
+
+    <TextView
+        android:id="@+id/tvTermsCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/TwentyFour"
+        android:layout_marginStart="@dimen/TwentyFour"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingTop="6dp"
+        android:paddingBottom="12dp"
+        android:text="@string/terms_conditions"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+        android:textColor="@color/toolbar_background" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -88,11 +105,13 @@
         android:layout_height="@dimen/buttonHeight"
         android:layout_marginEnd="@dimen/twenty"
         android:layout_marginStart="@dimen/twenty"
+        android:layout_marginBottom="@dimen/twenty"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:background="@drawable/mybutton"
         android:text="@string/login_button"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/white" />
+</LinearLayout>
     <TextView
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:id="@+id/textView1"

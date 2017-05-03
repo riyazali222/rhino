@@ -1,17 +1,25 @@
 package com.henceforth.rhino.activities;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
+
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.TypefaceSpan;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +28,7 @@ import com.henceforth.rhino.utills.ApiList;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.Constants;
+import com.henceforth.rhino.utills.CustomTypefaceSpan;
 import com.henceforth.rhino.utills.ForgotPasswordApi;
 import com.henceforth.rhino.webServices.apis.RestClient;
 
@@ -29,14 +38,18 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etEmailId, etPassword;
-    TextView textView1, tvForgetPass;
+    TextView textView1, tvForgetPass,tvTermsCondition;
     public static String unique_id;
     private boolean activityKilled = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!ApplicationGlobal.sessionId.isEmpty()) {
+            setContentView(R.layout.activity_splash);
+            StartAnimations();
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -46,36 +59,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         finish();
                     }
                 }
-            }, 1000);
+            }, 3000);
         } else {
-            setContentView(R.layout.activity_splash);
-            CountDownTimer timer = new CountDownTimer(2000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
+            setContentView(R.layout.activity_login);
+            findViewById(R.id.btnLogin).setOnClickListener(this);
+            findViewById(R.id.tvForgetPass).setOnClickListener(this);
+            findViewById(R.id.tvTermsCondition).setOnClickListener(this);
+            TextView tvTermsCondition = (TextView)findViewById(R.id.tvTermsCondition);
+            //Spannable String
+            String s = "By signing in, you agree with our Terms and Conditions";
+            Typeface robotoRegular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+            Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
+            TypefaceSpan robotoRegularSpan = new CustomTypefaceSpan("", robotoRegular);
+            TypefaceSpan robotoBoldSpan = new CustomTypefaceSpan("", robotoBold);
+            SpannableStringBuilder sb = new SpannableStringBuilder(s);
+            sb.setSpan(robotoRegularSpan, 0, 33, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            sb.setSpan(robotoBoldSpan, 33, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            sb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.toolbar_background)),
+                    34, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            tvTermsCondition.setText(sb);
 
-                }
-
-                @Override
-                public void onFinish() {
-                    setContentView(R.layout.activity_login);
-                    findViewById(R.id.btnLogin).setOnClickListener(LoginActivity.this);
-                    findViewById(R.id.tvForgetPass).setOnClickListener(LoginActivity.this);
-                    etEmailId = (EditText) findViewById(R.id.etEmailId);
-                    etPassword = (EditText) findViewById(R.id.etPassword);
-                    textView1 = (TextView) findViewById(R.id.textView1);
-                    tvForgetPass = (TextView) findViewById(R.id.tvForgetPass);
-                    unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
-                            Settings.Secure.ANDROID_ID);
-
-                    ApplicationGlobal.prefsManager.setDeviceId(CommonMethods.deviceId(getApplicationContext()));
-                }
-            }.start();
-
-
+            etEmailId = (EditText) findViewById(R.id.etEmailId);
+            etPassword = (EditText) findViewById(R.id.etPassword);
+            textView1 = (TextView) findViewById(R.id.textView1);
+            tvForgetPass = (TextView) findViewById(R.id.tvForgetPass);
+            unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+            ApplicationGlobal.prefsManager.setDeviceId(unique_id);
         }
     }
+    private void StartAnimations() {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        anim.reset();
+        LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
+        l.clearAnimation();
+        l.startAnimation(anim);
 
-
+        anim = AnimationUtils.loadAnimation(this, R.anim.translate);
+        anim.reset();
+        ImageView iv = (ImageView) findViewById(R.id.ivSplash);
+        iv.clearAnimation();
+        iv.startAnimation(anim);
+    }
     @Override
     public void onClick(final View v) {
 
@@ -100,9 +125,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tvForgetPass:
                 custom_dialog();
                 break;
+
+            case R.id.tvTermsCondition:
+                Intent intent=new Intent(LoginActivity.this,TermsConditionActivity.class);
+                startActivity(intent);
+                break;
+
         }
 
     }
+
+
 
     private void loginRetrofit(String usercred, String password, String device_type,
                                String device_id, String fcm_id) {
@@ -118,6 +151,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 ApplicationGlobal.sessionId = response.body().getAccessToken();
                                 ApplicationGlobal.prefsManager.setSessionId(response.body()
                                         .getAccessToken());
+
                                 Intent i = new Intent(LoginActivity.this,
                                         SwipeTabActivity.class);
                                 startActivity(i);
@@ -141,6 +175,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void custom_dialog() {
         final Dialog dialog = new Dialog(LoginActivity.this, R.style.slideFromTopDialog);
+
+
         dialog.setContentView(R.layout.forgot_password_dialog);
         Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.dialogToolbar);
         dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
@@ -205,4 +241,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onDestroy();
         activityKilled = true;
     }
+
+
 }

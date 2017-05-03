@@ -19,6 +19,14 @@ public class ApiList {
         return error_description;
     }
 
+    @SerializedName("is_notification")
+    @Expose
+    private String is_notification;
+
+    public String getIs_notification() {
+        return is_notification;
+    }
+
     @SerializedName("message")
     @Expose
     private String message;
