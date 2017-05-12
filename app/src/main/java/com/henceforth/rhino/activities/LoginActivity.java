@@ -3,10 +3,12 @@ package com.henceforth.rhino.activities;
 import android.app.Dialog;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
@@ -23,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.utills.ApiList;
 import com.henceforth.rhino.utills.ApplicationGlobal;
@@ -31,6 +34,9 @@ import com.henceforth.rhino.utills.Constants;
 import com.henceforth.rhino.utills.CustomTypefaceSpan;
 import com.henceforth.rhino.utills.ForgotPasswordApi;
 import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.webServices.pojo.ProfileList;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,9 +44,12 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etEmailId, etPassword;
-    TextView textView1, tvForgetPass,tvTermsCondition;
+    TextView textView1, tvForgetPass, tvTermsCondition;
     public static String unique_id;
     private boolean activityKilled = false;
+    ArrayList<ProfileList> profileLists = new ArrayList<>();
+    private SharedPreferences mSharedPreferences;
+    public static SharedPreferences.Editor mEditor;
 
 
     @Override
@@ -65,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             findViewById(R.id.btnLogin).setOnClickListener(this);
             findViewById(R.id.tvForgetPass).setOnClickListener(this);
             findViewById(R.id.tvTermsCondition).setOnClickListener(this);
-            TextView tvTermsCondition = (TextView)findViewById(R.id.tvTermsCondition);
+            TextView tvTermsCondition = (TextView) findViewById(R.id.tvTermsCondition);
             //Spannable String
             String s = "By signing in, you agree with our Terms and Conditions";
             Typeface robotoRegular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
@@ -75,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             SpannableStringBuilder sb = new SpannableStringBuilder(s);
             sb.setSpan(robotoRegularSpan, 0, 33, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
             sb.setSpan(robotoBoldSpan, 33, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-            sb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.toolbar_background)),
+            sb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)),
                     34, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
             tvTermsCondition.setText(sb);
 
@@ -88,6 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             ApplicationGlobal.prefsManager.setDeviceId(unique_id);
         }
     }
+
     private void StartAnimations() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         anim.reset();
@@ -101,6 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         iv.clearAnimation();
         iv.startAnimation(anim);
     }
+
     @Override
     public void onClick(final View v) {
 
@@ -120,6 +131,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         CommonMethods.showInternetNotConnectedToast(LoginActivity.this);
                     }
                 }
+                /*Intent i = new Intent(LoginActivity.this,
+                        SwipeTabActivity.class);
+                startActivity(i);*/
                 break;
 
             case R.id.tvForgetPass:
@@ -127,14 +141,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.tvTermsCondition:
-                Intent intent=new Intent(LoginActivity.this,TermsConditionActivity.class);
+                Intent intent = new Intent(LoginActivity.this, TermsConditionActivity.class);
                 startActivity(intent);
                 break;
 
         }
 
     }
-
 
 
     private void loginRetrofit(String usercred, String password, String device_type,
@@ -148,9 +161,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         CommonMethods.dismissProgressDialog();
                         try {
                             if (response.code() == 200 && response.body() != null) {
-                                ApplicationGlobal.sessionId = response.body().getAccessToken();
-                                ApplicationGlobal.prefsManager.setSessionId(response.body()
-                                        .getAccessToken());
+                                ApplicationGlobal.sessionId = response.body().getAccess_token();
+                                ApplicationGlobal.prefsManager.setSessionID(response.body()
+                                        .getAccess_token());
+//                             /*   String img=response.body().getImage();
+//                                String email=response.body().getEmail();
+//                                String custId=response.body().getCustomer_id();
+//                                String  fname=response.body().getFirstname();
+//                                String lname=response.body().getLastname();
+//                                String mname=response.body().getMiddlename();
+//                                String add1=response.body().getAddress1();
+//                                String add2=response.body().getAddress2();
+//                                String add3=response.body().getAddress3();
+//                                String city=response.body().getCity();
+//                                String state=response.body().getState();
+//                                String country=response.body().getCountry();
+//                                String pn=response.body().getPhone_no();
+//                                ProfileList list=new ProfileList(custId,email,fname,mname,lname,
+//                                        img,add1,add2,add3,city,state,country,pn);
+//                                Gson gson = new Gson();
+//                                String json = gson.toJson(list);
+//                                mEditor.putString("MyObject", json);
+//                                mEditor.commit();*/
+                                ApplicationGlobal.prefsManager.setProfile(new Gson().toJson(response.body()));
+                                Intent intent = new Intent("UPDATE");
+                                intent.putExtra("Update", "");
+                                LocalBroadcastManager.getInstance(LoginActivity.this)
+                                        .sendBroadcast(intent);
 
                                 Intent i = new Intent(LoginActivity.this,
                                         SwipeTabActivity.class);

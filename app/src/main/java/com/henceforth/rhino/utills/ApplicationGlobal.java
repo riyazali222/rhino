@@ -25,7 +25,7 @@ public class ApplicationGlobal extends Application {
         screenWidth = getScreenWidth();
         prefsManager = new PrefsManager(this);
         notiId=prefsManager.getNotificationId();
-        sessionId = prefsManager.getSessionId();
+        sessionId = prefsManager.getSessionID();
         vehicleName=prefsManager.getVehicleName();
 //        if (!sessionId.isEmpty()) {
 //            profile = new Gson().fromJson(prefsManager.getProfile(), Profile.class);

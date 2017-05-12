@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/colorGrayBg"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">
@@ -21,7 +21,7 @@
                 android:id="@+id/toolbarProfile"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/toolbar_background"
+                android:background="@color/colorAccent"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -55,6 +55,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorAccent"
                 android:text="Change/upload Profile Picture" />
 
             <LinearLayout
@@ -67,130 +68,115 @@
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical">
 
-                <EditText
+               <!-- <EditText
                     android:id="@+id/etCustomerId"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:hint="@string/customer_id"
                     android:inputType="text"
                     android:singleLine="true"
-                    android:background="@null"
                     android:textColorHint="@color/hintColor"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
+                    android:textColor="@color/colorAccent" />-->
+
 
                 <EditText
+                    android:id="@+id/etFName"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:hint="@string/first_name"
                     android:inputType="text"
                     android:singleLine="true"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:textColorHint="@color/hintColor"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
 
                 <EditText
+                    android:id="@+id/etMidName"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:hint="@string/middle_name"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:inputType="text"
                     android:textColorHint="@color/hintColor"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:hint="@string/last_name"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:inputType="text"
                     android:textColorHint="@color/hintColor"
                     android:singleLine="true"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
 
                 <EditText
+                    android:id="@+id/etCompName"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:hint="@string/company_name"
                     android:inputType="text"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:textColorHint="@color/hintColor"
                     android:singleLine="true"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
 
                 <EditText
                     android:id="@+id/etAddress1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
+                    android:backgroundTint="@color/colorAccent"
                     android:hint="@string/address1"
-                    android:background="@null"
-                    android:textColorHint="@color/hintColor"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
                     android:singleLine="true"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/hintColor" />
+
                 <EditText
                     android:id="@+id/etAddress2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:hint="@string/address2"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:textColorHint="@color/hintColor"
                     android:singleLine="true"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
                 <EditText
                     android:id="@+id/etAddress3"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:hint="@string/address3"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:textColorHint="@color/hintColor"
                     android:singleLine="true"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
 
                 <EditText
                     android:id="@+id/etCity"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:hint="@string/city"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:textColorHint="@color/hintColor"
                     android:singleLine="true"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
 
                 <EditText
                     android:id="@+id/etState"
@@ -198,13 +184,11 @@
                     android:layout_height="@dimen/editTextHeight"
                     android:textColorHint="@color/hintColor"
                     android:singleLine="true"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:hint="@string/state"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
 
                 <EditText
                     android:id="@+id/etCountry"
@@ -212,13 +196,11 @@
                     android:singleLine="true"
                     android:textColorHint="@color/hintColor"
                     android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:hint="@string/country"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
+
 
                 <EditText
                     android:id="@+id/etPhone"
@@ -226,29 +208,25 @@
                     android:layout_height="@dimen/editTextHeight"
                     android:textColorHint="@color/hintColor"
                     android:singleLine="true"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:inputType="phone"
                     android:hint="@string/phone_no"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />
 
-                <EditText
+
+              <!--  <EditText
                     android:id="@+id/etFax"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editTextHeight"
                     android:singleLine="true"
-                    android:background="@null"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:backgroundTint="@color/colorAccent"
                     android:inputType="phone"
                     android:textColorHint="@color/hintColor"
                     android:hint="@string/fax"
-                    android:textColor="@color/toolbar_background" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/toolbar_background"/>
+                    android:textColor="@color/colorAccent" />-->
+
                 <Button
                     android:id="@+id/btnSubmitProfile"
                     android:layout_width="match_parent"

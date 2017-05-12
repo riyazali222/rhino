@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/notification"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="@color/toolbar_background" />
+        android:textColor="@color/colorAccent" />
 
 
     <TextView
@@ -26,13 +26,13 @@
         android:singleLine="true"
         android:text="@string/date"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textColor="@color/toolbar_background" />
+        android:textColor="@color/colorAccent" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/view_height"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:background="@color/viewBackground" />
+        android:background="@color/colorAccent" />
 
 
 </LinearLayout>

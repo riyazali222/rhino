@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.henceforth.rhino.activities.SettingActivity">
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,9 +14,10 @@
             android:id="@+id/toolbarSetting"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/toolbar_background"
+            android:background="@color/colorAccent"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:padding="16dp"
             android:text="@string/enable_push"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/toolbar_background" />
+            android:textColor="@color/colorAccent" />
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/switchButton"
@@ -49,17 +49,17 @@
             android:layout_alignBottom="@+id/tvNotifications"
             android:layout_marginBottom="@dimen/Twelve"
             android:layout_alignParentEnd="true"
-            app:thumbTint="@color/toolbar_background"
-            android:checked="true"
+            android:checked="false"
+            android:theme="@style/SCBSwitch"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:padding="12dp" />
 
         <View
             android:id="@+id/viewLogout"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/view_height"
             android:layout_below="@+id/tvNotifications"
-            android:background="@color/viewBackground" />
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/tvChangePassword"
@@ -71,14 +71,14 @@
             android:padding="@dimen/activity_horizontal_margin"
             android:text="@string/change_password"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/toolbar_background" />
+            android:textColor="@color/colorAccent" />
 
         <View
             android:id="@+id/viewLine"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/view_height"
             android:layout_below="@+id/tvChangePassword"
-            android:background="@color/viewBackground" />
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/tvLogout"
@@ -91,7 +91,7 @@
             android:padding="16dp"
             android:text="@string/logout"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/toolbar_background" />
+            android:textColor="@color/colorAccent" />
 
 
     </RelativeLayout>

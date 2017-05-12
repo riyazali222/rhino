@@ -23,7 +23,7 @@
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-    android:textColor="@color/toolbar_background"
+    android:textColor="@color/colorAccent"
     android:visibility="gone"/>
 </RelativeLayout>
 

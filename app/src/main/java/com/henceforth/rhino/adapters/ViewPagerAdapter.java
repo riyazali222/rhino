@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.henceforth.rhino.fragments.ProfileFragment;
-import com.henceforth.rhino.fragments.ServiceProviderFragment;
+import com.henceforth.rhino.fragments.RaiseRequestFragment;
 import com.henceforth.rhino.fragments.NotificationFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -18,13 +18,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ServiceProviderFragment();
+                return new RaiseRequestFragment();
             case 1:
                 return new ProfileFragment();
             case 2:
                 return new NotificationFragment();
             default:
-                return new ServiceProviderFragment();
+                return new RaiseRequestFragment();
         }
     }
     @Override

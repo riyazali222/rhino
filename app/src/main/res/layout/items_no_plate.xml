@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorGrayBg"
+    android:orientation="vertical">
+<TextView
+    android:id="@+id/tvPlateNo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="NYF 23DL 2345"
+    android:focusableInTouchMode="false"
+    android:clickable="false"
+    android:textColor="@color/colorAccent"
+    android:layout_margin="12dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_height"
+        android:background="@color/colorAccent"/>
+</LinearLayout>

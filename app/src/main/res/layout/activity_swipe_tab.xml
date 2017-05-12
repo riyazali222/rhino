@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_frame"><android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_frame">
+    <android.support.design.widget.CoordinatorLayout
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -26,7 +27,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/toolbar_background"
+                android:background="@color/colorAccent"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -58,11 +59,15 @@
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout"
+                app:tabPaddingStart="-1dp"
+                app:tabPaddingEnd="-1dp"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/toolbar_background"
+                android:background="@color/colorAccent"
                 app:tabIndicatorColor="@android:color/white"
-                app:tabTextAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:layout_gravity="bottom"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
                 app:tabIndicatorHeight="2dp" />
         </android.support.design.widget.AppBarLayout>
 

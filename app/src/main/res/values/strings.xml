@@ -18,7 +18,7 @@
     <string name="country">Country/Territory</string>
     <string name="fax">Fax Number</string>
     <string name="licence_plate">Enter Number Plate Number</string>
-    <string name="memid"> Memid</string>
+    <string name="memid"> Membership Id</string>
     <string name="service_type">Select Service Type</string>
     <string name="vin">Vehicle Identification Number</string>
     <string name="vehicle_milage">Vehicle Mileage</string>
@@ -30,6 +30,7 @@
     <string name="vehicle_Year">Vehicle Manufactured Year</string>
     <string name="phone_no">Phone Number</string>
     <string name="odometer_reading">Current Odometer Reading (in miles)</string>
+    <string name="not_for_you">Not For You</string>
     <string name="email">Email</string>
     <string name="noNotification"> No Notification for you</string>
     <string name="password">Password</string>
@@ -75,6 +76,8 @@
     <string name="logout">Logout</string>
     <string name="yesButton">YES</string>
     <string name="logoutText">Are you sure you want to logout &#63;</string>
+    <string name="membership_of_vehicle">Is this Request for you &#63;</string>
+    <string name="safe_location_text">Are you on safe location &#63; if not then call on 911.</string>
     <string name="setting">Settings</string>
     <string name="noButton">NO</string>
     <string name="changePassword">Change Password</string>
@@ -82,9 +85,23 @@
     <string name="newPassword">New Password</string>
     <string name="enable_push">Enable Push</string>
     <string name="registered_vehicle">Registered Vehicle</string>
+    <string name="selection_text">Select from below mention list</string>
     <string name="registration_no">NYF 653 </string>
     <string name="enter_registration_no">Enter Registration Number</string>
     <string name="cancel_button">CANCEL</string>
     <string name="processing_image">Processing image</string>
     <string name="brand_name">Brand Name</string>
+    <string name="enterMembershipId">Enter Membership Id</string>
+    <string name="enterVehicleIdNumber">Enter Vehicle Identification Number</string>
+
+    <string-array name="media_options">
+        <item name="gallery">Choose From Gallery</item>
+        <item name="camera">Take Photo</item>
+        <item name="cancel">Cancel</item>
+    </string-array>
+    <string-array name="request_options">
+        <item name="gallery">Edit Request</item>
+        <item name="camera">Complete Request</item>
+        <item name="cancel">Cancel</item>
+    </string-array>
 </resources>

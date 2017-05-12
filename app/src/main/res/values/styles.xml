@@ -40,7 +40,7 @@
 
 
     <style name="spinner_style">
-        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingLeft">2dp</item>
         <item name="android:dropDownWidth">533dp</item>
         <item name="android:showDividers">none</item>
         <item name="android:dividerHeight">0dp</item>
@@ -48,5 +48,17 @@
         <item name="android:dropDownHeight">70dp</item>
         <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
         <item name="android:dropDownSelector">@android:color/white</item>
+    </style>
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorAccent</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/blue_grey
+        </item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/blue_grey
+        </item>
     </style>
 </resources>

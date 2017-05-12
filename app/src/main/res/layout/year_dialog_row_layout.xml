@@ -11,9 +11,9 @@
     android:text="2015"
     android:layout_margin="16dp"
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-    android:textColor="@color/toolbar_background"/>
+    android:textColor="@color/colorAccent"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/toolbar_background"/>
+        android:layout_height="@dimen/view_height"
+        android:background="@color/colorAccent"/>
 </LinearLayout>

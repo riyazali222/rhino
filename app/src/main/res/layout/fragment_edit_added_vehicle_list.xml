@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarAddVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Edit Vehicle"
+                android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:textColor="@color/white"/>
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etLicence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="@string/licence_plate"
+                android:inputType="textCapCharacters"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/hintColor"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+
+
+            <EditText
+                android:id="@+id/etVIN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="@string/vin"
+                android:inputType="textCapCharacters"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/hintColor"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+
+
+            <EditText
+                android:id="@+id/etMemid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="@string/memid"
+                android:inputType="textCapCharacters"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/hintColor"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+
+
+            <EditText
+                android:id="@+id/etMileage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="@string/vehicle_milage"
+                android:inputType="number"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:singleLine="true"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/hintColor"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+
+
+            <EditText
+                android:id="@+id/etVehicleType"
+                style="@style/spinner_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:focusable="false"
+                android:hint="@string/vehicle_type"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/hintColor"
+                android:textSize="16sp"/>
+
+
+            <EditText
+                android:id="@+id/tvBrandName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/brand_name"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/hintColor"
+                android:textSize="16sp"/>
+
+
+            <EditText
+                android:id="@+id/etVehicleModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="@string/vehicle_Model"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/hintColor"
+                android:textCursorDrawable="@drawable/color_cursor">
+
+            </EditText>
+
+
+            <EditText
+                android:id="@+id/tvVehicleYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/vehicle_Year"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:singleLine="true"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/hintColor"
+                android:textSize="16sp"/>
+
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/mybutton"
+                android:text="@string/submit"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -1,75 +1,61 @@
 package com.henceforth.rhino.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.activities.YearPickerActivity;
+import com.henceforth.rhino.utills.AddVehicles;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
-import com.henceforth.rhino.utills.VehiclesInfo;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.webServices.pojo.VehicleListing;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-/**
- * Created by HOME on 5/1/2017.
- */
-
-public class AddVehicleFragment extends Fragment {
-    @BindView(R.id.toolbarAddVehicle)
-    Toolbar toolbarAddVehicle;
-    @BindView(R.id.etLicence)
-    EditText etLicence;
-    @BindView(R.id.etMileage)
-    EditText etMileage;
-    @BindView(R.id.etVehicleType)
-    TextView etVehicleType;
-    @BindView(R.id.tvBrandName)
-    TextView tvBrandName;
-    @BindView(R.id.etVehicleModel)
-    EditText etVehicleModel;
-    @BindView(R.id.tvVehicleYear)
-    TextView tvVehicleYear;
-    @BindView(R.id.buttonSubmit)
-    Button buttonSubmit;
-    List<VehiclesInfo> vehiclesInfoList = new ArrayList<>();
-   public static String Licence, Mileage, VehicleType, BrandName, Model, VehicleYear;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_vehicle, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+import static com.henceforth.rhino.utills.ApplicationGlobal.prefsManager;
 
 
-    }
+public class AddVehicleFragment extends BaseFragment  {
+    @BindView(R.id.toolbarAddVehicle) Toolbar toolbarAddVehicle;
+    @BindView(R.id.etLicence) EditText etLicence;
+    @BindView(R.id.etMileage) EditText etMileage;
+    @BindView(R.id.etVehicleType) EditText etVehicleType;
+    @BindView(R.id.tvBrandName) EditText tvBrandName;
+    @BindView(R.id.etVehicleModel) EditText etVehicleModel;
+    @BindView(R.id.tvVehicleYear) EditText tvVehicleYear;
+    @BindView(R.id.buttonSubmit) Button buttonSubmit;
+    @BindView(R.id.etVIN) EditText etVIN;
+    @BindView(R.id.etMemid) EditText etMemid;
+    private Context mContext;
+
+
+
+    private String noPlate, vIn, meMID, mileage, year, vType, brandName, model;
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        init();
+    protected int getLayoutId() {
+        return R.layout.fragment_add_vehicle;
     }
 
-    private void init() {
+    protected void init() {
         toolbarAddVehicle = (Toolbar) getView().findViewById(R.id.toolbarAddVehicle);
         toolbarAddVehicle.setNavigationIcon(R.drawable.ic_close_white);
         toolbarAddVehicle.setNavigationOnClickListener(new View.OnClickListener() {
@@ -78,14 +64,11 @@ public class AddVehicleFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
-        Licence=etLicence.getText().toString();
-        Mileage=etMileage.getText().toString();
-        VehicleType=etVehicleType.getText().toString();
-        BrandName=tvBrandName.getText().toString();
-        Model=etVehicleModel.getText().toString();
-        VehicleYear=tvVehicleYear.getText().toString();
-        AddItems();
     }
+
+
+
+
 
 
     @OnClick({R.id.etVehicleType, R.id.tvBrandName, R.id.tvVehicleYear, R.id.buttonSubmit})
@@ -105,24 +88,81 @@ public class AddVehicleFragment extends Fragment {
                 startActivityForResult(j, 3);
                 break;
             case R.id.buttonSubmit:
+                noPlate = etLicence.getText().toString().trim();
+                mileage = etMileage.getText().toString();
+                vType = etVehicleType.getText().toString().trim();
+                brandName = tvBrandName.getText().toString().trim();
+                model = etVehicleModel.getText().toString().trim();
+                year = tvVehicleYear.getText().toString().trim();
+                vIn = etVIN.getText().toString().trim();
+                meMID = etMemid.getText().toString().trim();
                 CommonMethods.hideKeyboard(getActivity());
-                if (etLicence.getText().toString().trim().isEmpty())
+                if (noPlate.isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterRegistrationNumber));
-                else if (etMileage.getText().toString().trim().isEmpty())
+                else if (mileage.isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleMilage));
-                else if (etVehicleType.getText().toString().trim().isEmpty())
+                else if (meMID.isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterMembershipId));
+                else if (vIn.isEmpty())
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleIdNumber));
+                else if (vType.isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleType));
-                else if (tvBrandName.getText().toString().trim().isEmpty())
+                else if (brandName.isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterBrandName));
-
-                else if (etVehicleModel.getText().toString().trim().isEmpty())
+                else if (model.isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleModel));
-                else if (tvVehicleYear.getText().toString().trim().isEmpty())
+                else if (year.isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleYear));
+                else {
+                    hitApi();
+
+                }
 
 
                 break;
         }
+    }
+
+    private void hitApi() {
+        CommonMethods.showProgressDialog(getActivity());
+        RestClient.get().AddVehicleApi("", noPlate, vIn, meMID, mileage, vType,
+                String.valueOf(prefsManager.getVehicleBrandId()), model,
+                Integer.parseInt(year))
+                .enqueue(new Callback<AddVehicles>() {
+                    @Override
+                    public void onResponse(Call<AddVehicles> call, Response<AddVehicles> response) {
+
+                        CommonMethods.dismissProgressDialog();
+                        try {
+                            if (response.code() == 200 && response.body() != null) {
+                                Toast.makeText(getActivity(), "Submitted", Toast.LENGTH_LONG).show();
+                                VehicleListing listing=new VehicleListing(response.body().getUser_vehicle_id(),
+                                        noPlate, vIn,  meMID,Integer.valueOf(mileage), vType,
+                                        ApplicationGlobal.prefsManager.getVehicleBrandId(),model,
+                                Integer.parseInt(year),ApplicationGlobal.prefsManager.getBrandName());
+                                ProfileFragment pf=new ProfileFragment();
+                                Bundle bundle=new Bundle();
+                                bundle.putParcelable("ADD_VEHICLE",listing);
+                                pf.setArguments(bundle);
+                                getFragmentManager().beginTransaction().replace(R.id.main_frame,pf)
+                                        .commit();
+                                /*Intent i = new Intent("UPDATE");
+                                LocalBroadcastManager.getInstance(mContext).sendBroadcast(i);
+                                getActivity().onBackPressed();*/
+                            } else
+                                CommonMethods.showErrorMessage(getActivity(),
+                                        response.errorBody());
+                        } catch (Exception e) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddVehicles> call, Throwable t) {
+
+                        CommonMethods.dismissProgressDialog();
+                    }
+                });
     }
 
     private void showPopupWindow(final TextView tv, final int array) {
@@ -151,7 +191,8 @@ public class AddVehicleFragment extends Fragment {
         if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             String name = data.getStringExtra("name");
             Integer id = data.getIntExtra("id", 1);
-            ApplicationGlobal.prefsManager.setVehicleId(id);
+            prefsManager.setVehicleBrandId(id);
+            ApplicationGlobal.prefsManager.setBrandName(name);
             tvBrandName.setText(name);
         } else if (requestCode == 3 && resultCode == Activity.RESULT_OK) {
             String name = data.getStringExtra("year");
@@ -159,7 +200,4 @@ public class AddVehicleFragment extends Fragment {
         }
     }
 
-    private void AddItems() {
-
-    }
 }

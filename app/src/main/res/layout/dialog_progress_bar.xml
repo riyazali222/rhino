@@ -6,7 +6,7 @@
     android:layout_height="96dp"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    wheel:matProg_barColor="@color/toolbar_background"
+    wheel:matProg_barColor="@color/colorAccent"
     wheel:matProg_barWidth="6dp"
     wheel:matProg_fillRadius="true"
     wheel:matProg_progressIndeterminate="true" />

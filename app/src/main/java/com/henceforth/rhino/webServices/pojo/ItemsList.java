@@ -33,7 +33,7 @@ public class ItemsList {
     public void setId(Integer id) {
         this.id = id;
     }
-    @SerializedName("vehicle_name")
+    @SerializedName("make")
     private String vehicle_name;
     public String getVehicle_name() {
         return vehicle_name;

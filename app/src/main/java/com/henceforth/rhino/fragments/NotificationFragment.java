@@ -54,7 +54,7 @@ public class NotificationFragment extends Fragment {
         historyAdapter = new HistoryAdapter(getActivity(), notificationsList);
         recyclerView.setAdapter(historyAdapter);
         swipeRefresh.setColorSchemeColors(ContextCompat.getColor(getActivity(),
-                R.color.toolbar_background));
+                R.color.colorAccent));
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

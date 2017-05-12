@@ -1,81 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:tint="@color/colorAccent"
+        android:src="@drawable/ic_delete_black_24dp" />
 
     <LinearLayout
+        android:id="@+id/ll"
+        android:layout_toStartOf="@id/ivDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="16dp">
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vehicle Name : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textColor="@color/toolbar_background" />
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvVehicleName"
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vehicle Type : "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvVehicleName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Car"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/toolbar_background" />
-    </LinearLayout>
+            android:gravity="center_vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brand Name : "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvVehicleBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Audi R8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Brand Name : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textColor="@color/toolbar_background" />
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvVehicleBrand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Audi R8"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/toolbar_background" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registration No : "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="16dp">
+            <TextView
+                android:id="@+id/tvRegistrationNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sr532785df45"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Registration No : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textColor="@color/toolbar_background" />
 
-        <TextView
-            android:id="@+id/tvRegistrationNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sr532785df45"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/toolbar_background" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/toolbar_background" />
-</LinearLayout>
+        android:layout_height="1dp"
+        android:layout_below="@+id/ll"
+        android:background="@color/colorAccent"/>
+
+</RelativeLayout>

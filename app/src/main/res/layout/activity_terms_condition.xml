@@ -8,11 +8,11 @@
     android:id="@+id/toolbarWebView"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/toolbar_background">
+    android:background="@color/colorAccent">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Terms and Condition"
+        android:text="Terms and Conditions"
         android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
         android:textColor="@android:color/white"/>

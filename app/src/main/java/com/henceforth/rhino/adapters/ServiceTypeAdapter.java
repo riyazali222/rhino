@@ -1,6 +1,10 @@
 package com.henceforth.rhino.adapters;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +12,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.henceforth.rhino.R;
+import com.henceforth.rhino.fragments.RaiseRequestFragment;
+import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.webServices.Services;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by HOME on 5/3/2017.
- */
+
 
 public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.MyViewHolder> {
 
@@ -27,6 +31,7 @@ public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.
         this.servicesList = servicesList;
         this.mContext = mContext;
     }
+
     @Override
     public ServiceTypeAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -35,9 +40,25 @@ public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ServiceTypeAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final ServiceTypeAdapter.MyViewHolder holder, int position) {
         final Services item = servicesList.get(position);
-        holder.tvServiceType.setText(item.getService());
+        holder.tvServiceType.setText(item.getDesc());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //sending Broadcast
+                ApplicationGlobal.prefsManager.setServiceTypeCode(item.getService_id());
+                ApplicationGlobal.prefsManager.setServiceTypeName(item.getDesc());
+                Intent intent = new Intent("send_data");
+
+                intent.putExtra("ServiceList", item.getDesc());
+                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+
+                LocalBroadcastManager.getInstance(mContext).sendBroadcast(new Intent("delete"));
+            }
+
+        });
+
     }
 
     @Override
@@ -47,9 +68,10 @@ public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvServiceType;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvServiceType=(TextView)itemView.findViewById(R.id.tvServiceType);
+            tvServiceType = (TextView) itemView.findViewById(R.id.tvServiceType);
         }
     }
 }

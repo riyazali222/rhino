@@ -2,14 +2,14 @@ package com.henceforth.rhino.fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
@@ -42,42 +43,55 @@ import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.Constants;
 import com.henceforth.rhino.utills.LocationGetter;
+import com.henceforth.rhino.webServices.Services;
 import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.webServices.pojo.AddedVehicle;
+import com.henceforth.rhino.webServices.pojo.VehicleListing;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ServiceProviderFragment extends Fragment implements View.OnClickListener {
-    EditText etMileage, etVehicleModel, etRequestType,
-            etPhoneNo;
-    TextView tvVehicleMake, tvContactInfo, tvVehicleYear, etLicence, etVehicleType,tvServiceType;
+public class RaiseRequestFragment extends Fragment implements View.OnClickListener {
+    EditText etMileage, etVehicleModel, etMemid, etIdNo, tvOdometerReading, etNotForU,
+            etPhoneNo, etBrandName, tvVehicleYear, etLicence, etVehicleType, tvServiceType,
+            etDescription;
+    TextView tvContactInfo;
+    String serviceId;
     private LocationEnableRequest locationEnableRequest = new LocationEnableRequest();
-
+    ArrayList<VehicleListing> info = new ArrayList<>();
+    VehicleListing listing;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_service_provider, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_raise_request, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        etLicence = (TextView) getView().findViewById(R.id.etLicence);
+        etLicence = (EditText) getView().findViewById(R.id.etLicence);
         etMileage = (EditText) getView().findViewById(R.id.etMileage);
-        etVehicleType = (TextView) getView().findViewById(R.id.etVehicleType);
-        etRequestType = (EditText) getView().findViewById(R.id.etBrandName);
+        etVehicleType = (EditText) getView().findViewById(R.id.etVehicleType);
         etVehicleModel = (EditText) getView().findViewById(R.id.etVehicleModel);
-        tvVehicleYear = (TextView) getView().findViewById(R.id.tvVehicleYear);
+        tvVehicleYear = (EditText) getView().findViewById(R.id.tvVehicleYear);
         etPhoneNo = (EditText) getView().findViewById(R.id.etPhoneNo);
-        tvVehicleMake = (TextView) getView().findViewById(R.id.tvVehicleMake);
+        etBrandName = (EditText) getView().findViewById(R.id.etBrandName);
         tvContactInfo = (TextView) getView().findViewById(R.id.tvContactInfo);
-        tvServiceType=(TextView)getView().findViewById(R.id.tvServiceType);
+        tvServiceType = (EditText) getView().findViewById(R.id.tvServiceType);
+        etDescription = (EditText) getView().findViewById(R.id.etDescription);
+        tvOdometerReading = (EditText) getView().findViewById(R.id.tvOdometerReading);
+        etMemid = (EditText) getView().findViewById(R.id.etMemid);
+        etIdNo = (EditText) getView().findViewById(R.id.etIdNo);
+        etNotForU = (EditText) getView().findViewById(R.id.etNotForU);
+        if (!ApplicationGlobal.prefsManager.getPhoneNo().isEmpty())
+            etPhoneNo.setText(ApplicationGlobal.prefsManager.getPhoneNo());
         tvServiceType.setOnClickListener(this);
         tvContactInfo.setOnClickListener(this);
         getView().findViewById(R.id.btnSubmit).setOnClickListener(this);
-        tvVehicleMake.setOnClickListener(this);
+        etBrandName.setOnClickListener(this);
         tvVehicleYear.setOnClickListener(this);
         etVehicleType.setOnClickListener(this);
         etLicence.setOnClickListener(this);
@@ -94,7 +108,7 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
 
         SpannableString str2 = new SpannableString(getString(R.string.dial_no));
         str2.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(),
-                R.color.toolbar_background)), 0, str2.length(), 0);
+                R.color.colorAccent)), 0, str2.length(), 0);
         builder.append(str2);
 
         tvContactInfo.setText(builder, TextView.BufferType.SPANNABLE);
@@ -105,9 +119,10 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
         switch (v.getId()) {
             case R.id.tvServiceType:
 //                DialogFragment d= ServiceTypeFragment.newInstance();
-                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity)getActivity(),new ServiceTypeFragment(),"Tag");
+                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity) getActivity(), new ServiceTypeFragment(), "Tag");
+
                 break;
-            case R.id.tvVehicleMake:
+            case R.id.etBrandName:
                 Intent intent = new Intent(getActivity(), VehicleMakeActivity.class);
                 startActivityForResult(intent, 2);
                 break;
@@ -116,13 +131,21 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
                 CommonMethods.hideKeyboard(getActivity());
                 if (etLicence.getText().toString().trim().isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterRegistrationNumber));
-                else if (etMileage.getText().toString().trim().isEmpty())
+                else if (etMemid.getText().toString().trim().isEmpty()) {
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterMembershipId));
+                } else if (etIdNo.getText().toString().trim().isEmpty()) {
+                    CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleIdNumber));
+                } else if (tvServiceType.getText().toString().trim().isEmpty()) {
+                    CommonMethods.showToast(getActivity(), "Please Enter Service Type");
+                } else if (tvOdometerReading.getText().toString().trim().isEmpty()) {
+                    CommonMethods.showToast(getActivity(), "Please Enter Odometer Reading");
+                } else if (etMileage.getText().toString().trim().isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleMilage));
                 else if (etVehicleType.getText().toString().trim().isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleType));
-                else if (etRequestType.getText().toString().trim().isEmpty())
+                else if (tvServiceType.getText().toString().trim().isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleRequestType));
-                else if (tvVehicleMake.getText().toString().trim().isEmpty())
+                else if (etBrandName.getText().toString().trim().isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.selectVehicleCompany));
                 else if (etVehicleModel.getText().toString().trim().isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleModel));
@@ -131,9 +154,10 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
                 else if (etPhoneNo.getText().toString().trim().isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterPhoneNumber));
                 else {
-                    if (CommonMethods.isNetworkConnected(getActivity()))
-                        checkLocation();
+                    if (CommonMethods.isNetworkConnected(getActivity())) {
+                        requestPopup();
 
+                    }
                     else
                         CommonMethods.showInternetNotConnectedToast(getActivity());
 
@@ -155,46 +179,119 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
                 startActivityForResult(j, 3);
                 break;
             case R.id.etLicence:
-//                DialogFragment dialog = RegistrationNoDialog.newInstance();
-                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity)getActivity(),new RegistrationNoDialog(),"Tag");
+//                DialogFragment dialog = AddedVehiclesDialog.newInstance();
+                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity) getActivity(), new AddedVehiclesDialog(), "Tag");
+
+
+                // VehicleListing foo = bundle.getParcelable("Foo");
+                   /* value = getArguments().getString("REGISTRATION_NO");
+                    etLicence.setText(value);*/
+
+
         }
     }
 
-    private void dialogLicence() {
-
+    private void requestPopup() {
         final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
-
-
-        dialog.setContentView(R.layout.dialog_registration_no);
-        Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.dialogToolbar);
-        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
-        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        dialog.setContentView(R.layout.membership_of_vehicle_popup);
+       // Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.toolbarLogout);
+//        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
+//        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+        final Button btnCancle = (Button) dialog.findViewById(R.id.btnCancle);
+        Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+
+                safeLocationPopup();
+                dialog.dismiss();
+            }
+
+        });
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                safeLocationPopup();
                 dialog.dismiss();
             }
         });
-        Button submitButton = (Button) dialog.findViewById(R.id.btnSubmit);
-        final EditText editText = (EditText) dialog.findViewById(R.id.editText);
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        dialog.show();
+        dialog.setCancelable(false);
+
+    }
+    public Void safeLocationPopup(){
+        final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
+        dialog.setContentView(R.layout.safe_location_popup);
+        // Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.toolbarLogout);
+//        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
+//        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+        final Button btnCancle = (Button) dialog.findViewById(R.id.btnCancle);
+        Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = editText.getText().toString().trim();
-                if (!email.isEmpty()) {
-                    if (CommonMethods.isNetworkConnected(getActivity())) {
-                        //forgotPasswordResponse(email);
-                    } else
-                        CommonMethods.showInternetNotConnectedToast(getActivity());
 
-                } else {
-                    Toast.makeText(getActivity(), "Please enter email id", Toast.LENGTH_SHORT)
-                            .show();
-                }
+                checkLocation();
+                dialog.dismiss();
+            }
+
+        });
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 dialog.dismiss();
+                //getActivity().onBackPressed();
             }
         });
         dialog.show();
-
+        dialog.setCancelable(false);
+        return null;
     }
+//    private void dialogLicence() {
+//
+//        final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
+//
+//
+//        dialog.setContentView(R.layout.dialog_added_vehicle);
+//        Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.dialogToolbar);
+//        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
+//        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+//        Button submitButton = (Button) dialog.findViewById(R.id.btnSubmit);
+//        final EditText editText = (EditText) dialog.findViewById(R.id.editText);
+//        submitButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String email = editText.getText().toString().trim();
+//                if (!email.isEmpty()) {
+//                    if (CommonMethods.isNetworkConnected(getActivity())) {
+//                        //forgotPasswordResponse(email);
+//                    } else
+//                        CommonMethods.showInternetNotConnectedToast(getActivity());
+//
+//                } else {
+//                    Toast.makeText(getActivity(), "Please enter email id", Toast.LENGTH_SHORT)
+//                            .show();
+//                }
+//            }
+//        });
+//        dialog.show();
+//
+//    }
 
 
     private void showPopupWindow(final TextView tv, final int array) {
@@ -222,8 +319,8 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
         if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             String name = data.getStringExtra("name");
             Integer id = data.getIntExtra("id", 1);
-            ApplicationGlobal.prefsManager.setVehicleId(id);
-            tvVehicleMake.setText(name);
+            ApplicationGlobal.prefsManager.setVehicleBrandId(id);
+            etBrandName.setText(name);
         } else if (requestCode == 3 && resultCode == Activity.RESULT_OK) {
             String name = data.getStringExtra("year");
             tvVehicleYear.setText(name);
@@ -231,25 +328,28 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
     }
 
 
-    private void requestServicesResponse(String license_plate_no,
-                                         String vehicle_mileage, String type_of_vehicle,
-                                         String request_type,
-                                         String vehicle_model, String vehicle_year, String phone_no) {
+    private void requestServicesResponse() {
 
-        RestClient.get().requestServicesResponse(license_plate_no, vehicle_mileage,
-                type_of_vehicle, request_type, vehicle_model, vehicle_year,
-                phone_no, ApplicationGlobal.myLat, ApplicationGlobal.myLng).enqueue(new Callback<ApiList>() {
+        RestClient.get().requestServicesResponse(etLicence.getText().toString(),
+                etMileage.getText().toString(), etVehicleType.getText().toString(),
+                String.valueOf(ApplicationGlobal.prefsManager.getServiceTypeCode()),
+                String.valueOf(ApplicationGlobal.prefsManager.getVehicleBrandId()),
+                etVehicleModel.getText().toString(), tvVehicleYear.getText().toString(),
+                etPhoneNo.getText().toString(), ApplicationGlobal.myLat, ApplicationGlobal.myLng,
+                tvOdometerReading.getText().toString(), etNotForU.getText().toString(),
+                etDescription.getText().toString()).enqueue(new Callback<ApiList>() {
             @Override
             public void onResponse(Call<ApiList> call, Response<ApiList> response) {
                 CommonMethods.dismissProgressDialog();
                 try {
                     if (response.code() == 200 & response.body() != null) {
 
-                        Toast.makeText(getActivity(), response.body().getmessage(),
+                        Toast.makeText(getActivity(), "Request Submitted",
                                 Toast.LENGTH_SHORT).show();
 
                     } else
                         CommonMethods.showErrorMessage(getActivity(), response.errorBody());
+                    Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
 
                 }
@@ -304,10 +404,7 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
                 }
             }, 500);
         else {
-            requestServicesResponse(etLicence.getText().toString(),
-                    etMileage.getText().toString(), etVehicleType.getText().toString(),
-                    etRequestType.getText().toString(), etVehicleModel.getText().toString(),
-                    tvVehicleYear.getText().toString() + "-01-01", etPhoneNo.getText().toString());
+            requestServicesResponse();
         }
     }
 
@@ -324,4 +421,49 @@ public class ServiceProviderFragment extends Fragment implements View.OnClickLis
         super.onDestroyView();
         getActivity().unregisterReceiver(locationEnableRequest);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(receiver,
+                new IntentFilter("send_data"));
+
+    }
+
+    @Override
+    public void onPause() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+        super.onPause();
+    }
+
+    //receiving Broadcast
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.hasExtra("REGISTRATION_NO")) {
+                String s = intent.getStringExtra("REGISTRATION_NO");
+                etLicence.setText(s);
+
+            } else if (intent.hasExtra("ServiceList")) {
+                Services services = intent.getParcelableExtra("ServiceList");
+                tvServiceType.setText(ApplicationGlobal.prefsManager.getServiceTypeName());
+            }
+            //tvServiceType.setText(intent.getStringExtra("ServiceList"));
+            else if (intent.hasExtra("Data_New")) {
+
+                AddedVehicle vehicle = intent.getParcelableExtra("Data_New");
+                etLicence.setText(vehicle.getPlateno());
+                etMileage.setText(vehicle.getPlateno());
+                etIdNo.setText(vehicle.getVin());
+                etMemid.setText(vehicle.getMid());
+                etBrandName.setText(vehicle.getBrand());
+                etVehicleModel.setText(vehicle.getModel());
+                etVehicleType.setText(vehicle.getTypeofvehicle());
+                tvVehicleYear.setText(vehicle.getYear());
+
+            }
+        }
+    };
+
+
 }

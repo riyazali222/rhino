@@ -48,7 +48,7 @@ public class YearPickerActivity extends AppCompatActivity {
 
     private void init() {
         toolbarVehYear = (Toolbar) findViewById(R.id.toolbarVehYear);
-        toolbarVehYear.setNavigationIcon(R.drawable.ic_back);
+        toolbarVehYear.setNavigationIcon(R.drawable.ic_close_white);
         toolbarVehYear.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
