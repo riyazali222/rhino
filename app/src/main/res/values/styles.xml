@@ -30,6 +30,9 @@
     </style>
 
     <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:windowTitleStyle">@null</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -61,4 +64,5 @@
         <item name="android:colorForeground">@color/blue_grey
         </item>
     </style>
+
 </resources>

@@ -15,6 +15,7 @@
     <color name="tenOfBlack">#1A000000</color>
     <color name="tintRed">#D90E2B</color>
     <color name="colorGrayBg">#e6e6e6</color>
+    <color name="colorGray">#808080</color>
 </resources>
 
 

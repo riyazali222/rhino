@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:background="@color/white"
-                                            android:clickable="true"
-                                            android:focusable="true"
-                                            android:orientation="vertical">
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -43,138 +44,278 @@
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvCustomerId"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
-                    android:gravity="bottom"
-                    android:paddingBottom="@dimen/Eight"
-                    android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="@string/customer_id"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:text="@string/customer_id"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvCustomerId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorAccent"/>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
                     android:background="@color/colorAccent"/>
 
-                <TextView
-                    android:id="@+id/etName"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
-                    android:gravity="bottom"
-                    android:paddingBottom="@dimen/Eight"
-                    android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="@string/name"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:text="@string/name"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/etName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorAccent"/>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
                     android:background="@color/colorAccent"/>
 
-                <TextView
-                    android:id="@+id/tvEmail"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
-                    android:gravity="bottom"
-                    android:paddingBottom="@dimen/Eight"
-                    android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="@string/email_id"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:text="@string/email_id"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorAccent"/>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
                     android:background="@color/colorAccent"/>
 
-                <TextView
-                    android:id="@+id/tvPhone"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
-                    android:gravity="bottom"
-                    android:inputType="phone"
-                    android:paddingBottom="@dimen/Eight"
-                    android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="@string/phoneNo"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:text="@string/phoneNo"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorAccent"/>
+                </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
                     android:background="@color/colorAccent"/>
 
-                <TextView
-                    android:id="@+id/tvAddress"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
-                    android:gravity="bottom"
-                    android:paddingBottom="@dimen/Eight"
-                    android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="@string/address"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:text="@string/address"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorAccent"/>
+                </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
                     android:background="@color/colorAccent"/>
 
-                <TextView
-                    android:id="@+id/tvCity"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
-                    android:gravity="bottom"
-                    android:hint="@string/city"
-                    android:paddingBottom="@dimen/Eight"
-                    android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/colorAccent"
-                    android:textColorHint="@color/colorAccent"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:hint="@string/city"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorAccent"
+                        android:textColorHint="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorAccent"
+                        android:textColorHint="@color/colorAccent"/>
+                </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
                     android:background="@color/colorAccent"/>
 
-                <TextView
-                    android:id="@+id/tvState"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
-                    android:gravity="bottom"
-                    android:paddingBottom="@dimen/Eight"
-                    android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="@string/state"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:text="@string/state"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorAccent"/>
+                </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
                     android:background="@color/colorAccent"/>
 
-                <TextView
-                    android:id="@+id/tvCountry"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/editTextHeight"
-                    android:background="@null"
-                    android:gravity="bottom"
-                    android:paddingBottom="@dimen/Eight"
-                    android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="@string/country"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:text="@string/country"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvCountry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:paddingBottom="@dimen/Eight"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorAccent"/>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"

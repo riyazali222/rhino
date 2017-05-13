@@ -168,7 +168,7 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
 
     private void showPopupWindow(final TextView tv, final int array) {
         final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());
-        popupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.vehicle_type_popup,
+        popupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.popup_vehicle_type,
                 R.id.tvRow, getResources().getStringArray(array)));
         popupWindow.setAnchorView(tv);
         popupWindow.setWidth(ListPopupWindow.WRAP_CONTENT);

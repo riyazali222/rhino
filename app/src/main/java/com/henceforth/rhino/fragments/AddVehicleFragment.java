@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -33,7 +32,7 @@ import retrofit2.Response;
 import static com.henceforth.rhino.utills.ApplicationGlobal.prefsManager;
 
 
-public class AddVehicleFragment extends BaseFragment  {
+public class AddVehicleFragment extends BaseFragment {
     @BindView(R.id.toolbarAddVehicle) Toolbar toolbarAddVehicle;
     @BindView(R.id.etLicence) EditText etLicence;
     @BindView(R.id.etMileage) EditText etMileage;
@@ -45,7 +44,6 @@ public class AddVehicleFragment extends BaseFragment  {
     @BindView(R.id.etVIN) EditText etVIN;
     @BindView(R.id.etMemid) EditText etMemid;
     private Context mContext;
-
 
 
     private String noPlate, vIn, meMID, mileage, year, vType, brandName, model;
@@ -65,10 +63,6 @@ public class AddVehicleFragment extends BaseFragment  {
             }
         });
     }
-
-
-
-
 
 
     @OnClick({R.id.etVehicleType, R.id.tvBrandName, R.id.tvVehicleYear, R.id.buttonSubmit})
@@ -135,23 +129,26 @@ public class AddVehicleFragment extends BaseFragment  {
                         CommonMethods.dismissProgressDialog();
                         try {
                             if (response.code() == 200 && response.body() != null) {
-                                Toast.makeText(getActivity(), "Submitted", Toast.LENGTH_LONG).show();
-                                VehicleListing listing=new VehicleListing(response.body().getUser_vehicle_id(),
-                                        noPlate, vIn,  meMID,Integer.valueOf(mileage), vType,
-                                        ApplicationGlobal.prefsManager.getVehicleBrandId(),model,
-                                Integer.parseInt(year),ApplicationGlobal.prefsManager.getBrandName());
-                                ProfileFragment pf=new ProfileFragment();
-                                Bundle bundle=new Bundle();
-                                bundle.putParcelable("ADD_VEHICLE",listing);
+                                Toast.makeText(getActivity(), "Vehicle Added sucessfully",
+                                        Toast.LENGTH_LONG).show();
+                                VehicleListing listing = new VehicleListing(response.body().getUser_vehicle_id(),
+                                        noPlate, vIn, meMID, Integer.valueOf(mileage), vType,
+                                        ApplicationGlobal.prefsManager.getVehicleBrandId(), model,
+                                        Integer.parseInt(year), ApplicationGlobal.prefsManager.getBrandName());
+                                ProfileFragment pf = new ProfileFragment();
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("ADD_VEHICLE", listing);
                                 pf.setArguments(bundle);
-                                getFragmentManager().beginTransaction().replace(R.id.main_frame,pf)
-                                        .commit();
+                                /*getFragmentManager().beginTransaction().replace(R.id.main_frame, pf)
+                                        .commit();*/
+                                getActivity().onBackPressed();
                                 /*Intent i = new Intent("UPDATE");
                                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(i);
                                 getActivity().onBackPressed();*/
                             } else
                                 CommonMethods.showErrorMessage(getActivity(),
                                         response.errorBody());
+                            Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
 
                         }
@@ -159,7 +156,7 @@ public class AddVehicleFragment extends BaseFragment  {
 
                     @Override
                     public void onFailure(Call<AddVehicles> call, Throwable t) {
-
+                        Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
                         CommonMethods.dismissProgressDialog();
                     }
                 });
@@ -167,7 +164,7 @@ public class AddVehicleFragment extends BaseFragment  {
 
     private void showPopupWindow(final TextView tv, final int array) {
         final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());
-        popupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.vehicle_type_popup,
+        popupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.popup_vehicle_type,
                 R.id.tvRow, getResources().getStringArray(array)));
         popupWindow.setAnchorView(tv);
         popupWindow.setWidth(ListPopupWindow.WRAP_CONTENT);

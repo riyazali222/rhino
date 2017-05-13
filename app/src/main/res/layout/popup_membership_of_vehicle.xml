@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/popup"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/dialog_background">
+                android:id="@+id/popup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorGrayBg">
 
     <TextView
         android:id="@+id/textView1"
@@ -12,7 +12,8 @@
         android:layout_below="@+id/toolbarLogout"
         android:layout_centerHorizontal="true"
         android:padding="@dimen/twenty"
-        android:text="@string/logoutText"
+        android:gravity="center"
+        android:text="@string/membership_of_vehicle"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
         android:textColor="@color/colorAccent" />
 
@@ -29,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/logout"
+            android:text="Membership of Vehicle"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@android:color/white" />
     </android.support.v7.widget.Toolbar>
@@ -45,11 +46,10 @@
             android:layout_weight="1"
             android:text="@string/yesButton"
             android:layout_marginEnd="4dp"
-
             android:background="@drawable/button_yes"
             android:textColor="@android:color/white"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/editTextHeight" />
         <Button
             style="?attr/buttonBarButtonStyle"
             android:id="@+id/btnCancle"
@@ -60,7 +60,7 @@
             android:background="@drawable/no_button"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
-            android:layout_height="48dp" />
+            android:layout_height="@dimen/editTextHeight" />
 
     </LinearLayout>
 </RelativeLayout>

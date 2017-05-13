@@ -214,7 +214,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final Dialog dialog = new Dialog(LoginActivity.this, R.style.slideFromTopDialog);
 
 
-        dialog.setContentView(R.layout.forgot_password_dialog);
+        dialog.setContentView(R.layout.dialog_forgot_password);
         Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.dialogToolbar);
         dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
         dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {

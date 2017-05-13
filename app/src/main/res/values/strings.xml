@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">PARAGON</string>
-    <string name="name">Name</string>
-    <string name="customer_id">Customer Id</string>
-    <string name="email_id">Email Address</string>
-    <string name="phoneNo">Phone No</string>
-    <string name="address">Address</string>
+    <string name="name">Name : </string>
+    <string name="customer_id">Customer Id : </string>
+    <string name="email_id">Email Address : </string>
+    <string name="phoneNo">Phone No. : </string>
+    <string name="address">Address : </string>
     <string name="address1">Address 1</string>
     <string name="address2">Address 2</string>
     <string name="address3">Address 3</string>
@@ -12,10 +12,10 @@
     <string name="middle_name">Middle Name</string>
     <string name="last_name">Last Name</string>
     <string name="company_name">Company Name</string>
-    <string name="city">City or Town</string>
-    <string name="state">State/Province/County</string>
+    <string name="city">City or Town : </string>
+    <string name="state">State/Province/County : </string>
     <string name="postal_code">Postal Code</string>
-    <string name="country">Country/Territory</string>
+    <string name="country">Country/Territory : </string>
     <string name="fax">Fax Number</string>
     <string name="licence_plate">Enter Number Plate Number</string>
     <string name="memid"> Membership Id</string>
@@ -76,8 +76,10 @@
     <string name="logout">Logout</string>
     <string name="yesButton">YES</string>
     <string name="logoutText">Are you sure you want to logout &#63;</string>
-    <string name="membership_of_vehicle">Is this Request for you &#63;</string>
-    <string name="safe_location_text">Are you on safe location &#63; if not then call on 911.</string>
+    <string name="membership_of_vehicle">Is this service for your vehicle or someone listed on your membership&#63;</string>
+    <string name="safe_location_text">Are you in a safe location &#63;</string>
+    <string name="safty_text">If you feel your safety is at risk, please move your person(s) to a
+        safe location or call 911</string>
     <string name="setting">Settings</string>
     <string name="noButton">NO</string>
     <string name="changePassword">Change Password</string>
@@ -93,6 +95,7 @@
     <string name="brand_name">Brand Name</string>
     <string name="enterMembershipId">Enter Membership Id</string>
     <string name="enterVehicleIdNumber">Enter Vehicle Identification Number</string>
+    <string name="any_special_needs_or_requests">Any special needs or requests?</string>
 
     <string-array name="media_options">
         <item name="gallery">Choose From Gallery</item>

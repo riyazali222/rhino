@@ -59,7 +59,6 @@ public class AddedVehiclesDialog extends DialogFragment {
     ArrayList<VehicleListing> numberPlateLists = new ArrayList<>();
     NumberPlateAdapter numberPlateAdapter;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,

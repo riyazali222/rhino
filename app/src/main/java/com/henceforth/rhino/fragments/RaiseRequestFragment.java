@@ -2,14 +2,13 @@ package com.henceforth.rhino.fragments;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,17 +20,20 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +57,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RaiseRequestFragment extends Fragment implements View.OnClickListener {
-    EditText etMileage, etVehicleModel, etMemid, etIdNo, tvOdometerReading, etNotForU,
+    EditText etMileage, etVehicleModel, etMemid, etIdNo, tvOdometerReading,
             etPhoneNo, etBrandName, tvVehicleYear, etLicence, etVehicleType, tvServiceType,
             etDescription;
     TextView tvContactInfo;
@@ -63,11 +65,13 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
     private LocationEnableRequest locationEnableRequest = new LocationEnableRequest();
     ArrayList<VehicleListing> info = new ArrayList<>();
     VehicleListing listing;
+    String notForYou;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_raise_request, container, false);
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -85,7 +89,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         tvOdometerReading = (EditText) getView().findViewById(R.id.tvOdometerReading);
         etMemid = (EditText) getView().findViewById(R.id.etMemid);
         etIdNo = (EditText) getView().findViewById(R.id.etIdNo);
-        etNotForU = (EditText) getView().findViewById(R.id.etNotForU);
+        //etNotForU = (EditText) getView().findViewById(R.id.etNotForU);
         if (!ApplicationGlobal.prefsManager.getPhoneNo().isEmpty())
             etPhoneNo.setText(ApplicationGlobal.prefsManager.getPhoneNo());
         tvServiceType.setOnClickListener(this);
@@ -97,7 +101,8 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         etLicence.setOnClickListener(this);
         getActivity().registerReceiver(locationEnableRequest,
                 new IntentFilter("LocationEnableRequest"));
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams
+                .SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         //set different color for phone and dial
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
@@ -112,11 +117,19 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         builder.append(str2);
 
         tvContactInfo.setText(builder, TextView.BufferType.SPANNABLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                etMemid.clearFocus();
+            }
+        }, 100);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.tvServiceType:
 //                DialogFragment d= ServiceTypeFragment.newInstance();
                 CommonMethods.showDialogFragmentFullScreen((AppCompatActivity) getActivity(), new ServiceTypeFragment(), "Tag");
@@ -155,10 +168,9 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                     CommonMethods.showToast(getActivity(), getString(R.string.enterPhoneNumber));
                 else {
                     if (CommonMethods.isNetworkConnected(getActivity())) {
-                        requestPopup();
+                        safeLocationPopup();
 
-                    }
-                    else
+                    } else
                         CommonMethods.showInternetNotConnectedToast(getActivity());
 
                 }
@@ -191,42 +203,9 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    private void requestPopup() {
+    public String safeLocationPopup() {
         final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
-        dialog.setContentView(R.layout.membership_of_vehicle_popup);
-       // Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.toolbarLogout);
-//        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
-//        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//            }
-//        });
-        final Button btnCancle = (Button) dialog.findViewById(R.id.btnCancle);
-        Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                safeLocationPopup();
-                dialog.dismiss();
-            }
-
-        });
-        btnCancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                safeLocationPopup();
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-        dialog.setCancelable(false);
-
-    }
-    public Void safeLocationPopup(){
-        final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
-        dialog.setContentView(R.layout.safe_location_popup);
+        dialog.setContentView(R.layout.popup_safe_location);
         // Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.toolbarLogout);
 //        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
 //        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -240,7 +219,40 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                requestPopup();
+                dialog.dismiss();
+            }
 
+        });
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                suggestionPopup();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+        dialog.setCancelable(false);
+        return null;
+    }
+
+    private void requestPopup() {
+        final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
+        dialog.setContentView(R.layout.popup_membership_of_vehicle);
+        // Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.toolbarLogout);
+//        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
+//        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+        final Button btnCancle = (Button) dialog.findViewById(R.id.btnCancle);
+        Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notForYou = "1";
                 checkLocation();
                 dialog.dismiss();
             }
@@ -249,13 +261,32 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 dialog.dismiss();
-                //getActivity().onBackPressed();
+                notForYou = "0";
+                checkLocation();
+                dialog.dismiss();
             }
         });
         dialog.show();
         dialog.setCancelable(false);
-        return null;
+
+    }
+
+
+    public void suggestionPopup() {
+        final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
+        dialog.setContentView(R.layout.popup_suggestion);
+        Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+
+        });
+
+        dialog.show();
+        dialog.setCancelable(false);
     }
 //    private void dialogLicence() {
 //
@@ -296,7 +327,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
 
     private void showPopupWindow(final TextView tv, final int array) {
         final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());
-        popupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.vehicle_type_popup,
+        popupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.popup_vehicle_type,
                 R.id.tvRow, getResources().getStringArray(array)));
         popupWindow.setAnchorView(tv);
         popupWindow.setWidth(ListPopupWindow.WRAP_CONTENT);
@@ -336,7 +367,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                 String.valueOf(ApplicationGlobal.prefsManager.getVehicleBrandId()),
                 etVehicleModel.getText().toString(), tvVehicleYear.getText().toString(),
                 etPhoneNo.getText().toString(), ApplicationGlobal.myLat, ApplicationGlobal.myLng,
-                tvOdometerReading.getText().toString(), etNotForU.getText().toString(),
+                tvOdometerReading.getText().toString(), notForYou,
                 etDescription.getText().toString()).enqueue(new Callback<ApiList>() {
             @Override
             public void onResponse(Call<ApiList> call, Response<ApiList> response) {
@@ -436,7 +467,6 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         super.onPause();
     }
 
-    //receiving Broadcast
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -445,7 +475,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                 etLicence.setText(s);
 
             } else if (intent.hasExtra("ServiceList")) {
-                Services services = intent.getParcelableExtra("ServiceList");
+                // Services services = intent.getParcelableExtra("ServiceList");
                 tvServiceType.setText(ApplicationGlobal.prefsManager.getServiceTypeName());
             }
             //tvServiceType.setText(intent.getStringExtra("ServiceList"));
@@ -453,7 +483,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
 
                 AddedVehicle vehicle = intent.getParcelableExtra("Data_New");
                 etLicence.setText(vehicle.getPlateno());
-                etMileage.setText(vehicle.getPlateno());
+                etMileage.setText(vehicle.getMileage());
                 etIdNo.setText(vehicle.getVin());
                 etMemid.setText(vehicle.getMid());
                 etBrandName.setText(vehicle.getBrand());

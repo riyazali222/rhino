@@ -89,13 +89,6 @@ public class AddVehicleAdapter extends RecyclerView.Adapter<AddVehicleAdapter.My
                     final Dialog dialog = new Dialog(mContext, R.style.slideFromTopDialog);
                     dialog.setContentView(R.layout.dialog_delete_list);
                     Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.toolbarLogout);
-                    dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
-                    dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog.dismiss();
-                        }
-                    });
                     final Button btnCancle = (Button) dialog.findViewById(R.id.btnCancle);
                     Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
                     btnOk.setOnClickListener(new View.OnClickListener() {

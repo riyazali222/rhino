@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,6 +41,8 @@ public class SwipeTabActivity extends AppCompatActivity implements View.OnClickL
         viewPager.setOffscreenPageLimit(1);
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
+        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
        /* tabLayout.getTabAt(0).setText(R.string.raise_request).setIcon(R.drawable.selector_service);
         *//*TextView txt1= (TextView)tabLayout.getChildAt(0).findViewById(android.R.id.TextView1);
         txt1.setTextSize(25);*//*
@@ -75,8 +78,7 @@ public class SwipeTabActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
 
-        DialogFragment dialog = SettingDialogFragment.newInstance();
-        CommonMethods.showDialogFragmentFullScreen((AppCompatActivity)SwipeTabActivity.this,dialog,"Tag");
+        CommonMethods.showDialogFragmentFullScreen(SwipeTabActivity.this,new SettingDialogFragment(),"settings");
 
     }
 }

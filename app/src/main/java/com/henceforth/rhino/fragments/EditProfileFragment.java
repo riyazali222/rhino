@@ -276,10 +276,11 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
             public void onResponse(Call<EditProfile> call, Response<EditProfile> response) {
                 if (response.isSuccessful()) {
                     ApplicationGlobal.prefsManager.setProfile(new Gson().toJson(response.body()));
-                    Toast.makeText(getActivity(), response.body().getImage(), Toast.LENGTH_LONG).show();
-                    getActivity().getSupportFragmentManager().beginTransaction()
+                   // Toast.makeText(getActivity(), response.body().getImage(), Toast.LENGTH_LONG).show();
+                   /* getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_frame, new ProfileFragment())
-                            .commit();
+                            .commit();*/
+                   getActivity().onBackPressed();
                     ApplicationGlobal.prefsManager.setPhoneNo(phone_noP);
                     progressDialog.dismiss();
                     Log.e("Image", response.body().getImage());

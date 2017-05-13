@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -121,7 +122,7 @@
             android:textColorHint="@color/hintColor"
             android:backgroundTint="@color/colorAccent"
             android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:hint="@string/vehicle_ReqType"
+            android:hint="@string/any_special_needs_or_requests"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
             android:textCursorDrawable="@drawable/color_cursor" />
@@ -142,12 +143,12 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent" />
 
-       <!-- <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/view_height"
-            android:layout_marginEnd="@dimen/Twelve"
-            android:layout_marginStart="@dimen/Twelve"
-            android:background="@color/colorAccent" />-->
+        <!-- <View
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/view_height"
+             android:layout_marginEnd="@dimen/Twelve"
+             android:layout_marginStart="@dimen/Twelve"
+             android:background="@color/colorAccent" />-->
 
 
         <EditText
@@ -212,24 +213,12 @@
             android:inputType="phone"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:singleLine="true"
+            android:focusable="false"
             android:textColorHint="@color/hintColor"
             android:textColor="@color/colorAccent"
             android:textCursorDrawable="@drawable/color_cursor" />
 
-        <EditText
-            android:id="@+id/etNotForU"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/editTextHeight"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:hint="@string/not_for_you"
-            android:inputType="text"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:singleLine="true"
-            android:textColorHint="@color/hintColor"
-            android:textColor="@color/colorAccent"
-            android:textCursorDrawable="@drawable/color_cursor" />
+
 
         <Button
             android:id="@+id/btnSubmit"
@@ -258,6 +247,7 @@
             android:text="@string/dial_no"
             android:textColor="@color/colorAccent"
             android:textColorHighlight="@color/colorPrimary" />
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

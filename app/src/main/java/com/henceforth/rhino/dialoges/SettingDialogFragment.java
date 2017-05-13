@@ -46,21 +46,6 @@ public class SettingDialogFragment extends DialogFragment implements
         mContext = getActivity();
     }
 
-    public static SettingDialogFragment newInstance() {
-        return new SettingDialogFragment();
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(),
-                    R.color.colorPrimaryDark));
-        }
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.MyDialog);
-    }
 
     /* @TargetApi(Build.VERSION_CODES.LOLLIPOP)
      private void changeStatusBarColor() {
@@ -139,7 +124,7 @@ public class SettingDialogFragment extends DialogFragment implements
 
     private void ChangePasswordDialog() {
         final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
-        dialog.setContentView(R.layout.change_password_dialog);
+        dialog.setContentView(R.layout.dialog_change_password);
         final ShowHidePasswordEditText etOldPass = (ShowHidePasswordEditText)
                 dialog.findViewById(R.id.etOldPass);
         final ShowHidePasswordEditText etNewPass = (ShowHidePasswordEditText)
@@ -179,7 +164,7 @@ public class SettingDialogFragment extends DialogFragment implements
     private void logoutDialog() {
 
         final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
-        dialog.setContentView(R.layout.logout_dialog);
+        dialog.setContentView(R.layout.dialog_logout);
         Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.toolbarLogout);
         dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
         dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {

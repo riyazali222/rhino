@@ -95,36 +95,17 @@ public class ProfileFragment extends Fragment {
         if (!ApplicationGlobal.prefsManager.getProfile().isEmpty()) {
             EditProfile editProfile = new Gson().fromJson(ApplicationGlobal
                     .prefsManager.getProfile(), EditProfile.class);
-            if (!editProfile.getFirstname().isEmpty() || !editProfile.getMiddlename().isEmpty() ||
-                    !editProfile.getLastname().isEmpty()) {
-                etName.setText(editProfile.getFirstname() + " "
-                        + editProfile.getLastname() + " " + editProfile.getMiddlename());
-            } else etName.setText("Name");
-            if (!editProfile.getCustomerId().isEmpty())
-                tvCustomerId.setText(editProfile.getCustomerId());
-            else tvCustomerId.setText("Customer Id");
-            if (!editProfile.getAddress1().isEmpty() || !editProfile.getAddress1().isEmpty() ||
-                    !editProfile.getAddress1().isEmpty())
-                tvAddress.setText(editProfile.getAddress1() + " " + editProfile.getAddress2() + " "
-                        + editProfile.getAddress3() + " ");
-            else tvAddress.setText("Address");
-            if (!editProfile.getPhoneNo().isEmpty())
-                tvPhone.setText(editProfile.getPhoneNo());
-            else tvPhone.setText("Phone Number");
-            if (!editProfile.getCity().isEmpty())
-                tvCity.setText(editProfile.getCity());
-            else
-                tvCity.setText("City");
-            if (!editProfile.getState().isEmpty())
-                tvState.setText(editProfile.getState());
-            else tvState.setText("State");
-            if (!editProfile.getCountry().isEmpty())
-                tvCountry.setText(editProfile.getCountry());
-            else tvCountry.setText("Country");
-            if (!editProfile.getEmail().isEmpty())
-                tvEmail.setText(editProfile.getEmail());
-            else
-                tvEmail.setText("Email Address");
+
+            etName.setText(" " +editProfile.getFirstname() + " "
+                    + editProfile.getLastname() + " " + editProfile.getMiddlename());
+            tvCustomerId.setText(" " +editProfile.getCustomerId());
+            tvAddress.setText(" " +editProfile.getAddress1() + ", " + editProfile.getAddress2() + ", "
+                    + editProfile.getAddress3() + " ");
+            tvPhone.setText(" " +editProfile.getPhoneNo());
+            tvCity.setText(" " +editProfile.getCity());
+            tvState.setText(" " +editProfile.getState());
+            tvCountry.setText(" " +editProfile.getCountry());
+            tvEmail.setText(" " +editProfile.getEmail());
             Glide.with(getActivity()).load(editProfile.getImage()).centerCrop().into(ivProfile);
         }
     }
@@ -192,7 +173,6 @@ public class ProfileFragment extends Fragment {
                         CommonMethods.dismissProgressDialog();
                         try {
                             if (response.code() == 200 && response.body() != null) {
-                                CommonMethods.showToast(getActivity(), response.body().getmessage());
                                 hitVehicleListingApi();
                                 list.clear();
                                 addVehicleAdapter.notifyDataSetChanged();
@@ -207,7 +187,7 @@ public class ProfileFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<RemoveVehicles> call, Throwable t) {
-                        CommonMethods.showErrorToast(getActivity());
+                       // CommonMethods.showErrorToast(getActivity());
                         CommonMethods.dismissProgressDialog();
                     }
                 });
