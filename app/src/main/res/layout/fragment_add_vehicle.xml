@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:background="@color/white"
-            android:clickable="true"
-            android:focusable="true"
-            android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAddVehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Add Vehicle"
+            android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textColor="@color/white"/>
+    </android.support.v7.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarAddVehicle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:background="@color/colorAccent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Add Vehicle"
-                android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
-                android:textColor="@color/white"/>
-        </android.support.v7.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +42,7 @@
 
             <EditText
                 android:id="@+id/etLicence"
+                android:maxLength="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
@@ -45,7 +50,7 @@
                 android:layout_marginTop="12dp"
                 android:backgroundTint="@color/colorAccent"
                 android:hint="@string/licence_plate"
-                android:inputType="textCapCharacters"
+                android:inputType="text"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -63,7 +68,7 @@
                 android:layout_marginTop="12dp"
                 android:backgroundTint="@color/colorAccent"
                 android:hint="@string/vin"
-                android:inputType="textCapCharacters"
+                android:inputType="text"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -81,7 +86,7 @@
                 android:layout_marginTop="12dp"
                 android:backgroundTint="@color/colorAccent"
                 android:hint="@string/memid"
-                android:inputType="textCapCharacters"
+                android:inputType="text"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -194,5 +199,5 @@
 
         </LinearLayout>
     </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

@@ -280,6 +280,8 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
                    /* getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_frame, new ProfileFragment())
                             .commit();*/
+                    Toast.makeText(getActivity(), "Profile Updated Successfully", Toast.LENGTH_SHORT)
+                            .show();
                    getActivity().onBackPressed();
                     ApplicationGlobal.prefsManager.setPhoneNo(phone_noP);
                     progressDialog.dismiss();

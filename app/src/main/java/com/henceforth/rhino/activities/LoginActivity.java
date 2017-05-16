@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ArrayList<ProfileList> profileLists = new ArrayList<>();
     private SharedPreferences mSharedPreferences;
     public static SharedPreferences.Editor mEditor;
+    Dialog dialog;
 
 
     @Override
@@ -211,7 +212,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void custom_dialog() {
-        final Dialog dialog = new Dialog(LoginActivity.this, R.style.slideFromTopDialog);
+        dialog = new Dialog(LoginActivity.this, R.style.slideFromTopDialog);
 
 
         dialog.setContentView(R.layout.dialog_forgot_password);
@@ -256,6 +257,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 try {
                     if (response.code() == 200 && response.body() != null) {
                         CommonMethods.showToast(LoginActivity.this, response.body().getmessage());
+                        dialog.dismiss();
+
                     } else
                         CommonMethods.showErrorMessage(LoginActivity.this,
                                 response.errorBody());

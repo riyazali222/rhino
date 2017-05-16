@@ -37,6 +37,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.activities.YearPickerActivity;
@@ -48,6 +49,7 @@ import com.henceforth.rhino.utills.LocationGetter;
 import com.henceforth.rhino.webServices.Services;
 import com.henceforth.rhino.webServices.apis.RestClient;
 import com.henceforth.rhino.webServices.pojo.AddedVehicle;
+import com.henceforth.rhino.webServices.pojo.EditProfile;
 import com.henceforth.rhino.webServices.pojo.VehicleListing;
 
 import java.util.ArrayList;
@@ -90,8 +92,13 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         etMemid = (EditText) getView().findViewById(R.id.etMemid);
         etIdNo = (EditText) getView().findViewById(R.id.etIdNo);
         //etNotForU = (EditText) getView().findViewById(R.id.etNotForU);
-        if (!ApplicationGlobal.prefsManager.getPhoneNo().isEmpty())
-            etPhoneNo.setText(ApplicationGlobal.prefsManager.getPhoneNo());
+        if (!ApplicationGlobal.prefsManager.getProfile().isEmpty()) {
+            EditProfile editProfile = new Gson().fromJson(ApplicationGlobal
+                    .prefsManager.getProfile(), EditProfile.class);
+            etPhoneNo.setText(editProfile.getPhoneNo());
+        }
+        //if (!ApplicationGlobal.prefsManager.getPhoneNo().isEmpty())
+
         tvServiceType.setOnClickListener(this);
         tvContactInfo.setOnClickListener(this);
         getView().findViewById(R.id.btnSubmit).setOnClickListener(this);

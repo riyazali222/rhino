@@ -7,8 +7,26 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarProfile"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="EDIT PROFILE"
+            android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textColor="@color/white" />
+
+    </android.support.v7.widget.Toolbar>
     <ScrollView
+        android:layout_below="@+id/toolbarProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,31 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarProfile"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorAccent"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-                <TextView
-                    android:id="@+id/toolbarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="EDIT PROFILE"
-                    android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
-                    android:textColor="@color/white" />
-
-            </android.support.v7.widget.Toolbar>
-
             <ImageView
                 android:id="@+id/ivProfileUpload"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_below="@+id/toolbarProfile"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"

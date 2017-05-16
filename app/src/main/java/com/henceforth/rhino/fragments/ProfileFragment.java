@@ -99,8 +99,25 @@ public class ProfileFragment extends Fragment {
             etName.setText(" " +editProfile.getFirstname() + " "
                     + editProfile.getLastname() + " " + editProfile.getMiddlename());
             tvCustomerId.setText(" " +editProfile.getCustomerId());
-            tvAddress.setText(" " +editProfile.getAddress1() + ", " + editProfile.getAddress2() + ", "
+            if(!editProfile.getAddress1().isEmpty() && !editProfile.getAddress3().isEmpty() &&
+                    editProfile.getAddress2().isEmpty())
+            tvAddress.setText(" " +editProfile.getAddress1() + ", " + editProfile.getAddress2() + ""
                     + editProfile.getAddress3() + " ");
+            else if(!editProfile.getAddress1().isEmpty() && editProfile.getAddress3().isEmpty() &&
+                    editProfile.getAddress2().isEmpty())
+                tvAddress.setText(" " +editProfile.getAddress1() + "" + editProfile.getAddress2() + ""
+                        + editProfile.getAddress3() + " ");
+            else if(!editProfile.getAddress1().isEmpty() && editProfile.getAddress3().isEmpty() &&
+                    !editProfile.getAddress2().isEmpty()){
+                tvAddress.setText(" " +editProfile.getAddress1() + " " + editProfile.getAddress2() + ", "
+                        + editProfile.getAddress3() + " ");
+            }
+            else if(!editProfile.getAddress1().isEmpty() && !editProfile.getAddress3().isEmpty() &&
+                    !editProfile.getAddress2().isEmpty()){
+                tvAddress.setText(" " +editProfile.getAddress1() + ", " + editProfile.getAddress2() + ", "
+                        + editProfile.getAddress3() + " ");
+            }
+            else tvAddress.setText("");
             tvPhone.setText(" " +editProfile.getPhoneNo());
             tvCity.setText(" " +editProfile.getCity());
             tvState.setText(" " +editProfile.getState());
@@ -203,6 +220,7 @@ public class ProfileFragment extends Fragment {
         rvVehicles.setLayoutManager(new LinearLayoutManager(getActivity()));
         addVehicleAdapter = new AddVehicleAdapter(getActivity(), list);
         rvVehicles.setAdapter(addVehicleAdapter);
+        rvVehicles.setNestedScrollingEnabled(false);
 
 
     }

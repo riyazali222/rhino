@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -59,6 +60,7 @@ public class AddVehicleFragment extends BaseFragment {
         toolbarAddVehicle.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommonMethods.hideKeyboard(getActivity());
                 getActivity().onBackPressed();
             }
         });
@@ -142,10 +144,11 @@ public class AddVehicleFragment extends BaseFragment {
                                 /*getFragmentManager().beginTransaction().replace(R.id.main_frame, pf)
                                         .commit();*/
                                 getActivity().onBackPressed();
-                                /*Intent i = new Intent("UPDATE");
+                                Intent i = new Intent("UPDATE");
                                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(i);
-                                getActivity().onBackPressed();*/
-                            } else
+                                getActivity().onBackPressed();
+                            }
+                            else
                                 CommonMethods.showErrorMessage(getActivity(),
                                         response.errorBody());
                             Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();

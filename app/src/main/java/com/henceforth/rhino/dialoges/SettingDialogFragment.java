@@ -1,5 +1,6 @@
 package com.henceforth.rhino.dialoges;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -42,18 +43,16 @@ public class SettingDialogFragment extends DialogFragment implements
     private String status;
     Context mContext;
 
-    public SettingDialogFragment() {
+    /*public SettingDialogFragment() {
         mContext = getActivity();
-    }
+    }*/
 
 
-    /* @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
      private void changeStatusBarColor() {
-         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-             getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(),
-              R.color.colorPrimaryDark));
-         }
-     }*/
+         getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(),
+          R.color.colorPrimaryDark));
+     }
     @Override
     public void onStart() {
         super.onStart();
@@ -63,6 +62,7 @@ public class SettingDialogFragment extends DialogFragment implements
                     .MATCH_PARENT);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
+        changeStatusBarColor();
     }
 
 

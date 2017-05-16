@@ -168,17 +168,7 @@ public class AddedVehiclesDialog extends DialogFragment {
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getActivity().getWindow().addFlags(WindowManager.LayoutParams
-                    .FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(),
-                    R.color.colorPrimaryDark));
-        }
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.MyDialog);
-    }
+
 
     @Override
     public void onStart() {

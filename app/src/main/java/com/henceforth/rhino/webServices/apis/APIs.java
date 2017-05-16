@@ -38,7 +38,7 @@ public interface APIs {
                                 @Query("fcm_id") String fcm_id);
 
 
-    @POST("api/v1/forgot-password")
+    @POST("paragon/public/api/v1/forgot-password")
     Call<ForgotPasswordApi> forgotPasswordResponse(@Query("email") String email);
 
 
@@ -138,6 +138,7 @@ public interface APIs {
                                            @Part("city") RequestBody city,
                                            @Part("state") RequestBody state,
                                            @Part("country") RequestBody country);
+
     @GET("paragon/public/api/v1/service-types")
     Call<List<Services>> ServiceListResponse();
 }

@@ -66,7 +66,7 @@ public class CommonMethods {
             tag) {
         android.app.FragmentManager fm = context.getFragmentManager();
         int style = android.app.DialogFragment.STYLE_NO_TITLE, theme = 0;
-        theme = R.style.slideFromTopDialog;
+        theme = R.style.slideFromRightFullScreenDialog;
         dialogFragment.setStyle(style, theme);
         dialogFragment.show(fm, tag);
 
