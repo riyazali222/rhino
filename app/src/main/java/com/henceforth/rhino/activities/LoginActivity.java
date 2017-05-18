@@ -256,7 +256,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 CommonMethods.dismissProgressDialog();
                 try {
                     if (response.code() == 200 && response.body() != null) {
-                        CommonMethods.showToast(LoginActivity.this, response.body().getmessage());
+                        CommonMethods.showToast(LoginActivity.this,"An Email has been sent to you");
                         dialog.dismiss();
 
                     } else

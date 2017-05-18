@@ -89,6 +89,11 @@ public class ProfileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         profiledata();
+        Intent intent=new Intent("Profile");
+        EditProfile editProfile = new Gson().fromJson(ApplicationGlobal.prefsManager.getProfile()
+                , EditProfile.class);
+        intent.putExtra("Image",editProfile.getImage());
+        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
     }
 
     private void profiledata() {
@@ -96,8 +101,9 @@ public class ProfileFragment extends Fragment {
             EditProfile editProfile = new Gson().fromJson(ApplicationGlobal
                     .prefsManager.getProfile(), EditProfile.class);
 
-            etName.setText(" " +editProfile.getFirstname() + " "
-                    + editProfile.getLastname() + " " + editProfile.getMiddlename());
+            etName.setText(" " +editProfile.getFirstname()+ " " + editProfile.getMiddlename()
+                    + " "
+                    + editProfile.getLastname() );
             tvCustomerId.setText(" " +editProfile.getCustomerId());
             if(!editProfile.getAddress1().isEmpty() && !editProfile.getAddress3().isEmpty() &&
                     editProfile.getAddress2().isEmpty())
@@ -281,7 +287,11 @@ public class ProfileFragment extends Fragment {
 
                 profiledata();
 
-            } else {
+            }
+            else if(intent.hasExtra("PROFILE")){
+                profiledata();
+
+            }else {
 
                 hitVehicleListingApi();
             }

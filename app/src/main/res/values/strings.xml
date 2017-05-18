@@ -13,7 +13,7 @@
     <string name="last_name">Last Name</string>
     <string name="company_name">Company Name</string>
     <string name="city">City or Town : </string>
-    <string name="state">State/Province/County : </string>
+    <string name="state">State/Province : </string>
     <string name="postal_code">Postal Code</string>
     <string name="country">Country/Territory : </string>
     <string name="fax">Fax Number</string>
@@ -26,7 +26,7 @@
     <string name="vehicle_ReqType">Tell Regarding your Request</string>
     <string name="vehicle_ComId">Vehicle Company Id</string>
     <string name="vehicle_Make">Vehicle Make</string>
-    <string name="vehicle_Model">Vehicle Model</string>
+    <string name="vehicle_Model">Vehicle Model (eg. Cruze)</string>
     <string name="vehicle_Year">Vehicle Manufactured Year</string>
     <string name="phone_no">Phone Number</string>
     <string name="odometer_reading">Current Odometer Reading (in miles)</string>
@@ -76,7 +76,7 @@
     <string name="logout">Logout</string>
     <string name="yesButton">YES</string>
     <string name="logoutText">Are you sure you want to logout &#63;</string>
-    <string name="membership_of_vehicle">Is this service for your vehicle or someone listed on your membership&#63;</string>
+    <string name="membership_of_vehicle">Is this service for your vehicle- Yes or someone listed on your membership-no</string>
     <string name="safe_location_text">Are you in a safe location &#63;</string>
     <string name="safty_text">If you feel your safety is at risk, please move your person(s) to a
         safe location or call 911</string>

@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
 
         <EditText
@@ -18,47 +18,46 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:backgroundTint="@color/colorAccent"
             android:focusableInTouchMode="false"
             android:hint="@string/licence_plate"
-            android:textSize="16sp"
-            android:textColorHint="@color/hintColor"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:textColor="@color/colorAccent"
-            android:textCursorDrawable="@drawable/color_cursor" />
+            android:textColorHint="@color/hintColor"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="16sp"/>
 
 
         <EditText
             android:id="@+id/etMemid"
             android:layout_width="match_parent"
             android:layout_height="@dimen/editTextHeight"
-            android:hint="@string/memid"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:textColorHint="@color/hintColor"
-            android:singleLine="true"
+            android:hint="@string/memid"
             android:inputType="number"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
-            android:textCursorDrawable="@drawable/color_cursor" />
-
+            android:textColorHint="@color/hintColor"
+            android:textCursorDrawable="@drawable/color_cursor"/>
 
 
         <EditText
             android:id="@+id/etIdNo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/editTextHeight"
-            android:backgroundTint="@color/colorAccent"
             android:layout_marginTop="12dp"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:textColorHint="@color/hintColor"
+            android:backgroundTint="@color/colorAccent"
             android:hint="@string/vin"
-            android:singleLine="true"
             android:inputType="number"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
-            android:textCursorDrawable="@drawable/color_cursor" />
+            android:textColorHint="@color/hintColor"
+            android:textCursorDrawable="@drawable/color_cursor"/>
 
 
         <EditText
@@ -67,14 +66,14 @@
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:textColorHint="@color/hintColor"
-            android:hint="@string/service_type"
             android:focusable="false"
             android:focusableInTouchMode="false"
+            android:hint="@string/service_type"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
-            android:textCursorDrawable="@drawable/color_cursor" />
+            android:textColorHint="@color/hintColor"
+            android:textCursorDrawable="@drawable/color_cursor"/>
 
 
         <EditText
@@ -82,35 +81,31 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
-            android:textColorHint="@color/hintColor"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:hint="@string/vehicle_milage"
-            android:singleLine="true"
             android:inputType="number"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
-            android:textCursorDrawable="@drawable/color_cursor" />
-
+            android:textColorHint="@color/hintColor"
+            android:textCursorDrawable="@drawable/color_cursor"/>
 
 
         <EditText
             android:id="@+id/etVehicleType"
+            style="@style/spinner_style"
             android:layout_width="match_parent"
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:hint="@string/vehicle_type"
-            android:textColorHint="@color/hintColor"
-            style="@style/spinner_style"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/colorAccent" />
-
-
-
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/hintColor"/>
 
 
         <EditText
@@ -118,29 +113,27 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
-            android:textColorHint="@color/hintColor"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:hint="@string/any_special_needs_or_requests"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
-            android:textCursorDrawable="@drawable/color_cursor" />
-
-
+            android:textColorHint="@color/hintColor"
+            android:textCursorDrawable="@drawable/color_cursor"/>
 
 
         <EditText
             android:id="@+id/etBrandName"
             android:layout_width="match_parent"
             android:layout_height="@dimen/editTextHeight"
-            android:textColorHint="@color/hintColor"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:focusableInTouchMode="false"
             android:hint="@string/brand_name"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/hintColor"/>
 
         <!-- <View
              android:layout_width="match_parent"
@@ -156,17 +149,15 @@
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:textColorHint="@color/hintColor"
             android:hint="@string/vehicle_Model"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:singleLine="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
+            android:textColorHint="@color/hintColor"
             android:textCursorDrawable="@drawable/color_cursor">
 
         </EditText>
-
-
 
         <EditText
             android:id="@+id/tvVehicleYear"
@@ -174,14 +165,12 @@
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:focusableInTouchMode="false"
             android:hint="@string/vehicle_Year"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
-            android:textColorHint="@color/hintColor"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
-
-
+            android:textColorHint="@color/hintColor"/>
 
 
         <EditText
@@ -190,15 +179,14 @@
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:hint="@string/phone_no"
             android:inputType="phone"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:singleLine="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/hintColor"
-            android:textCursorDrawable="@drawable/color_cursor" />
-
+            android:textCursorDrawable="@drawable/color_cursor"/>
 
 
         <EditText
@@ -207,15 +195,14 @@
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/colorAccent"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:hint="@string/odometer_reading"
             android:inputType="phone"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:singleLine="true"
-            android:textColorHint="@color/hintColor"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
-            android:textCursorDrawable="@drawable/color_cursor" />
-
+            android:textColorHint="@color/hintColor"
+            android:textCursorDrawable="@drawable/color_cursor"/>
 
 
         <Button
@@ -226,25 +213,25 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/mybutton"
             android:text="@string/submit"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/submitting_request_text"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/tvContactInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingTop="8dp"
             android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:paddingTop="8dp"
             android:text="@string/dial_no"
             android:textColor="@color/colorAccent"
-            android:textColorHighlight="@color/colorPrimary" />
+            android:textColorHighlight="@color/colorPrimary"/>
 
     </LinearLayout>
 

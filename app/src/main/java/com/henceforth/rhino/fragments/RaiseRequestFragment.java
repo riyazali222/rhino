@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,16 +23,13 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,12 +37,12 @@ import com.google.gson.Gson;
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.activities.YearPickerActivity;
+import com.henceforth.rhino.dialoges.AddedVehiclesDialog;
 import com.henceforth.rhino.utills.ApiList;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.Constants;
 import com.henceforth.rhino.utills.LocationGetter;
-import com.henceforth.rhino.webServices.Services;
 import com.henceforth.rhino.webServices.apis.RestClient;
 import com.henceforth.rhino.webServices.pojo.AddedVehicle;
 import com.henceforth.rhino.webServices.pojo.EditProfile;
@@ -480,7 +476,13 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
             if (intent.hasExtra("REGISTRATION_NO")) {
                 String s = intent.getStringExtra("REGISTRATION_NO");
                 etLicence.setText(s);
-
+                etMileage.setText("");
+                etIdNo.setText("");
+                etMemid.setText("");
+                etBrandName.setText("");
+                etVehicleModel.setText("");
+                etVehicleType.setText("");
+                tvVehicleYear.setText("");
             } else if (intent.hasExtra("ServiceList")) {
                 // Services services = intent.getParcelableExtra("ServiceList");
                 tvServiceType.setText(ApplicationGlobal.prefsManager.getServiceTypeName());

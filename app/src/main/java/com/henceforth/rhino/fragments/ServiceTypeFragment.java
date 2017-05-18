@@ -16,10 +16,13 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +45,10 @@ public class ServiceTypeFragment extends DialogFragment {
     Context mContext;
     Toolbar toolbar;
     private List<Services> servicesList = new ArrayList<>();
+    private List<Services> listToDisplay = new ArrayList<>();
     RecyclerView recyclerView;
     ServiceTypeAdapter serviceTypeAdapter;
+    public EditText etSearchServices;
 
 
     @Override
@@ -76,19 +81,49 @@ public class ServiceTypeFragment extends DialogFragment {
             }
         });
         init();
+        addTextListener();
 
     }
 
     private void init() {
+        etSearchServices=(EditText)getView().findViewById(R.id.etSearchServices);
         recyclerView = (RecyclerView) getView().findViewById(R.id.rvServiceType);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        serviceTypeAdapter = new ServiceTypeAdapter(getActivity(), servicesList);
+        serviceTypeAdapter = new ServiceTypeAdapter(getActivity(), listToDisplay);
         recyclerView.setAdapter(serviceTypeAdapter);
        // addItems();
         hitServiceApi();
 
     }
+    private void addTextListener() {
 
+        etSearchServices.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                listToDisplay.clear();
+                for (Services items : servicesList) {
+                    if (items.getDesc().toLowerCase().contains(etSearchServices.getText().toString().toLowerCase())) {
+                        // Adding Matched items
+                        listToDisplay.add(items);
+                    }
+
+                }
+
+                serviceTypeAdapter.notifyDataSetChanged();
+
+            }
+        });
+    }
     private void hitServiceApi() {
         if(CommonMethods.isNetworkConnected(getActivity())) {
 
@@ -97,10 +132,15 @@ public class ServiceTypeFragment extends DialogFragment {
                 public void onResponse(Call<List<Services>> call, Response<List<Services>> response) {
                     try {
                         if (response.code() == 200 && response.body() != null) {
-                            servicesList.clear();
+                            /*servicesList.clear();
                             servicesList.addAll(response.body());
 //                            listToDisplay.clear();
 //                            listToDisplay.addAll(itemsListArrayList);
+                            serviceTypeAdapter.notifyDataSetChanged();*/
+                            servicesList.clear();
+                            servicesList.addAll(response.body());
+                            listToDisplay.clear();
+                            listToDisplay.addAll(servicesList);
                             serviceTypeAdapter.notifyDataSetChanged();
                         } else
                             CommonMethods.showErrorMessage(getActivity(),

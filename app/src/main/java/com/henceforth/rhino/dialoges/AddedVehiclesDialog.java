@@ -1,7 +1,7 @@
 
 
 
-package com.henceforth.rhino.fragments;
+package com.henceforth.rhino.dialoges;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

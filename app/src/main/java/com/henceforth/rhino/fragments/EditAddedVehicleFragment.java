@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -16,16 +17,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.activities.YearPickerActivity;
 import com.henceforth.rhino.utills.AddVehicles;
+import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
+import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.webServices.pojo.VehicleListing;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import static com.henceforth.rhino.activities.YearPickerActivity.year;
 import static com.henceforth.rhino.utills.ApplicationGlobal.prefsManager;
 
 public class EditAddedVehicleFragment extends Fragment implements View.OnClickListener {
@@ -45,25 +54,10 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
             tvVehicleYear;
     Toolbar toolbarAddVehicle;
     Button buttonSubmit;
+    int userVehicleId,vehicleMakeId;
+    String noPlate,mileage,vType,brandName,model,year,vIn,meMID;
 
-  /*  @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle bundle = getArguments();
-        if (getArguments() != null) {
-            AddVehicles vehicles = bundle.getParcelable("list_info");
-            assert vehicles != null;
-            etLicence.setText(vehicles.getLicense_plate_no());
-//            etMemid.setText(vehicles.getMembership_id());
-//            etMileage.setText(vehicles.getVehicle_mileage().toString());
-//            etVehicleModel.setText(vehicles.getVehicle_model());
-//            etVehicleType.setText(vehicles.getType_of_vehicle());
-//            etVIN.setText(vehicles.getVehicle_identification_number());
-//            //tvBrandName.setText(vehicles.getVehicle_make_id().toString());
-//            tvVehicleYear.setText(vehicles.getVehicle_year().toString());
 
-        }
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,14 +124,14 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
                 break;
 
             case R.id.buttonSubmit:
-                String noPlate = etLicence.getText().toString().trim();
-                String mileage = etMileage.getText().toString();
-                String vType = etVehicleType.getText().toString().trim();
-                String brandName = tvBrandName.getText().toString().trim();
-                String model = etVehicleModel.getText().toString().trim();
-                String year = tvVehicleYear.getText().toString().trim();
-                String vIn = etVIN.getText().toString().trim();
-                String meMID = etMemid.getText().toString().trim();
+                 noPlate = etLicence.getText().toString().trim();
+                 mileage = etMileage.getText().toString();
+                 vType = etVehicleType.getText().toString().trim();
+                 brandName = tvBrandName.getText().toString().trim();
+                 model = etVehicleModel.getText().toString().trim();
+                 year = tvVehicleYear.getText().toString().trim();
+                 vIn = etVIN.getText().toString().trim();
+                 meMID = etMemid.getText().toString().trim();
                 CommonMethods.hideKeyboard(getActivity());
                 if (noPlate.isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterRegistrationNumber));
@@ -156,7 +150,7 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
                 else if (year.isEmpty())
                     CommonMethods.showToast(getActivity(), getString(R.string.enterVehicleYear));
                 else {
-                    //hitApi();
+                    hitApi();
 
                 }
 
@@ -203,14 +197,60 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
         Bundle bundle = getArguments();
         AddVehicles vehicles = bundle.getParcelable("list_info");
         assert vehicles != null;
+        userVehicleId=vehicles.getUser_vehicle_id();
         etLicence.setText(vehicles.getLicense_plate_no());
         etMemid.setText(vehicles.getMembership_id());
         etMileage.setText(vehicles.getVehicle_mileage().toString());
         etVehicleModel.setText(vehicles.getVehicle_model());
         etVehicleType.setText(vehicles.getType_of_vehicle());
         etVIN.setText(vehicles.getVehicle_identification_number());
+        vehicleMakeId=vehicles.getVehicle_make_id();
         //tvBrandName.setText(vehicles.getVehicle_make_id().toString());
         tvVehicleYear.setText(vehicles.getVehicle_year().toString());
     }
+    private void hitApi() {
+        CommonMethods.showProgressDialog(getActivity());
+        RestClient.get().AddVehicleApi(String.valueOf(userVehicleId), noPlate, vIn, meMID, mileage, vType,
+                String.valueOf(vehicleMakeId), model,
+                Integer.parseInt(year))
+                .enqueue(new Callback<AddVehicles>() {
+                    @Override
+                    public void onResponse(Call<AddVehicles> call, Response<AddVehicles> response) {
 
+                        CommonMethods.dismissProgressDialog();
+                        try {
+                            if (response.code() == 200 && response.body() != null) {
+                                Toast.makeText(getActivity(), "Vehicle successfully edited",
+                                        Toast.LENGTH_LONG).show();
+                               /* VehicleListing listing = new VehicleListing(response.body().getUser_vehicle_id(),
+                                        noPlate, vIn, meMID, Integer.valueOf(mileage), vType,
+                                        ApplicationGlobal.prefsManager.getVehicleBrandId(), model,
+                                        Integer.parseInt(year), ApplicationGlobal.prefsManager.getBrandName());
+                                ProfileFragment pf = new ProfileFragment();
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("ADD_VEHICLE", listing);
+                                pf.setArguments(bundle);
+                                *//*getFragmentManager().beginTransaction().replace(R.id.main_frame, pf)
+                                        .commit();*//*
+                                getActivity().onBackPressed();
+                                Intent i = new Intent("UPDATE");
+                                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(i);*/
+                                getActivity().onBackPressed();
+                            }
+                            else
+                                CommonMethods.showErrorMessage(getActivity(),
+                                        response.errorBody());
+                            Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddVehicles> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
+                        CommonMethods.dismissProgressDialog();
+                    }
+                });
+    }
 }

@@ -25,6 +25,7 @@ public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.
 
     private List<Services> servicesList = new ArrayList<>();
     private Context mContext;
+    private List<Services> listToDisplay;
 
 
     public ServiceTypeAdapter(Context mContext, List<Services> servicesList) {

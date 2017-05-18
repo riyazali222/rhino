@@ -131,7 +131,7 @@ public class AddVehicleFragment extends BaseFragment {
                         CommonMethods.dismissProgressDialog();
                         try {
                             if (response.code() == 200 && response.body() != null) {
-                                Toast.makeText(getActivity(), "Vehicle Added sucessfully",
+                                Toast.makeText(getActivity(), "Vehicle Added successfully",
                                         Toast.LENGTH_LONG).show();
                                 VehicleListing listing = new VehicleListing(response.body().getUser_vehicle_id(),
                                         noPlate, vIn, meMID, Integer.valueOf(mileage), vType,

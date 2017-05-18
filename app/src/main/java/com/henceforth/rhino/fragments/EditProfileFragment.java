@@ -3,7 +3,10 @@ package com.henceforth.rhino.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -17,6 +20,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,6 +44,7 @@ import com.henceforth.rhino.utills.Constants;
 import com.henceforth.rhino.utills.GetSampledImage;
 import com.henceforth.rhino.utills.RetrofitUtils;
 import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.webServices.pojo.AddedVehicle;
 import com.henceforth.rhino.webServices.pojo.EditProfile;
 
 import java.io.File;
@@ -191,6 +196,7 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getString(R.string.string_title_upload_progressbar_));
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
 //        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),
 //                f);
@@ -276,16 +282,15 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
             public void onResponse(Call<EditProfile> call, Response<EditProfile> response) {
                 if (response.isSuccessful()) {
                     ApplicationGlobal.prefsManager.setProfile(new Gson().toJson(response.body()));
-                   // Toast.makeText(getActivity(), response.body().getImage(), Toast.LENGTH_LONG).show();
-                   /* getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_frame, new ProfileFragment())
-                            .commit();*/
                     Toast.makeText(getActivity(), "Profile Updated Successfully", Toast.LENGTH_SHORT)
                             .show();
                    getActivity().onBackPressed();
                     ApplicationGlobal.prefsManager.setPhoneNo(phone_noP);
                     progressDialog.dismiss();
                     Log.e("Image", response.body().getImage());
+                    Intent intent=new Intent("UPDATE");
+                    intent.putExtra("PROFILE","");
+                    LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
 //                    getFragmentManager().popBackStackImmediate();
                 } else {
                     try {
@@ -469,108 +474,34 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
     public void onSampledImageAsyncPostExecute(File file) {
         imageProfile = file;
         if (imageProfile != null) {
+            //ivProfileUpload=null;
             ivProfileUpload.setImageURI(Uri.parse(Constants.LOCAL_FILE_PREFIX +
                     imageProfile));
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(receiver,
+                new IntentFilter("Profile"));
 
-//    private void hitEditProfile(String fname, final String phoneno, String license_plate_no, String
-//            vehicle_id, String lastname, String middlename, String company_name, String address1,
-//                                String address2, String address3, String fax_no, String city,
-//                                String state, String country) {
-//        final ProgressDialog progressDialog;
-//        progressDialog = new ProgressDialog(getActivity());
-//        progressDialog.setMessage(getString(R.string.string_title_upload_progressbar_));
-//        progressDialog.show();
-//
-//        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),
-//                f);
-//
-//        // MultipartBody.Part is used to send also the actual file name
-//
-//        MultipartBody.Part image =
-//                MultipartBody.Part.createFormData("image", f.getName(), requestFile);
-//        RequestBody name1 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), fname);
-//
-//        RequestBody phone =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), phoneno);
-//        RequestBody license_plate =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), license_plate_no);
-//        RequestBody vehicleId =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), vehicle_id);
-//        RequestBody name2 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), middlename);
-//        RequestBody name3 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), lastname);
-//        RequestBody compname =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), company_name);
-//        RequestBody add1 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), address1);
-//        RequestBody add2 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), address2);
-//        RequestBody add3 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), address3);
-//        RequestBody fax =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), fax_no);
-//        RequestBody City =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), city);
-//        RequestBody State =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), state);
-//        RequestBody Country =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), country);
-//
-//
-//
-//        RestClient.get().EditProfileResponse(name1, image,
-//                phone, license_plate, vehicleId, name2, name3, compname, add1, add2, add3, fax, City,
-//                State, Country).enqueue(new Callback<EditProfile>() {
-//            @Override
-//            public void onResponse(Call<EditProfile> call, Response<EditProfile> response) {
-//
-//                progressDialog.dismiss();
-//
-//                if (response.code() == 200 && response.body() != null) {
-//                    Toast.makeText(getActivity(), response.body().getCustomerId(), Toast.LENGTH_LONG)
-//                            .show();
-//                    ApplicationGlobal.prefsManager.setProfile(new Gson().toJson(response.body()));
-//                    ProfileData list = new ProfileData(fNameP, LNameP, MNameP, phone_noP, cityP,
-//                            faxP, stateP, countryP, add1P, add2P, add3P, compNameP, CustIdP);
-//
-//                    Intent intent = new Intent("UPDATE");
-//                    intent.putExtra("Data_New", list);
-//                    LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
-//                    getFragmentManager().popBackStackImmediate();
-//                }
-//                picturePath = "";
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<EditProfile> call, Throwable t) {
-//                progressDialog.dismiss();
-//
-//            }
-//
-//
-//        });
-//
-//    }
+    }
+
+    @Override
+    public void onPause() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+        super.onPause();
+    }
 
 
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.hasExtra("Image")) {
+                String s = intent.getStringExtra("Image");
+               // Glide.with(getActivity()).load(s).centerCrop().into(ivProfileUpload);
+            }
+        }
+    };
 }
