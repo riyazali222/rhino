@@ -127,11 +127,10 @@ public class AddVehicles implements Parcelable {
         return 0;
     }
 
-    public AddVehicles(Integer user_id, String license_plate_no, String vehicle_identification_number,
+    public AddVehicles(String license_plate_no, String vehicle_identification_number,
                        String membership_id, Integer vehicle_mileage, String type_of_vehicle,
                        Integer vehicle_make_id, String vehicle_model, Integer vehicle_year,
-                       Integer user_vehicle_id,String BrandName) {
-        this.user_id = user_id;
+                       Integer user_vehicle_id,String BrandName,String val) {
         this.license_plate_no = license_plate_no;
         this.vehicle_identification_number = vehicle_identification_number;
         this.membership_id = membership_id;

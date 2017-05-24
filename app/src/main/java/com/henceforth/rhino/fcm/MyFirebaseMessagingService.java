@@ -12,6 +12,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.henceforth.rhino.R;
@@ -19,11 +20,14 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import com.henceforth.rhino.activities.LoginActivity;
+import com.henceforth.rhino.activities.SwipeTabActivity;
 import com.henceforth.rhino.fragments.NotificationFragment;
 import com.henceforth.rhino.utills.ApplicationGlobal;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
+    Context mContext;
 
     /**
      * Called when message is received.
@@ -53,7 +57,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
-                .setColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
+                .setColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                 .setContentIntent(pendingIntent);
 
 
@@ -64,7 +68,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationManager.notify(notificationId, notificationBuilder.build());
         notificationId++;
         ApplicationGlobal.prefsManager.setNotificationId(notificationId);
-
+        ((SwipeTabActivity)mContext).getSupportFragmentManager().beginTransaction().
+                replace(R.id.main_frame,new NotificationFragment()).commit();
 
 
     }

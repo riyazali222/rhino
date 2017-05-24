@@ -55,7 +55,7 @@ public class AddVehicleAdapter extends RecyclerView.Adapter<AddVehicleAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final VehicleListing item = vehiclesInfoList.get(position);
-       // holder.tvVehicleBrand.setText(item.getBrand());
+        holder.tvVehicleBrand.setText(item.getBrand());
         holder.tvRegistrationNo.setText(item.getLicense_plate_no());
         holder.tvVehicleName.setText(item.getType_of_vehicle());
 
@@ -132,14 +132,15 @@ public class AddVehicleAdapter extends RecyclerView.Adapter<AddVehicleAdapter.My
 
 
                     EditAddedVehicleFragment fragment = new EditAddedVehicleFragment();
-                    AddVehicles listing=new AddVehicles(item.getUser_vehicle_id(),
+                    AddVehicles listing=new AddVehicles(
                             item.getLicense_plate_no(),item.getVehicle_identification_number(),
                             item.getMembership_id(), item.getVehicle_mileage(),
                             item.getType_of_vehicle(), item.getVehicle_make_id(),
                             item.getVehicle_model(), item.getVehicle_year(),
-                            item.getUser_vehicle_id(),"Brand");
+                            item.getUser_vehicle_id(),item.getBrand(),"g");
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("list_info", listing);
+                   // bundle.putParcelable("list_info", listing);
+                    bundle.putParcelable("list_info", item);
                     fragment.setArguments(bundle);
                     ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_frame, fragment,"Tag").addToBackStack(null).commit();

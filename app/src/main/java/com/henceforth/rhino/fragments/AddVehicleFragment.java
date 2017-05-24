@@ -123,7 +123,7 @@ public class AddVehicleFragment extends BaseFragment {
         CommonMethods.showProgressDialog(getActivity());
         RestClient.get().AddVehicleApi("", noPlate, vIn, meMID, mileage, vType,
                 String.valueOf(prefsManager.getVehicleBrandId()), model,
-                Integer.parseInt(year))
+                Integer.parseInt(year),brandName)
                 .enqueue(new Callback<AddVehicles>() {
                     @Override
                     public void onResponse(Call<AddVehicles> call, Response<AddVehicles> response) {
@@ -133,10 +133,11 @@ public class AddVehicleFragment extends BaseFragment {
                             if (response.code() == 200 && response.body() != null) {
                                 Toast.makeText(getActivity(), "Vehicle Added successfully",
                                         Toast.LENGTH_LONG).show();
+                               // AddVehicles addVehicles=AddVehicles()
                                 VehicleListing listing = new VehicleListing(response.body().getUser_vehicle_id(),
                                         noPlate, vIn, meMID, Integer.valueOf(mileage), vType,
                                         ApplicationGlobal.prefsManager.getVehicleBrandId(), model,
-                                        Integer.parseInt(year), ApplicationGlobal.prefsManager.getBrandName());
+                                        Integer.parseInt(year), brandName);
                                 ProfileFragment pf = new ProfileFragment();
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelable("ADD_VEHICLE", listing);

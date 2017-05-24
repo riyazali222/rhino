@@ -291,7 +291,11 @@ public class ProfileFragment extends Fragment {
             else if(intent.hasExtra("PROFILE")){
                 profiledata();
 
-            }else {
+            }
+            else if(intent.hasExtra("Updated_list")){
+                hitVehicleListingApi();
+            }
+            else {
 
                 hitVehicleListingApi();
             }

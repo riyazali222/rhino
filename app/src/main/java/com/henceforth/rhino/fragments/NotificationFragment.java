@@ -11,10 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.henceforth.rhino.R;
-import com.henceforth.rhino.adapters.HistoryAdapter;
+import com.henceforth.rhino.adapters.NotificationAdapter;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.webServices.apis.RestClient;
@@ -29,7 +28,7 @@ import retrofit2.Response;
 
 public class NotificationFragment extends Fragment {
     private RecyclerView recyclerView;
-    private HistoryAdapter historyAdapter;
+    private NotificationAdapter historyAdapter;
     private List<NotificationsLists> notificationsList = new ArrayList<>();
     private TextView tvNoNoti;
     private int notification_Id = 1;
@@ -51,7 +50,7 @@ public class NotificationFragment extends Fragment {
         tvNoNoti = (TextView) getView().findViewById(R.id.tvNoNoti);
         tvNoNoti.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        historyAdapter = new HistoryAdapter(getActivity(), notificationsList);
+        historyAdapter = new NotificationAdapter(getActivity(), notificationsList);
         recyclerView.setAdapter(historyAdapter);
         swipeRefresh.setColorSchemeColors(ContextCompat.getColor(getActivity(),
                 R.color.colorAccent));

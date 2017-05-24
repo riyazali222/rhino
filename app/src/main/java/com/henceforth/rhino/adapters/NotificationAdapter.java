@@ -14,14 +14,14 @@ import com.henceforth.rhino.webServices.pojo.NotificationsLists;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHolder> {
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder> {
 
 
     private List<NotificationsLists> listNotification = new ArrayList<>();
     private Context mContext;
 
 
-    public HistoryAdapter(Context mContext, List<NotificationsLists> listNotification) {
+    public NotificationAdapter(Context mContext, List<NotificationsLists> listNotification) {
         this.listNotification = listNotification;
         this.mContext = mContext;
     }

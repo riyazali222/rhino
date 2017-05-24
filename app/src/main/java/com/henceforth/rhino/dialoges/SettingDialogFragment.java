@@ -143,6 +143,7 @@ public class SettingDialogFragment extends DialogFragment implements
             public void onClick(View v) {
                 String oldPass = etOldPass.getText().toString().trim();
                 String newPass = etNewPass.getText().toString().trim();
+                String _method="PUT";
                 if (!oldPass.isEmpty() && !newPass.isEmpty() && !etNewPass.equals(etOldPass)) {
                     if (CommonMethods.isNetworkConnected(getActivity())) {
                         ChangePasswordRetrofit(oldPass, newPass);
@@ -245,7 +246,8 @@ public class SettingDialogFragment extends DialogFragment implements
                     } else
                         CommonMethods.showErrorMessage(getActivity(),
                                 response.errorBody());
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
 
                 }
             }

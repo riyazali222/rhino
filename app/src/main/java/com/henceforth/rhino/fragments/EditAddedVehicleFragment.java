@@ -195,7 +195,8 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
 
     private void add() {
         Bundle bundle = getArguments();
-        AddVehicles vehicles = bundle.getParcelable("list_info");
+       // AddVehicles vehicles = bundle.getParcelable("list_info");
+        VehicleListing vehicles=bundle.getParcelable("list_info");
         assert vehicles != null;
         userVehicleId=vehicles.getUser_vehicle_id();
         etLicence.setText(vehicles.getLicense_plate_no());
@@ -205,6 +206,8 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
         etVehicleType.setText(vehicles.getType_of_vehicle());
         etVIN.setText(vehicles.getVehicle_identification_number());
         vehicleMakeId=vehicles.getVehicle_make_id();
+        tvBrandName.setText(vehicles.getBrand());
+        brandName=vehicles.getBrand();
         //tvBrandName.setText(vehicles.getVehicle_make_id().toString());
         tvVehicleYear.setText(vehicles.getVehicle_year().toString());
     }
@@ -212,7 +215,7 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
         CommonMethods.showProgressDialog(getActivity());
         RestClient.get().AddVehicleApi(String.valueOf(userVehicleId), noPlate, vIn, meMID, mileage, vType,
                 String.valueOf(vehicleMakeId), model,
-                Integer.parseInt(year))
+                Integer.parseInt(year),brandName)
                 .enqueue(new Callback<AddVehicles>() {
                     @Override
                     public void onResponse(Call<AddVehicles> call, Response<AddVehicles> response) {
@@ -235,6 +238,9 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
                                 getActivity().onBackPressed();
                                 Intent i = new Intent("UPDATE");
                                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(i);*/
+                                Intent i = new Intent("UPDATE");
+                                i.putExtra("Updated_list","");
+                                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(i);
                                 getActivity().onBackPressed();
                             }
                             else

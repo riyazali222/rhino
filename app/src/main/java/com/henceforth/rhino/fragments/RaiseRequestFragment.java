@@ -195,7 +195,8 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.etLicence:
 //                DialogFragment dialog = AddedVehiclesDialog.newInstance();
-                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity) getActivity(), new AddedVehiclesDialog(), "Tag");
+                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity) getActivity(),
+                        new AddedVehiclesDialog(), "Tag");
 
 
                 // VehicleListing foo = bundle.getParcelable("Foo");
@@ -255,7 +256,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                notForYou = "1";
+                notForYou = "0";
                 checkLocation();
                 dialog.dismiss();
             }
@@ -264,7 +265,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                notForYou = "0";
+                notForYou = "1";
                 checkLocation();
                 dialog.dismiss();
             }
@@ -273,7 +274,6 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         dialog.setCancelable(false);
 
     }
-
 
     public void suggestionPopup() {
         final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
@@ -291,42 +291,6 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         dialog.show();
         dialog.setCancelable(false);
     }
-//    private void dialogLicence() {
-//
-//        final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
-//
-//
-//        dialog.setContentView(R.layout.dialog_added_vehicle);
-//        Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.dialogToolbar);
-//        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
-//        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//            }
-//        });
-//        Button submitButton = (Button) dialog.findViewById(R.id.btnSubmit);
-//        final EditText editText = (EditText) dialog.findViewById(R.id.editText);
-//        submitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String email = editText.getText().toString().trim();
-//                if (!email.isEmpty()) {
-//                    if (CommonMethods.isNetworkConnected(getActivity())) {
-//                        //forgotPasswordResponse(email);
-//                    } else
-//                        CommonMethods.showInternetNotConnectedToast(getActivity());
-//
-//                } else {
-//                    Toast.makeText(getActivity(), "Please enter email id", Toast.LENGTH_SHORT)
-//                            .show();
-//                }
-//            }
-//        });
-//        dialog.show();
-//
-//    }
-
 
     private void showPopupWindow(final TextView tv, final int array) {
         final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());
@@ -371,7 +335,8 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                 etVehicleModel.getText().toString(), tvVehicleYear.getText().toString(),
                 etPhoneNo.getText().toString(), ApplicationGlobal.myLat, ApplicationGlobal.myLng,
                 tvOdometerReading.getText().toString(), notForYou,
-                etDescription.getText().toString()).enqueue(new Callback<ApiList>() {
+                etDescription.getText().toString(), etIdNo.getText().toString(),
+                etMemid.getText().toString()).enqueue(new Callback<ApiList>() {
             @Override
             public void onResponse(Call<ApiList> call, Response<ApiList> response) {
                 CommonMethods.dismissProgressDialog();
@@ -398,7 +363,8 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Constants.ENABLE_LOCATION_PERMISSION)
             checkLocation();

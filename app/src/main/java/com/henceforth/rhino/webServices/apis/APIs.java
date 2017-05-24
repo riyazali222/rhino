@@ -60,8 +60,10 @@ public interface APIs {
                                           @Query("current_odometer_reading") String
                                                   current_odometer_reading,
                                           @Query("not_for_you") String not_for_you,
-                                          @Query("description") String description
-                                          );
+                                          @Query("description") String description,
+                                          @Query("vehicle_identification_number")
+                                                  String  vehicle_identification_number,
+                                          @Query("membership_id") String  membership_id);
 
     @GET("paragon/public/api/v1/notification-listing")
     Call<List<NotificationsLists>> NotificationListResponse();
@@ -70,7 +72,7 @@ public interface APIs {
     @POST("paragon/public/api/v1/logout")
     Call<LogoutApi> LogoutResponse(@Query("device_id") String device_id);
 
-    @PUT("api/v1/change-password")
+    @POST("paragon/public/api/v1/change-password")
     Call<ChangePasswordApi> ChangePasswordResponse(@Query("old_password") String old_password,
                                                    @Query("new_password") String new_password);
 
@@ -81,15 +83,16 @@ public interface APIs {
 
     @POST("paragon/public/api/v1/save-vehicle")
     Call<AddVehicles> AddVehicleApi(@Query("user_vehicle_id") String user_vehicle_id,
-                                       @Query("license_plate_no") String license_plate_no,
-                                       @Query("vehicle_identification_number")
-                                               String vehicle_identification_number,
-                                       @Query("membership_id") String membership_id,
-                                       @Query("vehicle_mileage") String vehicle_mileage,
-                                       @Query("type_of_vehicle") String type_of_vehicle,
-                                       @Query("vehicle_make_id") String vehicle_make_id,
-                                       @Query("vehicle_model") String vehicle_model,
-                                       @Query("vehicle_year") Integer vehicle_year
+                                    @Query("license_plate_no") String license_plate_no,
+                                    @Query("vehicle_identification_number")
+                                            String vehicle_identification_number,
+                                    @Query("membership_id") String membership_id,
+                                    @Query("vehicle_mileage") String vehicle_mileage,
+                                    @Query("type_of_vehicle") String type_of_vehicle,
+                                    @Query("vehicle_make_id") String vehicle_make_id,
+                                    @Query("vehicle_model") String vehicle_model,
+                                    @Query("vehicle_year") Integer vehicle_year,
+                                    @Query("vehicle_make") String vehicle_make
     );
 
 
@@ -113,21 +116,7 @@ public interface APIs {
     @Multipart
     @POST("paragon/public/api/v1/edit-profile")
     Call<EditProfile> editProfileWithImage(@Part("firstname") RequestBody firstname,
-                                          @Part MultipartBody.Part image,
-                                          @Part("phone_no") RequestBody phone_no,
-                                          @Part("lastname") RequestBody lastname,
-                                          @Part("middlename") RequestBody middlename,
-                                          @Part("company_name") RequestBody company_name,
-                                          @Part("address1") RequestBody address1,
-                                          @Part("address2") RequestBody address2,
-                                          @Part("address3") RequestBody address3,
-                                          @Part("city") RequestBody city,
-                                          @Part("state") RequestBody state,
-                                          @Part("country") RequestBody country);
-
-    @Multipart
-    @POST("paragon/public/api/v1/edit-profile")
-    Call<EditProfile> editProfile(@Part("firstname") RequestBody firstname,
+                                           @Part MultipartBody.Part image,
                                            @Part("phone_no") RequestBody phone_no,
                                            @Part("lastname") RequestBody lastname,
                                            @Part("middlename") RequestBody middlename,
@@ -138,6 +127,20 @@ public interface APIs {
                                            @Part("city") RequestBody city,
                                            @Part("state") RequestBody state,
                                            @Part("country") RequestBody country);
+
+    @Multipart
+    @POST("paragon/public/api/v1/edit-profile")
+    Call<EditProfile> editProfile(@Part("firstname") RequestBody firstname,
+                                  @Part("phone_no") RequestBody phone_no,
+                                  @Part("lastname") RequestBody lastname,
+                                  @Part("middlename") RequestBody middlename,
+                                  @Part("company_name") RequestBody company_name,
+                                  @Part("address1") RequestBody address1,
+                                  @Part("address2") RequestBody address2,
+                                  @Part("address3") RequestBody address3,
+                                  @Part("city") RequestBody city,
+                                  @Part("state") RequestBody state,
+                                  @Part("country") RequestBody country);
 
     @GET("paragon/public/api/v1/service-types")
     Call<List<Services>> ServiceListResponse();

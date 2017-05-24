@@ -15,18 +15,18 @@ public class VehicleListing implements Parcelable {
     private Integer vehicle_make_id;
     private String vehicle_model;
     private Integer vehicle_year;
-    String brand;
+    String vehicle_make;
 
-    public VehicleListing(String brand) {
-        this.brand = brand;
+    public VehicleListing(String vehicle_make) {
+        this.vehicle_make = vehicle_make;
     }
 
     public String getBrand() {
-        return brand;
+        return vehicle_make;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setBrand(String vehicle_make) {
+        this.vehicle_make = vehicle_make;
     }
 
     public Integer getUser_vehicle_id() {
@@ -117,7 +117,7 @@ public class VehicleListing implements Parcelable {
     public VehicleListing(Integer user_vehicle_id, String license_plate_no,
                           String vehicle_identification_number, String membership_id,
                           Integer vehicle_mileage, String type_of_vehicle, Integer vehicle_make_id,
-                          String vehicle_model, Integer vehicle_year, String brand) {
+                          String vehicle_model, Integer vehicle_year, String vehicle_make) {
         this.user_vehicle_id = user_vehicle_id;
         this.license_plate_no = license_plate_no;
         this.vehicle_identification_number = vehicle_identification_number;
@@ -127,7 +127,7 @@ public class VehicleListing implements Parcelable {
         this.vehicle_make_id = vehicle_make_id;
         this.vehicle_model = vehicle_model;
         this.vehicle_year = vehicle_year;
-        this.brand = brand;
+        this.vehicle_make = vehicle_make;
     }
 
     @Override
