@@ -1,11 +1,9 @@
-package com.henceforth.rhino.utills;
+package com.henceforth.rhino.webServices;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by HOME on 5/4/2017.
- */
+
 
 public class AddVehicles implements Parcelable {
     private Integer user_id;

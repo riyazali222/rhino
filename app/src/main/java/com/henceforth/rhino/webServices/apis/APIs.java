@@ -1,7 +1,7 @@
 package com.henceforth.rhino.webServices.apis;
 
-import com.henceforth.rhino.utills.AddVehicles;
-import com.henceforth.rhino.utills.ApiList;
+import com.henceforth.rhino.webServices.AddVehicles;
+import com.henceforth.rhino.webServices.ApiList;
 import com.henceforth.rhino.utills.ForgotPasswordApi;
 import com.henceforth.rhino.webServices.Services;
 import com.henceforth.rhino.webServices.pojo.EditProfile;
@@ -10,8 +10,6 @@ import com.henceforth.rhino.webServices.pojo.NotificationsLists;
 import com.henceforth.rhino.webServices.pojo.RemoveVehicles;
 import com.henceforth.rhino.webServices.pojo.VehicleListing;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -19,12 +17,9 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 public interface APIs {

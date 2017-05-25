@@ -43,8 +43,7 @@ import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.Constants;
 import com.henceforth.rhino.utills.GetSampledImage;
 import com.henceforth.rhino.utills.RetrofitUtils;
-import com.henceforth.rhino.webServices.apis.RestClient;
-import com.henceforth.rhino.webServices.pojo.AddedVehicle;
+import com.henceforth.rhino.utills.RestClient;
 import com.henceforth.rhino.webServices.pojo.EditProfile;
 
 import java.io.File;
@@ -63,8 +62,6 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
     @BindView(R.id.toolbarTitle) TextView toolbarTitle;
     @BindView(R.id.lin_lay) LinearLayout linLay;
     @BindView(R.id.toolbarProfile) Toolbar toolbarProfile;
-    //@BindView(R.id.ivProfileUpload) ImageView ivProfileUpload;
-    //@BindView(R.id.etCustomerId) EditText etCustomerId;
     @BindView(R.id.etFName) EditText etFName;
     @BindView(R.id.etMidName) EditText etMidName;
     @BindView(R.id.etLastName) EditText etLastName;
@@ -107,7 +104,6 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
             etFName.setText(editProfile.getFirstname());
             etMidName.setText(editProfile.getMiddlename());
             etLastName.setText(editProfile.getLastname());
-           // etCustomerId.setText(editProfile.getCustomerId());
             etAddress1.setText(editProfile.getAddress1());
             etAddress2.setText(editProfile.getAddress2());
             etAddress3.setText(editProfile.getAddress3());
@@ -132,7 +128,6 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
                     checkPermission();
                 } else {
                     showPictureOptionsDialog();
-                    // selectImage();
                 }
             }
         });
@@ -160,21 +155,19 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
                     add2P = etAddress2.getText().toString();
                     add3P = etAddress3.getText().toString();
                     phone_noP = etPhone.getText().toString();
-                  //  CustIdP = etCustomerId.getText().toString();
                     cityP = etCity.getText().toString();
                     stateP = etState.getText().toString();
                     countryP = etCountry.getText().toString();
-                    faxP = "";
                     CommonMethods.hideKeyboard(getActivity());
-               if (etFName.getText().toString().trim().isEmpty()) {
+                    if (etFName.getText().toString().trim().isEmpty()) {
                         CommonMethods.showToast(getActivity(), "Please Enter First Name");
-                    }else if (etLastName.getText().toString().trim().isEmpty()) {
+                    } else if (etLastName.getText().toString().trim().isEmpty()) {
                         CommonMethods.showToast(getActivity(), "Please Enter Last Name");
                     } else if (etAddress1.getText().toString().trim().isEmpty()) {
                         CommonMethods.showToast(getActivity(), "Please Enter Address1");
-                    }  else if (etPhone.getText().toString().trim().isEmpty()) {
+                    } else if (etPhone.getText().toString().trim().isEmpty()) {
                         CommonMethods.showToast(getActivity(), "Please Enter Phone Number");
-                    }  else if (etCity.getText().toString().trim().isEmpty()) {
+                    } else if (etCity.getText().toString().trim().isEmpty()) {
                         CommonMethods.showToast(getActivity(), "Please Enter City");
                     } else if (etState.getText().toString().trim().isEmpty()) {
                         CommonMethods.showToast(getActivity(), "Please Enter State");
@@ -197,59 +190,6 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
         progressDialog.setMessage(getString(R.string.string_title_upload_progressbar_));
         progressDialog.show();
         progressDialog.setCancelable(false);
-
-//        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),
-//                f);
-//
-//        // MultipartBody.Part is used to send also the actual file name
-//
-//        MultipartBody.Part image =
-//                MultipartBody.Part.createFormData("image", f.getName(), requestFile);
-//        RequestBody name1 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), fname);
-//
-//        RequestBody phone =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), phoneno);
-//        RequestBody license_plate =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), license_plate_no);
-//        RequestBody vehicleId =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), vehicle_id);
-//        RequestBody name2 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), middlename);
-//        RequestBody name3 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), lastname);
-//        RequestBody compname =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), company_name);
-//        RequestBody add1 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), address1);
-//        RequestBody add2 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), address2);
-//        RequestBody add3 =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), address3);
-//        RequestBody fax =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), fax_no);
-//        RequestBody City =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), city);
-//        RequestBody State =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), state);
-//        RequestBody Country =
-//                RequestBody.create(
-//                        MediaType.parse("text/pain"), country);
-
-
         Call<EditProfile> profileCall;
         if (imageProfile == null) {
             profileCall = RestClient.get().editProfile(RetrofitUtils.stringToRequestBody(fNameP),
@@ -284,14 +224,13 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
                     ApplicationGlobal.prefsManager.setProfile(new Gson().toJson(response.body()));
                     Toast.makeText(getActivity(), "Profile Updated Successfully", Toast.LENGTH_SHORT)
                             .show();
-                   getActivity().onBackPressed();
+                    getActivity().onBackPressed();
                     ApplicationGlobal.prefsManager.setPhoneNo(phone_noP);
                     progressDialog.dismiss();
                     Log.e("Image", response.body().getImage());
-                    Intent intent=new Intent("UPDATE");
-                    intent.putExtra("PROFILE","");
+                    Intent intent = new Intent("UPDATE");
+                    intent.putExtra("PROFILE", "");
                     LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
-//                    getFragmentManager().popBackStackImmediate();
                 } else {
                     try {
                         CommonMethods.showErrorMessage(getActivity(), response.errorBody());
@@ -474,7 +413,6 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
     public void onSampledImageAsyncPostExecute(File file) {
         imageProfile = file;
         if (imageProfile != null) {
-            //ivProfileUpload=null;
             ivProfileUpload.setImageURI(Uri.parse(Constants.LOCAL_FILE_PREFIX +
                     imageProfile));
         }
@@ -500,7 +438,6 @@ public class EditProfileFragment extends Fragment implements GetSampledImage.Sam
         public void onReceive(Context context, Intent intent) {
             if (intent.hasExtra("Image")) {
                 String s = intent.getStringExtra("Image");
-               // Glide.with(getActivity()).load(s).centerCrop().into(ivProfileUpload);
             }
         }
     };

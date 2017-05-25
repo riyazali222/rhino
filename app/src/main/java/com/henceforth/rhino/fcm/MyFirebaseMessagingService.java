@@ -68,8 +68,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationManager.notify(notificationId, notificationBuilder.build());
         notificationId++;
         ApplicationGlobal.prefsManager.setNotificationId(notificationId);
-        ((SwipeTabActivity)mContext).getSupportFragmentManager().beginTransaction().
-                replace(R.id.main_frame,new NotificationFragment()).commit();
+        /*((SwipeTabActivity)mContext).getSupportFragmentManager().beginTransaction().
+                replace(R.id.main_frame,new NotificationFragment()).commit();*/
 
 
     }

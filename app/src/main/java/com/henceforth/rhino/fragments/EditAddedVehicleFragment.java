@@ -22,10 +22,9 @@ import android.widget.Toast;
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.activities.YearPickerActivity;
-import com.henceforth.rhino.utills.AddVehicles;
-import com.henceforth.rhino.utills.ApplicationGlobal;
+import com.henceforth.rhino.webServices.AddVehicles;
 import com.henceforth.rhino.utills.CommonMethods;
-import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.utills.RestClient;
 import com.henceforth.rhino.webServices.pojo.VehicleListing;
 
 import butterknife.ButterKnife;
@@ -34,21 +33,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.henceforth.rhino.activities.YearPickerActivity.year;
 import static com.henceforth.rhino.utills.ApplicationGlobal.prefsManager;
 
 public class EditAddedVehicleFragment extends Fragment implements View.OnClickListener {
 
-    /*@BindView(R.id.toolbarAddVehicle) Toolbar toolbarAddVehicle;
-    @BindView(R.id.etLicence) EditText etLicence;
-    @BindView(R.id.etVIN) EditText etVIN;
-    @BindView(R.id.etMemid) EditText etMemid;
-    @BindView(R.id.etMileage) EditText etMileage;
-    @BindView(R.id.etVehicleType) EditText etVehicleType;
-    @BindView(R.id.tvBrandName) EditText tvBrandName;
-    @BindView(R.id.etVehicleModel) EditText etVehicleModel;
-    @BindView(R.id.tvVehicleYear) EditText tvVehicleYear;
-    @BindView(R.id.buttonSubmit) Button buttonSubmit;*/
+
     Unbinder unbinder;
     private EditText etLicence, etMileage, etVIN, etMemid, etVehicleType, tvBrandName, etVehicleModel,
             tvVehicleYear;
@@ -185,6 +174,7 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
         if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             String name = data.getStringExtra("name");
             Integer id = data.getIntExtra("id", 1);
+            vehicleMakeId=id;
             prefsManager.setVehicleBrandId(id);
             tvBrandName.setText(name);
         } else if (requestCode == 3 && resultCode == Activity.RESULT_OK) {
@@ -225,19 +215,7 @@ public class EditAddedVehicleFragment extends Fragment implements View.OnClickLi
                             if (response.code() == 200 && response.body() != null) {
                                 Toast.makeText(getActivity(), "Vehicle successfully edited",
                                         Toast.LENGTH_LONG).show();
-                               /* VehicleListing listing = new VehicleListing(response.body().getUser_vehicle_id(),
-                                        noPlate, vIn, meMID, Integer.valueOf(mileage), vType,
-                                        ApplicationGlobal.prefsManager.getVehicleBrandId(), model,
-                                        Integer.parseInt(year), ApplicationGlobal.prefsManager.getBrandName());
-                                ProfileFragment pf = new ProfileFragment();
-                                Bundle bundle = new Bundle();
-                                bundle.putParcelable("ADD_VEHICLE", listing);
-                                pf.setArguments(bundle);
-                                *//*getFragmentManager().beginTransaction().replace(R.id.main_frame, pf)
-                                        .commit();*//*
-                                getActivity().onBackPressed();
-                                Intent i = new Intent("UPDATE");
-                                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(i);*/
+
                                 Intent i = new Intent("UPDATE");
                                 i.putExtra("Updated_list","");
                                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(i);

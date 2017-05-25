@@ -27,13 +27,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.henceforth.rhino.R;
-import com.henceforth.rhino.utills.ApiList;
+import com.henceforth.rhino.webServices.ApiList;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.Constants;
 import com.henceforth.rhino.utills.CustomTypefaceSpan;
 import com.henceforth.rhino.utills.ForgotPasswordApi;
-import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.utills.RestClient;
 import com.henceforth.rhino.webServices.pojo.ProfileList;
 
 import java.util.ArrayList;

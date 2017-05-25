@@ -1,7 +1,6 @@
 package com.henceforth.rhino.adapters;
 
 import android.app.Dialog;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.henceforth.rhino.R;
-import com.henceforth.rhino.fragments.AddVehicleFragment;
 import com.henceforth.rhino.fragments.EditAddedVehicleFragment;
-import com.henceforth.rhino.utills.AddVehicles;
-import com.henceforth.rhino.utills.ApplicationGlobal;
+import com.henceforth.rhino.webServices.AddVehicles;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.webServices.pojo.VehicleListing;
 

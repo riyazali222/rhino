@@ -1,4 +1,4 @@
-package com.henceforth.rhino.utills;
+package com.henceforth.rhino.webServices;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

@@ -10,6 +10,15 @@ import android.os.Parcelable;
 public class AddedVehicle implements Parcelable {
     String plateno="", mid="", brand="", year="", vin="", typeofvehicle="", model="", mileage="";
 
+    public int getVehiclemakeId() {
+        return vehiclemakeId;
+    }
+
+    public void setVehiclemakeId(int vehiclemakeId) {
+        this.vehiclemakeId = vehiclemakeId;
+    }
+
+    int vehiclemakeId;
     public String getPlateno() {
         return plateno;
     }
@@ -75,7 +84,7 @@ public class AddedVehicle implements Parcelable {
     }
 
     public AddedVehicle(String plateno, String mid, String brand, String year, String vin,
-                        String typeofvehicle, String model, String mileage) {
+                        String typeofvehicle, String model, String mileage,int vehiclemakeId) {
         this.plateno = plateno;
         this.mid = mid;
         this.brand = brand;
@@ -84,6 +93,7 @@ public class AddedVehicle implements Parcelable {
         this.typeofvehicle = typeofvehicle;
         this.model = model;
         this.mileage = mileage;
+        this.vehiclemakeId=vehiclemakeId;
 
     }
 

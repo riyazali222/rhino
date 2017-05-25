@@ -135,12 +135,7 @@
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/hintColor"/>
 
-        <!-- <View
-             android:layout_width="match_parent"
-             android:layout_height="@dimen/view_height"
-             android:layout_marginEnd="@dimen/Twelve"
-             android:layout_marginStart="@dimen/Twelve"
-             android:background="@color/colorAccent" />-->
+
 
 
         <EditText

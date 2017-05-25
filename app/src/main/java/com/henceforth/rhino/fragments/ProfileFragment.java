@@ -1,11 +1,9 @@
 package com.henceforth.rhino.fragments;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,23 +18,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.adapters.AddVehicleAdapter;
-import com.henceforth.rhino.utills.AddVehicles;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.Constants;
-import com.henceforth.rhino.utills.PrefsManager;
 import com.henceforth.rhino.webServices.ProfileData;
 import com.henceforth.rhino.webServices.apis.APIs;
-import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.utills.RestClient;
 import com.henceforth.rhino.webServices.pojo.EditProfile;
-import com.henceforth.rhino.webServices.pojo.NotificationsLists;
-import com.henceforth.rhino.webServices.pojo.ProfileList;
 import com.henceforth.rhino.webServices.pojo.RemoveVehicles;
 import com.henceforth.rhino.webServices.pojo.VehicleListing;
 
@@ -73,7 +66,7 @@ public class ProfileFragment extends Fragment {
     String delete;
     AddVehicleAdapter addVehicleAdapter;
     List<VehicleListing> list = new ArrayList<>();
-    VehicleListing listing;
+    boolean flag=true;
 
 
     @Override
@@ -89,10 +82,10 @@ public class ProfileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         profiledata();
-        Intent intent=new Intent("Profile");
+        Intent intent = new Intent("Profile");
         EditProfile editProfile = new Gson().fromJson(ApplicationGlobal.prefsManager.getProfile()
                 , EditProfile.class);
-        intent.putExtra("Image",editProfile.getImage());
+        intent.putExtra("Image", editProfile.getImage());
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
     }
 
@@ -101,34 +94,32 @@ public class ProfileFragment extends Fragment {
             EditProfile editProfile = new Gson().fromJson(ApplicationGlobal
                     .prefsManager.getProfile(), EditProfile.class);
 
-            etName.setText(" " +editProfile.getFirstname()+ " " + editProfile.getMiddlename()
+            etName.setText(" " + editProfile.getFirstname() + " " + editProfile.getMiddlename()
                     + " "
-                    + editProfile.getLastname() );
-            tvCustomerId.setText(" " +editProfile.getCustomerId());
-            if(!editProfile.getAddress1().isEmpty() && !editProfile.getAddress3().isEmpty() &&
+                    + editProfile.getLastname());
+            tvCustomerId.setText(" " + editProfile.getCustomerId());
+            if (!editProfile.getAddress1().isEmpty() && !editProfile.getAddress3().isEmpty() &&
                     editProfile.getAddress2().isEmpty())
-            tvAddress.setText(" " +editProfile.getAddress1() + ", " + editProfile.getAddress2() + ""
-                    + editProfile.getAddress3() + " ");
-            else if(!editProfile.getAddress1().isEmpty() && editProfile.getAddress3().isEmpty() &&
+                tvAddress.setText(" " + editProfile.getAddress1() + ", " + editProfile.getAddress2() + ""
+                        + editProfile.getAddress3() + " ");
+            else if (!editProfile.getAddress1().isEmpty() && editProfile.getAddress3().isEmpty() &&
                     editProfile.getAddress2().isEmpty())
-                tvAddress.setText(" " +editProfile.getAddress1() + "" + editProfile.getAddress2() + ""
+                tvAddress.setText(" " + editProfile.getAddress1() + "" + editProfile.getAddress2() + ""
                         + editProfile.getAddress3() + " ");
-            else if(!editProfile.getAddress1().isEmpty() && editProfile.getAddress3().isEmpty() &&
-                    !editProfile.getAddress2().isEmpty()){
-                tvAddress.setText(" " +editProfile.getAddress1() + " " + editProfile.getAddress2() + ", "
+            else if (!editProfile.getAddress1().isEmpty() && editProfile.getAddress3().isEmpty() &&
+                    !editProfile.getAddress2().isEmpty()) {
+                tvAddress.setText(" " + editProfile.getAddress1() + " " + editProfile.getAddress2() + ", "
                         + editProfile.getAddress3() + " ");
-            }
-            else if(!editProfile.getAddress1().isEmpty() && !editProfile.getAddress3().isEmpty() &&
-                    !editProfile.getAddress2().isEmpty()){
-                tvAddress.setText(" " +editProfile.getAddress1() + ", " + editProfile.getAddress2() + ", "
+            } else if (!editProfile.getAddress1().isEmpty() && !editProfile.getAddress3().isEmpty() &&
+                    !editProfile.getAddress2().isEmpty()) {
+                tvAddress.setText(" " + editProfile.getAddress1() + ", " + editProfile.getAddress2() + ", "
                         + editProfile.getAddress3() + " ");
-            }
-            else tvAddress.setText("");
-            tvPhone.setText(" " +editProfile.getPhoneNo());
-            tvCity.setText(" " +editProfile.getCity());
-            tvState.setText(" " +editProfile.getState());
-            tvCountry.setText(" " +editProfile.getCountry());
-            tvEmail.setText(" " +editProfile.getEmail());
+            } else tvAddress.setText("");
+            tvPhone.setText(" " + editProfile.getPhoneNo());
+            tvCity.setText(" " + editProfile.getCity());
+            tvState.setText(" " + editProfile.getState());
+            tvCountry.setText(" " + editProfile.getCountry());
+            tvEmail.setText(" " + editProfile.getEmail());
             Glide.with(getActivity()).load(editProfile.getImage()).centerCrop().into(ivProfile);
         }
     }
@@ -152,6 +143,8 @@ public class ProfileFragment extends Fragment {
                         list.clear();
                         list.addAll(response.body());
                         addVehicleAdapter.notifyDataSetChanged();
+                        flag=false;
+
 
                     } else
                         CommonMethods.showErrorMessage(getActivity(),
@@ -182,6 +175,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser && flag)
         hitVehicleListingApi();
     }
 
@@ -210,7 +204,7 @@ public class ProfileFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<RemoveVehicles> call, Throwable t) {
-                       // CommonMethods.showErrorToast(getActivity());
+                        // CommonMethods.showErrorToast(getActivity());
                         CommonMethods.dismissProgressDialog();
                     }
                 });
@@ -287,15 +281,12 @@ public class ProfileFragment extends Fragment {
 
                 profiledata();
 
-            }
-            else if(intent.hasExtra("PROFILE")){
+            } else if (intent.hasExtra("PROFILE")) {
                 profiledata();
 
-            }
-            else if(intent.hasExtra("Updated_list")){
+            } else if (intent.hasExtra("Updated_list")) {
                 hitVehicleListingApi();
-            }
-            else {
+            } else {
 
                 hitVehicleListingApi();
             }

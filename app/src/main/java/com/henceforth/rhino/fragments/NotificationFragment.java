@@ -16,7 +16,7 @@ import com.henceforth.rhino.R;
 import com.henceforth.rhino.adapters.NotificationAdapter;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
-import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.utills.RestClient;
 import com.henceforth.rhino.webServices.pojo.NotificationsLists;
 
 import java.util.ArrayList;

@@ -18,10 +18,10 @@ import android.widget.Toast;
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.activities.YearPickerActivity;
-import com.henceforth.rhino.utills.AddVehicles;
+import com.henceforth.rhino.webServices.AddVehicles;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
-import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.utills.RestClient;
 import com.henceforth.rhino.webServices.pojo.VehicleListing;
 
 import butterknife.BindView;
@@ -142,8 +142,6 @@ public class AddVehicleFragment extends BaseFragment {
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelable("ADD_VEHICLE", listing);
                                 pf.setArguments(bundle);
-                                /*getFragmentManager().beginTransaction().replace(R.id.main_frame, pf)
-                                        .commit();*/
                                 getActivity().onBackPressed();
                                 Intent i = new Intent("UPDATE");
                                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(i);

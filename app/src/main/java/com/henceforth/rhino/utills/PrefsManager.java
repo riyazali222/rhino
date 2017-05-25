@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.henceforth.rhino.webServices.AddVehicles;
 import com.henceforth.rhino.webServices.ProfileData;
 
 import java.util.ArrayList;

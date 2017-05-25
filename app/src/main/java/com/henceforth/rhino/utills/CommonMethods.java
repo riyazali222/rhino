@@ -15,9 +15,7 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -32,7 +30,6 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.LoginActivity;
-import com.henceforth.rhino.webServices.apis.RestClient;
 
 import java.io.File;
 import java.io.IOException;

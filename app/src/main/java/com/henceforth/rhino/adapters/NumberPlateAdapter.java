@@ -1,8 +1,6 @@
 package com.henceforth.rhino.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.henceforth.rhino.R;
-import com.henceforth.rhino.utills.AddVehicles;
-import com.henceforth.rhino.webServices.pojo.AddedVehicle;
 import com.henceforth.rhino.webServices.pojo.VehicleListing;
 
 import java.util.ArrayList;

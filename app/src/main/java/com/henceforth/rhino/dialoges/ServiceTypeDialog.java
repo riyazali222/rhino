@@ -1,4 +1,4 @@
-package com.henceforth.rhino.fragments;
+package com.henceforth.rhino.dialoges;
 
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -7,11 +7,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.app.DialogFragment;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,18 +19,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.henceforth.rhino.R;
-import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.adapters.ServiceTypeAdapter;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.webServices.Services;
-import com.henceforth.rhino.webServices.apis.RestClient;
-import com.henceforth.rhino.webServices.pojo.ItemsList;
+import com.henceforth.rhino.utills.RestClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ServiceTypeFragment extends DialogFragment {
+public class ServiceTypeDialog extends DialogFragment {
     Context mContext;
     Toolbar toolbar;
     private List<Services> servicesList = new ArrayList<>();
@@ -56,7 +50,8 @@ public class ServiceTypeFragment extends DialogFragment {
         super.onStart();
         Dialog dialog = getDialog();
         if (dialog != null) {
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams
+                    .MATCH_PARENT);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
     }
@@ -112,7 +107,8 @@ public class ServiceTypeFragment extends DialogFragment {
             public void afterTextChanged(Editable s) {
                 listToDisplay.clear();
                 for (Services items : servicesList) {
-                    if (items.getDesc().toLowerCase().contains(etSearchServices.getText().toString().toLowerCase())) {
+                    if (items.getDesc().toLowerCase().contains(etSearchServices.getText().toString()
+                            .toLowerCase())) {
                         // Adding Matched items
                         listToDisplay.add(items);
                     }
@@ -132,11 +128,6 @@ public class ServiceTypeFragment extends DialogFragment {
                 public void onResponse(Call<List<Services>> call, Response<List<Services>> response) {
                     try {
                         if (response.code() == 200 && response.body() != null) {
-                            /*servicesList.clear();
-                            servicesList.addAll(response.body());
-//                            listToDisplay.clear();
-//                            listToDisplay.addAll(itemsListArrayList);
-                            serviceTypeAdapter.notifyDataSetChanged();*/
                             servicesList.clear();
                             servicesList.addAll(response.body());
                             listToDisplay.clear();

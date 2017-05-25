@@ -1,7 +1,6 @@
 package com.henceforth.rhino.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +15,9 @@ import android.widget.Toast;
 
 import com.henceforth.rhino.R;
 import com.henceforth.rhino.adapters.VehicleMakeAdapter;
-import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.RecyclerItemClickListener;
-import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.utills.RestClient;
 import com.henceforth.rhino.webServices.pojo.ItemsList;
 
 import java.util.ArrayList;

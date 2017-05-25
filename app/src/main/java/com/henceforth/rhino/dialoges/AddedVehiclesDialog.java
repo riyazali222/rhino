@@ -113,9 +113,11 @@ public class AddedVehiclesDialog extends DialogFragment {
                         String model = list.getVehicle_model();
                         String type = list.getType_of_vehicle();
                         String mileage = String.valueOf(list.getVehicle_mileage());
+                        int vehicleMakeId=list.getVehicle_make_id();
+                       // int serviceTypeId=list.get
 
                         AddedVehicle vehicle = new AddedVehicle(licence, mid, brand, year, vin,
-                                type, model, mileage);
+                                type, model, mileage,vehicleMakeId);
                         Intent intent = new Intent("send_data");
                         intent.putExtra("Data_New", vehicle);
                         LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);

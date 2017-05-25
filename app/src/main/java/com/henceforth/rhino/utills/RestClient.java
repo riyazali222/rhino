@@ -1,7 +1,8 @@
-package com.henceforth.rhino.webServices.apis;
+package com.henceforth.rhino.utills;
 
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.Constants;
+import com.henceforth.rhino.webServices.apis.APIs;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

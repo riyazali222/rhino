@@ -38,12 +38,13 @@ import com.henceforth.rhino.R;
 import com.henceforth.rhino.activities.VehicleMakeActivity;
 import com.henceforth.rhino.activities.YearPickerActivity;
 import com.henceforth.rhino.dialoges.AddedVehiclesDialog;
-import com.henceforth.rhino.utills.ApiList;
+import com.henceforth.rhino.dialoges.ServiceTypeDialog;
+import com.henceforth.rhino.webServices.ApiList;
 import com.henceforth.rhino.utills.ApplicationGlobal;
 import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.utills.Constants;
 import com.henceforth.rhino.utills.LocationGetter;
-import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.utills.RestClient;
 import com.henceforth.rhino.webServices.pojo.AddedVehicle;
 import com.henceforth.rhino.webServices.pojo.EditProfile;
 import com.henceforth.rhino.webServices.pojo.VehicleListing;
@@ -64,6 +65,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
     ArrayList<VehicleListing> info = new ArrayList<>();
     VehicleListing listing;
     String notForYou;
+    int vehicleMakeId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -134,8 +136,8 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.tvServiceType:
-//                DialogFragment d= ServiceTypeFragment.newInstance();
-                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity) getActivity(), new ServiceTypeFragment(), "Tag");
+                CommonMethods.showDialogFragmentFullScreen((AppCompatActivity) getActivity(),
+                        new ServiceTypeDialog(), "Tag");
 
                 break;
             case R.id.etBrandName:
@@ -194,14 +196,9 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                 startActivityForResult(j, 3);
                 break;
             case R.id.etLicence:
-//                DialogFragment dialog = AddedVehiclesDialog.newInstance();
                 CommonMethods.showDialogFragmentFullScreen((AppCompatActivity) getActivity(),
                         new AddedVehiclesDialog(), "Tag");
 
-
-                // VehicleListing foo = bundle.getParcelable("Foo");
-                   /* value = getArguments().getString("REGISTRATION_NO");
-                    etLicence.setText(value);*/
 
 
         }
@@ -317,6 +314,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             String name = data.getStringExtra("name");
             Integer id = data.getIntExtra("id", 1);
+            vehicleMakeId=id;
             ApplicationGlobal.prefsManager.setVehicleBrandId(id);
             etBrandName.setText(name);
         } else if (requestCode == 3 && resultCode == Activity.RESULT_OK) {
@@ -331,7 +329,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
         RestClient.get().requestServicesResponse(etLicence.getText().toString(),
                 etMileage.getText().toString(), etVehicleType.getText().toString(),
                 String.valueOf(ApplicationGlobal.prefsManager.getServiceTypeCode()),
-                String.valueOf(ApplicationGlobal.prefsManager.getVehicleBrandId()),
+                String.valueOf(vehicleMakeId),
                 etVehicleModel.getText().toString(), tvVehicleYear.getText().toString(),
                 etPhoneNo.getText().toString(), ApplicationGlobal.myLat, ApplicationGlobal.myLng,
                 tvOdometerReading.getText().toString(), notForYou,
@@ -342,6 +340,8 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                 CommonMethods.dismissProgressDialog();
                 try {
                     if (response.code() == 200 & response.body() != null) {
+//                        Toast.makeText(getActivity(), ApplicationGlobal.prefsManager.getVehicleBrandId()
+//                                , Toast.LENGTH_SHORT).show();
 
                         Toast.makeText(getActivity(), "Request Submitted",
                                 Toast.LENGTH_SHORT).show();
@@ -363,8 +363,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Constants.ENABLE_LOCATION_PERMISSION)
             checkLocation();
@@ -450,10 +449,8 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                 etVehicleType.setText("");
                 tvVehicleYear.setText("");
             } else if (intent.hasExtra("ServiceList")) {
-                // Services services = intent.getParcelableExtra("ServiceList");
                 tvServiceType.setText(ApplicationGlobal.prefsManager.getServiceTypeName());
             }
-            //tvServiceType.setText(intent.getStringExtra("ServiceList"));
             else if (intent.hasExtra("Data_New")) {
 
                 AddedVehicle vehicle = intent.getParcelableExtra("Data_New");
@@ -465,6 +462,7 @@ public class RaiseRequestFragment extends Fragment implements View.OnClickListen
                 etVehicleModel.setText(vehicle.getModel());
                 etVehicleType.setText(vehicle.getTypeofvehicle());
                 tvVehicleYear.setText(vehicle.getYear());
+                vehicleMakeId=vehicle.getVehiclemakeId();
 
             }
         }

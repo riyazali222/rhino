@@ -3,6 +3,8 @@ package com.henceforth.rhino.utills;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.henceforth.rhino.webServices.AddVehicles;
+
 /**
  * Created by HOME on 5/6/2017.
  */

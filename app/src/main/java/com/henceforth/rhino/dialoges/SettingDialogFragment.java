@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ import com.henceforth.rhino.utills.CommonMethods;
 import com.henceforth.rhino.webServices.apis.ChangePasswordApi;
 import com.henceforth.rhino.webServices.apis.EnableDisableApi;
 import com.henceforth.rhino.webServices.apis.LogoutApi;
-import com.henceforth.rhino.webServices.apis.RestClient;
+import com.henceforth.rhino.utills.RestClient;
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
 import retrofit2.Call;
@@ -166,14 +165,7 @@ public class SettingDialogFragment extends DialogFragment implements
 
         final Dialog dialog = new Dialog(getActivity(), R.style.slideFromTopDialog);
         dialog.setContentView(R.layout.dialog_logout);
-        Toolbar dialogToolbar = (Toolbar) dialog.findViewById(R.id.toolbarLogout);
-        dialogToolbar.setNavigationIcon(R.drawable.ic_close_white);
-        dialogToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+
         final Button btnCancle = (Button) dialog.findViewById(R.id.btnCancle);
         Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
         btnOk.setOnClickListener(new View.OnClickListener() {
